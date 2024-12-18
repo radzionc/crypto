@@ -9,3 +9,7 @@ output "bucket_key" {
 output "function_name" {
   value = aws_lambda_function.lambda.function_name
 }
+
+output "price_alerts_table_name" {
+  value = aws_dynamodb_table.rules.name
+}

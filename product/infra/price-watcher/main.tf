@@ -40,6 +40,7 @@ resource "aws_lambda_function" "lambda" {
       SENTRY_KEY = var.sentry_key
       TELEGRAM_BOT_TOKEN   = var.telegram_bot_token
       TELEGRAM_BOT_CHAT_ID = var.telegram_bot_chat_id
+      PRICE_ALERTS_TABLE_NAME = aws_dynamodb_table.rules.name
     }
   }
 }
