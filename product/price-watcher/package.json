@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "@types/node-telegram-bot-api": "^0"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && node build.mjs",
+    "typecheck": "tsc --noEmit"
   }
 }

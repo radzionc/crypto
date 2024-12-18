@@ -4,6 +4,7 @@ import { PriceAlert } from '../entities/PriceAlert'
 import { getEnvVar } from '../getEnvVar'
 import { DeleteCommand, PutCommand } from '@aws-sdk/lib-dynamodb'
 import { dbDocClient } from '@lib/dynamodb/client'
+import { updateItem } from '@lib/dynamodb/updateItem'
 
 const tableName = getEnvVar('PRICE_ALERTS_TABLE_NAME')
 
@@ -42,4 +43,15 @@ export const putPriceAlert = (user: PriceAlert) => {
   })
 
   return dbDocClient.send(command)
+}
+
+export const updatePriceAlert = async (
+  id: string,
+  fields: Partial<PriceAlert>,
+) => {
+  return updateItem({
+    tableName: tableName,
+    key: { id },
+    fields,
+  })
 }
