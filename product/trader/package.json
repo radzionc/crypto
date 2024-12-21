@@ -1,0 +1,11 @@
+{
+  "name": "@product/trader",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "createAccount": "npx tsx scripts/createAccount"
+  },
+  "dependencies": {
+    "viem": "^2.21.55"
+  }
+}
