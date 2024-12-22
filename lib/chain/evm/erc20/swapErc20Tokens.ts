@@ -1,21 +1,21 @@
 import { createClientV2 } from '@0x/swap-ts-sdk'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import {
-  Chain,
   Address,
+  Chain,
   createPublicClient,
   createWalletClient,
   http,
 } from 'viem'
 import { polygon } from 'viem/chains'
-import { getErc20Balance } from './getErc20Balance'
 import { TransferDirection } from '@lib/utils/TransferDirection'
 import { assertField } from '@lib/utils/record/assertField'
 
-type Input = Record<TransferDirection, string> & {
+type Input = Record<TransferDirection, Address> & {
   chain: Chain
   accountAddress: Address
   zeroXApiKey: string
+  amount: bigint
 }
 
 export const swapErc20Tokens = async ({
@@ -24,6 +24,7 @@ export const swapErc20Tokens = async ({
   chain,
   from,
   to,
+  amount,
 }: Input) => {
   const client = createClientV2({
     apiKey: zeroXApiKey,
@@ -40,16 +41,11 @@ export const swapErc20Tokens = async ({
     transport: http(),
   })
 
-  const sellAmount = await getErc20Balance({
-    chain: polygon,
-    address: accountAddress,
-  })
-
   const quote = await client.swap.permit2.getQuote.query({
     sellToken: from,
     buyToken: to,
     chainId: chain.id,
-    sellAmount,
+    sellAmount: amount,
     taker: accountAddress,
   })
 

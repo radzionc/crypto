@@ -6,7 +6,9 @@ import { swapErc20Tokens } from '../../../lib/chain/evm/erc20/swapErc20Tokens'
 import { getSecret } from '../getSercret'
 import { getEnvVar } from '../getEnvVar'
 import { Address } from 'viem'
+import { limitOrderAssetAddress } from '../entities/LimitOrderAsset'
 import { polygon } from 'viem/chains'
+import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
 
 export const runLimitOrders = async () => {
   const items = await getAllLimitOrders()
@@ -26,12 +28,21 @@ export const runLimitOrders = async () => {
       if (isConditionMet) {
         const zeroXApiKey = await getSecret('zeroXApiKey')
 
+        const accountAddress = getEnvVar('ACCOUNT_ADDRESS') as Address
+
+        const amount = await getErc20Balance({
+          chain: polygon,
+          address: limitOrderAssetAddress[swap.from],
+          accountAddress,
+        })
+
         await swapErc20Tokens({
           zeroXApiKey,
-          accountAddress: getEnvVar('ACCOUNT_ADDRESS') as Address,
+          accountAddress,
+          amount,
           chain: polygon,
-          from: swap.from,
-          to: swap.to,
+          from: limitOrderAssetAddress[swap.from],
+          to: limitOrderAssetAddress[swap.to],
         })
 
         await sendSwapNotification({

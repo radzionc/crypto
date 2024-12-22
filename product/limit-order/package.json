@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "createAccount": "npx tsx scripts/createAccount"
+    "createAccount": "npx tsx scripts/createAccount",
+    "build": "rm -rf ./dist && node build.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.716.0",
-    "viem": "^2.21.55"
+    "@sentry/serverless": "7.114.0",
+    "@types/node-telegram-bot-api": "^0",
+    "node-telegram-bot-api": "^0.66.0",
+    "viem": "^2.21.56"
   }
 }

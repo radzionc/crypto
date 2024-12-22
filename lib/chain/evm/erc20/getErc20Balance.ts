@@ -1,12 +1,16 @@
 import { Address, Chain, createPublicClient, http, parseAbi } from 'viem'
-import { readContract } from 'viem/_types/actions/public/readContract'
 
 type Input = {
   chain: Chain
   address: Address
+  accountAddress: Address
 }
 
-export const getErc20Balance = async ({ chain, address }: Input) => {
+export const getErc20Balance = async ({
+  chain,
+  address,
+  accountAddress,
+}: Input) => {
   const erc20Abi = parseAbi([
     'function balanceOf(address owner) view returns (uint256)',
   ])
@@ -16,10 +20,10 @@ export const getErc20Balance = async ({ chain, address }: Input) => {
     transport: http(),
   })
 
-  return readContract(publicClient, {
+  return publicClient.readContract({
     address,
     abi: erc20Abi,
     functionName: 'balanceOf',
-    args: [address],
+    args: [accountAddress],
   })
 }
