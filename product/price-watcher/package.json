@@ -12,6 +12,6 @@
   "scripts": {
     "build": "rm -rf ./dist && node build.mjs",
     "typecheck": "tsc --noEmit",
-    "run": "npx tsx scripts/runPriceWatcher.ts"
+    "dev": "npx tsx scripts/runPriceWatcher.ts"
   }
 }

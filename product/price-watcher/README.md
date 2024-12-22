@@ -31,7 +31,7 @@ export PRICE_ALERTS_TABLE_NAME=<DynamoDB_Table_Name>
 Run the code locally:
 
 ```bash
-yarn run
+yarn dev
 ```
 
 ## Deployment

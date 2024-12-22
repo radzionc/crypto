@@ -5,7 +5,8 @@
   "scripts": {
     "createAccount": "npx tsx scripts/createAccount",
     "build": "rm -rf ./dist && node build.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev": "npx tsx scripts/runLimitOrders.ts"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.716.0",
