@@ -1,6 +1,20 @@
 # @product/price-watcher
 
-A core package for managing cryptocurrency price alerts and notifications.
+A self-hosted tool for receiving notifications when a cryptocurrency exceeds or falls below a specified price.
+
+## Features
+
+- Set alerts for cryptocurrency prices.
+- Get notified via Telegram when a price crosses the specified threshold.
+- Efficient price checking every 10 minutes.
+
+## Tech Stack
+
+- **TypeScript Monorepo**: Modular project structure.
+- **DynamoDB**: Stores user alerts.
+- **AWS Lambda**: Executes periodic price checks.
+- **Telegram**: Sends notifications.
+- **Terraform**: Infrastructure as code.
 
 ## Run Locally
 

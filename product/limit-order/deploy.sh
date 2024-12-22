@@ -1,3 +1,8 @@
+# Required environment variables:
+# - BUCKET
+# - BUCKET_KEY
+# - FUNCTION_NAME
+
 yarn build
 cd dist
 

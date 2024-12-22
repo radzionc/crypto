@@ -1,45 +1,22 @@
-# @product/price-watcher
+# @product/limit-order
 
-A core package for managing cryptocurrency price alerts and notifications.
+This package provides a service to run limit orders on an EVM chain, focusing on swaps between wETH and USDC on the Polygon network. It allows specifying a price condition based on an asset’s target price (using either a `less` or `more` comparison), and automatically executes the swap via the 0x v2 API when the condition is met.
 
-## Run Locally
+## Requirements
 
-Ensure the following environment variables are configured:
-
-```bash
-# Required only when running on AWS Lambda
-# export SENTRY_KEY=<Your_Sentry_Key>
-export ACCOUNT_ADDRESS=<Your_Account_Address>
-export LIMIT_ORDERS_TABLE_NAME=crypto_limit_orders
-export SECRETS=<Your_Secrets_Manager_Secret_Name>
-export TELEGRAM_BOT_CHAT_ID=<Your_Telegram_Bot_Chat_Id>
-```
-
-The service also requires secrets to be stored in AWS Secrets Manager. The following secrets are required:
-
-```json
-{
-  "accountPrivateKey": "<Your_Account_Private_Key>",
-  "zeroXApiKey": "<Your_0x_Api_Key>",
-  "telegramBotToken": "<Your_Telegram_Bot_Token>",
-}
-```
+- **Environment Variables**:  
+  - Refer to the `getEnvVars.ts` file for a list of required environment variables.
+- **AWS Secrets Manager**:  
+  - Sensitive data (e.g., API keys, private keys) must be stored in AWS Secrets Manager.
+  - The secret key names and usage are outlined in the `getSecret.ts` file.
 
 ## Deployment
 
-To deploy this project to AWS Lambda, configure the environment variables:
-
-```bash
-export BUCKET=<Your_S3_Bucket_Name>
-export BUCKET_KEY=lambda.zip
-export FUNCTION_NAME=<Your_AWS_Lambda_Function_Name>
-```
-
-Deploy the function:
-
-```bash
-. ./deploy.sh
-```
-
-This will upload the packaged Lambda to the specified S3 bucket and deploy it to AWS Lambda with the given function name.
-
+1. **Configure Environment**:  
+   - Make sure the environment variables specified in `deploy.sh` are set properly.
+   - Ensure AWS credentials are configured for your deployment environment.
+2. **Run the Deployment Script**:  
+   ```bash
+   ./deploy.sh
+   ```
+   - This script will deploy the service using Terraform or other configured tools.
