@@ -12,6 +12,7 @@ Ensure the following environment variables are configured:
 export ACCOUNT_ADDRESS=<Your_Account_Address>
 export LIMIT_ORDERS_TABLE_NAME=crypto_limit_orders
 export SECRETS=<Your_Secrets_Manager_Secret_Name>
+export TELEGRAM_BOT_CHAT_ID=<Your_Telegram_Bot_Chat_Id>
 ```
 
 The service also requires secrets to be stored in AWS Secrets Manager. The following secrets are required:
