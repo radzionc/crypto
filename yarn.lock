@@ -1227,9 +1227,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@product/limit-order@workspace:product/limit-order":
+"@product/limit-orders@workspace:product/limit-orders":
   version: 0.0.0-use.local
-  resolution: "@product/limit-order@workspace:product/limit-order"
+  resolution: "@product/limit-orders@workspace:product/limit-orders"
   dependencies:
     "@aws-sdk/client-secrets-manager": "npm:^3.716.0"
     "@sentry/serverless": "npm:7.114.0"

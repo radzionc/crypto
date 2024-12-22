@@ -1,4 +1,4 @@
-# @product/limit-order
+# @product/limit-orders
 
 This package provides a service to run limit orders on an EVM chain, focusing on swaps between wETH and USDC on the Polygon network. It allows specifying a price condition based on an asset’s target price (using either a `less` or `more` comparison), and automatically executes the swap via the 0x v2 API when the condition is met.
 

@@ -2,7 +2,7 @@
 
 Welcome! This monorepo contains two TypeScript projects that streamline crypto trading and price monitoring:
 
-- [**@product/limit-order**](./product/limit-order/README.md)  
+- [**@product/limit-orders**](./product/limit-orders/README.md)  
   Automates limit orders on EVM chains (e.g., wETH <-> USDC on Polygon) using the 0x v2 API when conditions are met.
 
 - [**@product/price-watcher**](./product/price-watcher/README.md)  
