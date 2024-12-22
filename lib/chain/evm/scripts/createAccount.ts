@@ -1,6 +1,6 @@
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 
-const createEvmAccount = () => {
+const createAccount = () => {
   const privateKey = generatePrivateKey()
 
   const { address } = privateKeyToAccount(privateKey)
@@ -10,4 +10,4 @@ const createEvmAccount = () => {
   console.log('Private Key:', privateKey)
 }
 
-createEvmAccount()
+createAccount()

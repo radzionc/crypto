@@ -51,7 +51,7 @@ export const swapErc20Tokens = async ({
 
   const transaction = assertField(quote, 'transaction')
 
-  const txHash = await walletClient.sendTransaction({
+  const hash = await walletClient.sendTransaction({
     gas: BigInt(shouldBePresent(transaction.gas, 'gas')),
     value: BigInt(transaction.value),
     to: transaction.to as Address,
@@ -59,9 +59,9 @@ export const swapErc20Tokens = async ({
     data: transaction.data as `0x${string}`,
   })
 
-  const { transactionHash } = await publicClient.waitForTransactionReceipt({
-    hash: txHash,
+  await publicClient.waitForTransactionReceipt({
+    hash,
   })
 
-  return transactionHash
+  return hash
 }

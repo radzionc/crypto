@@ -9,6 +9,7 @@ import { Address } from 'viem'
 import { limitOrderAssetAddress } from '../entities/LimitOrderAsset'
 import { polygon } from 'viem/chains'
 import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
+import { recordMap } from '@lib/utils/record/recordMap'
 
 export const runLimitOrders = async () => {
   const items = await getAllLimitOrders()
@@ -25,34 +26,35 @@ export const runLimitOrders = async () => {
         less: () => price < targetPrice,
       })
 
-      if (isConditionMet) {
-        const zeroXApiKey = await getSecret('zeroXApiKey')
-
-        const accountAddress = getEnvVar('ACCOUNT_ADDRESS') as Address
-
-        const amount = await getErc20Balance({
-          chain: polygon,
-          address: limitOrderAssetAddress[swap.from],
-          accountAddress,
-        })
-
-        await swapErc20Tokens({
-          zeroXApiKey,
-          accountAddress,
-          amount,
-          chain: polygon,
-          from: limitOrderAssetAddress[swap.from],
-          to: limitOrderAssetAddress[swap.to],
-        })
-
-        await sendSwapNotification({
-          swap,
-          asset,
-          price,
-        })
-
-        return deleteLimitOrder(id)
+      if (!isConditionMet) {
+        return
       }
+
+      const zeroXApiKey = await getSecret('zeroXApiKey')
+
+      const accountAddress = getEnvVar('ACCOUNT_ADDRESS') as Address
+
+      const amount = await getErc20Balance({
+        chain: polygon,
+        address: limitOrderAssetAddress[swap.from],
+        accountAddress,
+      })
+
+      await swapErc20Tokens({
+        zeroXApiKey,
+        accountAddress,
+        amount,
+        chain: polygon,
+        ...recordMap(swap, (asset) => limitOrderAssetAddress[asset]),
+      })
+
+      await sendSwapNotification({
+        swap,
+        asset,
+        price,
+      })
+
+      return deleteLimitOrder(id)
     }),
   )
 }

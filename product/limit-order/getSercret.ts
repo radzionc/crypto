@@ -7,7 +7,7 @@ import { memoizeAsync } from '@lib/utils/memoizeAsync'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { assertField } from '@lib/utils/record/assertField'
 
-type VariableName = 'accountPrivateKey' | 'zeroXApiKey' | 'telegramBotToken'
+type SecretName = 'accountPrivateKey' | 'zeroXApiKey' | 'telegramBotToken'
 
 const getSecrets = memoizeAsync(async () => {
   const client = new SecretsManagerClient({})
@@ -17,7 +17,7 @@ const getSecrets = memoizeAsync(async () => {
   return shouldBePresent(SecretString)
 })
 
-export const getSecret = async (name: VariableName): Promise<string> => {
+export const getSecret = async (name: SecretName): Promise<string> => {
   const secrets = await getSecrets()
 
   return assertField(JSON.parse(secrets), name)
