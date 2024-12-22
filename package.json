@@ -29,5 +29,8 @@
     "format": "eslint --fix && prettier --write",
     "typecheck": "tsc --noEmit",
     "sync-packages": "syncpack fix-mismatches"
+  },
+  "dependencies": {
+    "@0x/swap-ts-sdk": "^2.1.1"
   }
 }
