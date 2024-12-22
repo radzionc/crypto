@@ -1,8 +1,8 @@
 type VariableName =
-  | 'ZEROX_API_KEY'
-  | 'ACCOUNT_PRIVATE_KEY'
   | 'ACCOUNT_ADDRESS'
   | 'LIMIT_ORDERS_TABLE_NAME'
+  | 'SENTRY_KEY'
+  | 'SECRETS'
 
 export const getEnvVar = (name: VariableName): string => {
   const value = process.env[name]

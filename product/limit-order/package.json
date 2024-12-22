@@ -6,6 +6,7 @@
     "createAccount": "npx tsx scripts/createAccount"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.716.0",
     "viem": "^2.21.55"
   }
 }

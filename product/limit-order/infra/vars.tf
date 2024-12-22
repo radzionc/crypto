@@ -1,8 +1,6 @@
 variable "name" {}
 
-variable "price_alerts_table_name" {}
-
-variable "telegram_bot_token" {}
+variable "limit_orders_table_name" {}
 
 variable "telegram_bot_chat_id" {}
 
