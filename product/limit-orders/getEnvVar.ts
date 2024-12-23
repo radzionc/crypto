@@ -4,12 +4,13 @@ type VariableName =
   | 'SENTRY_KEY'
   | 'SECRETS'
   | 'TELEGRAM_BOT_CHAT_ID'
+  | 'WITHDRAWAL_ADDRESS'
 
-export const getEnvVar = (name: VariableName): string => {
+export const getEnvVar = <T extends string>(name: VariableName): T => {
   const value = process.env[name]
   if (!value) {
     throw new Error(`Missing ${name} environment variable`)
   }
 
-  return value
+  return value as T
 }

@@ -14,17 +14,19 @@ import { assertField } from '@lib/utils/record/assertField'
 type Input = Record<TransferDirection, Address> & {
   chain: Chain
   accountAddress: Address
+  destinationAddress?: Address
   zeroXApiKey: string
   amount: bigint
 }
 
-export const swapErc20Tokens = async ({
+export const swapErc20Token = async ({
   zeroXApiKey,
   accountAddress,
   chain,
   from,
   to,
   amount,
+  destinationAddress,
 }: Input) => {
   const client = createClientV2({
     apiKey: zeroXApiKey,
@@ -46,7 +48,7 @@ export const swapErc20Tokens = async ({
     buyToken: to,
     chainId: chain.id,
     sellAmount: amount,
-    taker: accountAddress,
+    taker: destinationAddress ?? accountAddress,
   })
 
   const transaction = assertField(quote, 'transaction')

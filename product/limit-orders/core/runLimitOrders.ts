@@ -2,7 +2,7 @@ import { match } from '@lib/utils/match'
 import { getAssetPrices } from '../../../lib/chain/price/utils/getAssetPrices'
 import { deleteLimitOrder, getAllLimitOrders } from '../db/limitOrders'
 import { sendSwapNotification } from './sendSwapNotification'
-import { swapErc20Tokens } from '../../../lib/chain/evm/erc20/swapErc20Tokens'
+import { swapErc20Token } from '../../../lib/chain/evm/erc20/swapErc20Token'
 import { getSecret } from '../getSercret'
 import { getEnvVar } from '../getEnvVar'
 import { Address } from 'viem'
@@ -40,9 +40,10 @@ export const runLimitOrders = async () => {
         accountAddress,
       })
 
-      await swapErc20Tokens({
+      await swapErc20Token({
         zeroXApiKey,
         accountAddress,
+        destinationAddress: getEnvVar<Address>('WITHDRAWAL_ADDRESS'),
         amount,
         chain: polygon,
         ...recordMap(swap, (asset) => limitOrderAssetAddress[asset]),

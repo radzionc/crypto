@@ -13,6 +13,7 @@ export TF_VAR_limit_orders_table_name=
 export TF_VAR_telegram_bot_chat_id=
 export TF_VAR_sentry_key=
 export TF_VAR_account_address=
+export TF_VAR_wihdrawal_address=
 
 export TF_VAR_remote_state_bucket=
 export TF_VAR_remote_state_key=

@@ -42,6 +42,7 @@ resource "aws_lambda_function" "lambda" {
       LIMIT_ORDERS_TABLE_NAME = aws_dynamodb_table.orders.name
       ACCOUNT_ADDRESS = var.account_address
       SECRETS = aws_secretsmanager_secret.secrets.name
+      WITHDRAWAL_ADDRESS = var.withdrawal_address
     }
   }
 }
