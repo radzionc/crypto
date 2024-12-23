@@ -17,7 +17,7 @@ const getSecrets = memoizeAsync(async () => {
   return shouldBePresent(SecretString)
 })
 
-export const getSecret = async (name: SecretName): Promise<string> => {
+export const getSecret = async <T = string>(name: SecretName): Promise<T> => {
   const secrets = await getSecrets()
 
   return assertField(JSON.parse(secrets), name)

@@ -1,5 +1,4 @@
 type VariableName =
-  | 'ACCOUNT_ADDRESS'
   | 'LIMIT_ORDERS_TABLE_NAME'
   | 'SENTRY_KEY'
   | 'SECRETS'

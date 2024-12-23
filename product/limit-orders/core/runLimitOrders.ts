@@ -10,6 +10,7 @@ import { limitOrderAssetAddress } from '../entities/LimitOrderAsset'
 import { polygon } from 'viem/chains'
 import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
 import { recordMap } from '@lib/utils/record/recordMap'
+import { privateKeyToAddress } from 'viem/accounts'
 
 export const runLimitOrders = async () => {
   const items = await getAllLimitOrders()
@@ -32,17 +33,17 @@ export const runLimitOrders = async () => {
 
       const zeroXApiKey = await getSecret('zeroXApiKey')
 
-      const accountAddress = getEnvVar('ACCOUNT_ADDRESS') as Address
+      const privateKey = await getSecret<`0x${string}`>('accountPrivateKey')
 
       const amount = await getErc20Balance({
         chain: polygon,
         address: limitOrderAssetAddress[swap.from],
-        accountAddress,
+        accountAddress: privateKeyToAddress(privateKey),
       })
 
       await swapErc20Token({
         zeroXApiKey,
-        accountAddress,
+        privateKey,
         destinationAddress: getEnvVar<Address>('WITHDRAWAL_ADDRESS'),
         amount,
         chain: polygon,

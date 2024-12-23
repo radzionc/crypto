@@ -10,23 +10,24 @@ import {
 import { polygon } from 'viem/chains'
 import { TransferDirection } from '@lib/utils/TransferDirection'
 import { assertField } from '@lib/utils/record/assertField'
+import { privateKeyToAccount } from 'viem/accounts'
 
 type Input = Record<TransferDirection, Address> & {
   chain: Chain
-  accountAddress: Address
   destinationAddress?: Address
   zeroXApiKey: string
   amount: bigint
+  privateKey: `0x${string}`
 }
 
 export const swapErc20Token = async ({
   zeroXApiKey,
-  accountAddress,
   chain,
   from,
   to,
   amount,
   destinationAddress,
+  privateKey,
 }: Input) => {
   const client = createClientV2({
     apiKey: zeroXApiKey,
@@ -37,8 +38,10 @@ export const swapErc20Token = async ({
     transport: http(),
   })
 
+  const account = privateKeyToAccount(privateKey)
+
   const walletClient = createWalletClient({
-    account: accountAddress,
+    account,
     chain: polygon,
     transport: http(),
   })
@@ -48,7 +51,7 @@ export const swapErc20Token = async ({
     buyToken: to,
     chainId: chain.id,
     sellAmount: amount,
-    taker: destinationAddress ?? accountAddress,
+    taker: destinationAddress ?? account.address,
   })
 
   const transaction = assertField(quote, 'transaction')
@@ -61,9 +64,7 @@ export const swapErc20Token = async ({
     data: transaction.data as `0x${string}`,
   })
 
-  await publicClient.waitForTransactionReceipt({
-    hash,
-  })
+  await publicClient.waitForTransactionReceipt({ hash })
 
   return hash
 }

@@ -40,7 +40,6 @@ resource "aws_lambda_function" "lambda" {
       SENTRY_KEY = var.sentry_key
       TELEGRAM_BOT_CHAT_ID = var.telegram_bot_chat_id
       LIMIT_ORDERS_TABLE_NAME = aws_dynamodb_table.orders.name
-      ACCOUNT_ADDRESS = var.account_address
       SECRETS = aws_secretsmanager_secret.secrets.name
       WITHDRAWAL_ADDRESS = var.withdrawal_address
     }
