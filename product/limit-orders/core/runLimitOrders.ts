@@ -4,10 +4,10 @@ import { deleteLimitOrder, getAllLimitOrders } from '../db/limitOrders'
 import { sendSwapNotification } from './sendSwapNotification'
 import { swapErc20Token } from '../../../lib/chain/evm/erc20/swapErc20Token'
 import { getSecret } from '../getSercret'
-import { getEnvVar } from '../getEnvVar'
-import { Address } from 'viem'
-import { limitOrderAssetAddress } from '../entities/LimitOrderAsset'
-import { polygon } from 'viem/chains'
+import {
+  limitOrderAssetAddress,
+  limitOrderChain,
+} from '../entities/LimitOrderAsset'
 import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { privateKeyToAddress } from 'viem/accounts'
@@ -36,7 +36,7 @@ export const runLimitOrders = async () => {
       const privateKey = await getSecret<`0x${string}`>('accountPrivateKey')
 
       const amount = await getErc20Balance({
-        chain: polygon,
+        chain: limitOrderChain,
         address: limitOrderAssetAddress[swap.from],
         accountAddress: privateKeyToAddress(privateKey),
       })
@@ -44,9 +44,8 @@ export const runLimitOrders = async () => {
       await swapErc20Token({
         zeroXApiKey,
         privateKey,
-        destinationAddress: getEnvVar<Address>('WITHDRAWAL_ADDRESS'),
         amount,
-        chain: polygon,
+        chain: limitOrderChain,
         ...recordMap(swap, (asset) => limitOrderAssetAddress[asset]),
       })
 

@@ -6,8 +6,8 @@ resource "aws_iam_role" "lambda" {
     Version = "2012-10-17",
     Statement = [
       {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
+        Action    = "sts:AssumeRole",
+        Effect    = "Allow",
         Principal = {
           Service = "lambda.amazonaws.com"
         }
@@ -15,6 +15,9 @@ resource "aws_iam_role" "lambda" {
     ]
   })
 }
+
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
 resource "aws_iam_policy" "lambda" {
   name        = "tf-${var.name}"
@@ -65,11 +68,16 @@ resource "aws_iam_policy" "dynamodb_full_access" {
           "dynamodb:BatchGetItem"
         ],
         Resource = [
-          "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/crypto_price_alerts"
+          aws_dynamodb_table.orders.arn
         ]
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "dynamodb_full_access" {
+  role       = aws_iam_role.lambda.name
+  policy_arn = aws_iam_policy.dynamodb_full_access.arn
 }
 
 resource "aws_secretsmanager_secret" "secrets" {

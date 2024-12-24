@@ -4,11 +4,11 @@ import { LimitOrder } from '../entities/LimitOrder'
 const partialItems: Omit<LimitOrder, 'id'>[] = [
   {
     asset: 'weth',
-    condition: 'more',
+    condition: 'less',
     targetPrice: 3800,
     swap: {
-      from: 'weth',
-      to: 'usdc',
+      from: 'usdc',
+      to: 'weth',
     },
   },
 ]

@@ -1,4 +1,5 @@
 import { Address } from 'viem'
+import { polygon } from 'viem/chains'
 
 export const limitOrderAssets = ['weth', 'usdc'] as const
 
@@ -14,3 +15,5 @@ export const limitOrderAssetPriceProividerId: Record<LimitOrderAsset, string> =
     weth: 'polygon:weth',
     usdc: 'polygon:usdc',
   }
+
+export const limitOrderChain = polygon

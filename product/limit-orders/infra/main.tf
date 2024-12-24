@@ -41,14 +41,9 @@ resource "aws_lambda_function" "lambda" {
       TELEGRAM_BOT_CHAT_ID = var.telegram_bot_chat_id
       LIMIT_ORDERS_TABLE_NAME = aws_dynamodb_table.orders.name
       SECRETS = aws_secretsmanager_secret.secrets.name
-      WITHDRAWAL_ADDRESS = var.withdrawal_address
     }
   }
 }
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 
 resource "aws_cloudwatch_event_rule" "lambda" {
   name                = var.name
