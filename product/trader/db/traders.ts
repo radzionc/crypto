@@ -7,7 +7,7 @@ import { dbDocClient } from '@lib/dynamodb/client'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
 import { updateItem } from '@lib/dynamodb/updateItem'
 
-const tableName = getEnvVar('TRADER_STATE_TABLE_NAME')
+const tableName = getEnvVar('TRADERS_TABLE_NAME')
 
 export const getTraderItemParams = (id: string) => ({
   TableName: tableName,
@@ -34,6 +34,12 @@ export const deleteTrader = (id: string) => {
   const command = new DeleteCommand(getTraderItemParams(id))
 
   return dbDocClient.send(command)
+}
+
+export const deleteAllTraders = async () => {
+  const alerts = await getAllTraders(['id'])
+
+  return Promise.all(alerts.map(({ id }) => deleteTrader(id)))
 }
 
 export const putTrader = (item: Trader) => {

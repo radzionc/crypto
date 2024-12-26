@@ -1,5 +1,5 @@
 type VariableName =
-  | 'TRADER_STATE_TABLE_NAME'
+  | 'TRADERS_TABLE_NAME'
   | 'SENTRY_KEY'
   | 'SECRETS'
   | 'TELEGRAM_BOT_CHAT_ID'

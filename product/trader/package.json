@@ -5,7 +5,8 @@
   "scripts": {
     "build": "rm -rf ./dist && node build.mjs",
     "typecheck": "tsc --noEmit",
-    "dev": "npx tsx scripts/runTraders.ts"
+    "dev": "npx tsx scripts/runTraders.ts",
+    "setTraders": "npx tsx scripts/setTraders.ts"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.716.0",
