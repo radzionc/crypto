@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "lambda" {
 
 resource "aws_iam_policy" "dynamodb_full_access" {
   name        = "tf-${var.name}-dynamodb-full-access"
-  description = "Full access for Lambda function ${var.name} to DynamoDB table ${var.limit_orders_table_name}"
+  description = "Full access for Lambda function ${var.name} to DynamoDB table ${var.traders_table_name}"
   path        = "/"
 
   policy = jsonencode({
@@ -68,7 +68,7 @@ resource "aws_iam_policy" "dynamodb_full_access" {
           "dynamodb:BatchGetItem"
         ],
         Resource = [
-          aws_dynamodb_table.orders.arn
+          aws_dynamodb_table.traders.arn
         ]
       }
     ]

@@ -10,6 +10,10 @@ output "function_name" {
   value = aws_lambda_function.lambda.function_name
 }
 
-output "limit_orders_table_name" {
-  value = aws_dynamodb_table.orders.name
+output "traders_table_name" {
+  value = aws_dynamodb_table.traders.name
+}
+
+output "secrets" {
+  value = aws_secretsmanager_secret.secrets.name
 }

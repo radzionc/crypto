@@ -8,7 +8,7 @@ export AWS_ACCESS_KEY_ID=
 export AWS_REGION=
 
 export TF_VAR_name=
-export TF_VAR_limit_orders_table_name=
+export TF_VAR_traders_table_name=
 
 export TF_VAR_telegram_bot_chat_id=
 export TF_VAR_sentry_key=
