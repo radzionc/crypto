@@ -16,3 +16,5 @@ export const tradeAssetPriceProividerId: Record<TradeAsset, string> = {
 }
 
 export const tradeChain = polygon
+
+export const cashAsset: TradeAsset = 'usdc'
