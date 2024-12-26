@@ -1249,6 +1249,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@product/trader@workspace:product/trader":
+  version: 0.0.0-use.local
+  resolution: "@product/trader@workspace:product/trader"
+  dependencies:
+    "@aws-sdk/client-secrets-manager": "npm:^3.716.0"
+    "@sentry/serverless": "npm:7.114.0"
+    "@types/node-telegram-bot-api": "npm:^0"
+    node-telegram-bot-api: "npm:^0.66.0"
+    viem: "npm:^2.21.56"
+  languageName: unknown
+  linkType: soft
+
 "@scure/base@npm:~1.2.1":
   version: 1.2.1
   resolution: "@scure/base@npm:1.2.1"

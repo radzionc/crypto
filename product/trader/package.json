@@ -1,13 +1,11 @@
 {
-  "name": "@product/limit-orders",
+  "name": "@product/trader",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "rm -rf ./dist && node build.mjs",
     "typecheck": "tsc --noEmit",
-    "dev": "npx tsx scripts/runLimitOrders.ts",
-    "setLimitOrders": "npx tsx scripts/setLimitOrders.ts",
-    "withdraw": "npx tsx scripts/withdraw.ts"
+    "dev": "npx tsx scripts/runTraders.ts"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.716.0",
