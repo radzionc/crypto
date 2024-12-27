@@ -17,7 +17,7 @@ export const updatePrices = async () => {
     traders.map(async ({ id, prices: oldPrices, asset }) => {
       const price = priceRecord[tradeAssetPriceProividerId[asset]]
 
-      const prices = [...oldPrices, price].slice(0, traderConfig.longTermPeriod)
+      const prices = [...oldPrices, price].slice(-traderConfig.longTermPeriod)
 
       return updateTrader(id, { prices })
     }),
