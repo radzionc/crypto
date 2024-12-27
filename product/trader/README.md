@@ -1,6 +1,6 @@
-# @product/limit-orders
+# @product/trader
 
-This package provides a service to run limit orders on an EVM chain, focusing on swaps between wETH and USDC on the Polygon network. It allows specifying a price condition based on an asset’s target price (using either a `less` or `more` comparison), and automatically executes the swap via the 0x v2 API when the condition is met.
+This project automates a Moving Average Crossover Strategy for trading wETH and USDC on Polygon using the 0x v2 API. Built with TypeScript and deployed as an AWS Lambda via Terraform, it ensures security with sensitive data managed in AWS Secrets Manager.
 
 ## Requirements
 
