@@ -16,7 +16,6 @@ import { updateTrader } from '../db/traders'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { sendTradeNotification } from './sendTradeNotification'
 
-// Moving Average Crossover Strategy
 export const runTrader = async ({ prices, asset, lastTrade, id }: Trader) => {
   const shortTermAverage = getAverage(
     prices.slice(-traderConfig.shortTermPeriod),
