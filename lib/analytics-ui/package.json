@@ -1,0 +1,17 @@
+{
+  "name": "@lib/analytics-ui",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}
