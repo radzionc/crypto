@@ -1,5 +1,5 @@
 import { getAverage } from '@lib/utils/math/getAverage'
-import { Trader, TradeType } from '../entities/Trader'
+import { Trader } from '../entities/Trader'
 import { traderConfig } from './config'
 import { getSecret } from '../getSercret'
 import {
@@ -15,6 +15,7 @@ import { recordMap } from '@lib/utils/record/recordMap'
 import { updateTrader } from '../db/traders'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { sendTradeNotification } from './sendTradeNotification'
+import { TradeType } from '@lib/chain/types/TradeType'
 
 export const runTrader = async ({ prices, asset, lastTrade, id }: Trader) => {
   const shortTermAverage = getAverage(

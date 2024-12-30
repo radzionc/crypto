@@ -1,10 +1,11 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { Text, TextColor } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { Trade, TradeType } from '../../entities/Trade'
+import { Trade } from '../../entities/Trade'
 import { format } from 'date-fns'
 import { match } from '@lib/utils/match'
 import { TradeItemFrame } from './TradeItemFrame'
+import { TradeType } from '@lib/chain/types/TradeType'
 
 export const TradeItem = ({
   value: { asset, amount, price, type, timestamp, cashAsset },

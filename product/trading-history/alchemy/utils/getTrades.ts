@@ -6,13 +6,13 @@ import {
   Trade,
   TradeAsset,
   tradeAssets,
-  TradeType,
 } from '../../entities/Trade'
 import { isOneOf } from '@lib/utils/array/isOneOf'
 import { convertDuration } from '@lib/utils/time/convertDuration'
 import { match } from '@lib/utils/match'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
+import { TradeType } from '@lib/chain/types/TradeType'
 
 type Input = {
   address: string

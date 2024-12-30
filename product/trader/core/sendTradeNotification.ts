@@ -2,8 +2,8 @@ import { getEnvVar } from '../getEnvVar'
 import TelegramBot from 'node-telegram-bot-api'
 import { getSecret } from '../getSercret'
 import { TradeAsset } from '../entities/TradeAsset'
-import { TradeType } from '../entities/Trader'
 import { match } from '@lib/utils/match'
+import { TradeType } from '@lib/chain/types/TradeType'
 
 type Input = {
   asset: TradeAsset
