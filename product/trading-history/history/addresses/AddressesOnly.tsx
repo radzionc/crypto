@@ -7,7 +7,11 @@ export const AddressesOnly = ({ children }: ComponentWithChildrenProps) => {
   const [addresses] = useAddresses()
 
   if (isEmpty(addresses)) {
-    return <Text>Add an address to continue</Text>
+    return (
+      <Text color="contrast" size={18}>
+        Add an address to continue 👉
+      </Text>
+    )
   }
 
   return <>{children}</>
