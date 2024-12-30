@@ -1,7 +1,6 @@
 import { EntityWithId } from '@lib/utils/entities/EntityWithId'
 import { TradeAsset } from './TradeAsset'
-
-export type TradeType = 'buy' | 'sell'
+import { TradeType } from '@lib/chain/types/TradeType'
 
 export type Trader = EntityWithId & {
   prices: number[]
