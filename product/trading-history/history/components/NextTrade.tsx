@@ -33,8 +33,8 @@ export const NextTrade = ({ lastTrade }: NextTradeProps) => {
         pending={() => <Text>Loading price...</Text>}
         success={(price) => {
           const isGoodPrice = match(lastTrade.type, {
-            buy: () => price < lastTrade.price,
-            sell: () => price > lastTrade.price,
+            buy: () => price > lastTrade.price,
+            sell: () => price < lastTrade.price,
           })
 
           const nextTrade = lastTrade.type === 'buy' ? 'sell' : 'buy'
