@@ -8,6 +8,7 @@ import { getErrorMessage } from '@lib/utils/getErrorMessage'
 import { NextTrade } from './NextTrade'
 import { getLastItem } from '@lib/utils/array/getLastItem'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { TradesChart } from './chart/TradesChart'
 
 export const Trades = () => {
   const query = useTradesQuery()
@@ -30,14 +31,20 @@ export const Trades = () => {
       <NonEmptyOnly
         value={query.data}
         render={(trades) => (
-          <SeparatedByLine gap={20}>
-            <NextTrade lastTrade={getLastItem(trades)} />
-            <VStack gap={20}>
-              {trades.map((trade) => (
-                <TradeItem key={trade.hash} value={trade} />
-              ))}
-            </VStack>
-          </SeparatedByLine>
+          <VStack gap={40}>
+            <NonEmptyOnly
+              value={trades}
+              render={(value) => <TradesChart value={value} />}
+            />
+            <SeparatedByLine gap={20}>
+              <NextTrade lastTrade={getLastItem(trades)} />
+              <VStack gap={20}>
+                {trades.map((trade) => (
+                  <TradeItem key={trade.hash} value={trade} />
+                ))}
+              </VStack>
+            </SeparatedByLine>
+          </VStack>
         )}
       />
     </>
