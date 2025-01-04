@@ -1,7 +1,7 @@
 import { Trade } from '../../../entities/Trade'
 import { TimePoint } from '@lib/utils/entities/TimePoint'
 import { ElementSizeAware } from '@lib/ui/base/ElementSizeAware'
-import { hStack, VStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import { normalizeDataArrays } from '@lib/utils/math/normalizeDataArrays'
 import { generateYLabels } from '@lib/ui/charts/utils/generateYLabels'
 import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
@@ -16,17 +16,28 @@ import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getOppositeTrade } from '@lib/chain/utils/getOppositeTrade'
 import { isGoodPrice } from '../../utils/isGoodPrice'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
+import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
+import { format } from 'date-fns'
+import { toSizeUnit } from '@lib/ui/css/toSizeUnit'
 
-export const ChartContainer = styled.div`
-  ${hStack()};
+export const ChartSlice = styled.div`
   position: relative;
-  isolation: isolate;
+  display: grid;
+  grid-template-columns: ${toSizeUnit(tradesChartConfig.yLabelsWidth)} 1fr;
 `
 
 export const YLabel = styled.p`
   ${text({
     size: 12,
     color: 'supporting',
+  })}
+`
+
+export const XLabel = styled.p`
+  ${text({
+    size: 12,
+    color: 'supporting',
+    nowrap: true,
   })}
 `
 
@@ -65,47 +76,65 @@ export function TradesChartContent({
   return (
     <ElementSizeAware
       render={({ setElement, size }) => (
-        <ChartContainer ref={setElement}>
-          <ChartYAxis
-            expectedLabelWidth={tradesChartConfig.yLabelsWidth}
-            renderLabel={(index) => (
-              <YLabel key={index}>{yLabels[index]}</YLabel>
-            )}
-            data={normalized.yLabels}
-          />
-          <VStack
-            style={{
-              position: 'relative',
-              minHeight: tradesChartConfig.chartHeight,
-            }}
-            fullWidth
-          >
+        <VStack gap={20} ref={setElement}>
+          <ChartSlice>
+            <ChartYAxis
+              expectedLabelWidth={tradesChartConfig.yLabelsWidth}
+              renderLabel={(index) => (
+                <YLabel key={index}>{yLabels[index]}</YLabel>
+              )}
+              data={normalized.yLabels}
+            />
+            <VStack
+              style={{
+                position: 'relative',
+              }}
+              fullWidth
+            >
+              {size && (
+                <LineChart
+                  dataPointsConnectionKind="sharp"
+                  fillKind={'gradient'}
+                  data={normalized.prices}
+                  width={size.width - tradesChartConfig.yLabelsWidth}
+                  height={tradesChartConfig.chartHeight}
+                  color={color}
+                />
+              )}
+              <ChartHorizontalGridLines data={normalized.yLabels} />
+              {trades.map((trade, index) => (
+                <TradePoint
+                  key={trade.hash}
+                  style={{
+                    left: toPercents(
+                      (trade.timestamp - timeInterval.start) /
+                        getIntervalDuration(timeInterval),
+                    ),
+                    top: toPercents(1 - normalized.trades[index]),
+                  }}
+                  value={trade}
+                />
+              ))}
+            </VStack>
+          </ChartSlice>
+          <ChartSlice>
+            <div />
             {size && (
-              <LineChart
-                dataPointsConnectionKind="sharp"
-                fillKind={'gradient'}
-                data={normalized.prices}
-                width={size.width - tradesChartConfig.yLabelsWidth}
-                height={tradesChartConfig.chartHeight}
-                color={color}
+              <ChartXAxis
+                dataSize={timeseries.length}
+                containerWidth={size.width - tradesChartConfig.yLabelsWidth}
+                expectedLabelHeight={tradesChartConfig.xLabelsHeight}
+                expectedLabelWidth={tradesChartConfig.xLabelsWidth}
+                labelsMinDistance={tradesChartConfig.xLabelsMinDistance}
+                renderLabel={(index) => (
+                  <XLabel>
+                    {format(timeseries[index].timestamp, 'MMM yyyy')}
+                  </XLabel>
+                )}
               />
             )}
-            <ChartHorizontalGridLines data={normalized.yLabels} />
-            {trades.map((trade, index) => (
-              <TradePoint
-                key={trade.hash}
-                style={{
-                  left: toPercents(
-                    (trade.timestamp - timeInterval.start) /
-                      getIntervalDuration(timeInterval),
-                  ),
-                  top: toPercents(1 - normalized.trades[index]),
-                }}
-                value={trade}
-              />
-            ))}
-          </VStack>
-        </ChartContainer>
+          </ChartSlice>
+        </VStack>
       )}
     />
   )

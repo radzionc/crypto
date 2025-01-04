@@ -1,6 +1,7 @@
 export const tradesChartConfig = {
   chartHeight: 240,
   yLabelsWidth: 58,
-  yLabelsHeight: 18,
-  yLabelsMinDistance: 20,
+  xLabelsHeight: 18,
+  xLabelsWidth: 80,
+  xLabelsMinDistance: 20,
 }
