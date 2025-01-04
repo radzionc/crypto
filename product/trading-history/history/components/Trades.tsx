@@ -42,7 +42,7 @@ export const Trades = () => {
         value={tradesQuery.data}
         render={(trades) => (
           <VStack gap={40}>
-            {!tradesQuery.isLoading && <TradesChart value={trades} />}
+            {!tradesQuery.isLoading && <TradesChart trades={trades} />}
             <SeparatedByLine gap={20}>
               <MatchQuery
                 value={priceQuery}

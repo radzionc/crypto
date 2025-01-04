@@ -1,6 +1,6 @@
 export const tradesChartConfig = {
   chartHeight: 240,
-  expectedLabelWidth: 58,
-  expectedLabelHeight: 18,
-  labelsMinDistance: 20,
+  yLabelsWidth: 58,
+  yLabelsHeight: 18,
+  yLabelsMinDistance: 20,
 }
