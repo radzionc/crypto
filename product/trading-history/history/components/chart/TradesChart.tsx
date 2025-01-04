@@ -18,6 +18,11 @@ import styled, { useTheme } from 'styled-components'
 import { text } from '@lib/ui/text'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { LineChart } from '@lib/ui/charts/LineChart'
+import { PositionAbsolutelyByCenter } from '@lib/ui/layout/PositionAbsolutelyByCenter'
+import { TradePoint } from './TradePoint'
+import { toPercents } from '@lib/utils/toPercents'
+import { getLastItem } from '@lib/utils/array/getLastItem'
+
 export type TradesChartProps = ComponentWithValueProps<Trade[]>
 
 export const ChartContainer = styled.div`
@@ -58,8 +63,6 @@ export function TradesChart({ value: trades }: TradesChartProps) {
           data: prices,
         })
 
-        console.log(yLabels)
-
         const normalized = normalizeDataArrays({
           trades: trades.map((trade) => trade.price),
           prices: timeseries.map((timepoint) => timepoint.value),
@@ -98,6 +101,21 @@ export function TradesChart({ value: trades }: TradesChartProps) {
                       />
                     )}
                     <ChartHorizontalGridLines data={normalized.yLabels} />
+                    {trades.map((trade) => (
+                      <PositionAbsolutelyByCenter
+                        key={trade.hash}
+                        left={toPercents(
+                          (trade.timestamp - timeseries[0].timestamp) /
+                            (getLastItem(timeseries).timestamp -
+                              timeseries[0].timestamp),
+                        )}
+                        top={toPercents(
+                          1 - normalized.trades[trades.indexOf(trade)],
+                        )}
+                      >
+                        <TradePoint type={trade.type} />
+                      </PositionAbsolutelyByCenter>
+                    ))}
                   </VStack>
                 </ChartContainer>
               </VStack>

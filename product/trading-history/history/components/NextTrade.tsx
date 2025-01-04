@@ -1,25 +1,16 @@
-import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
-import {
-  cashAssets,
-  primaryTradeAssetPriceProviderId,
-  Trade,
-  tradeAssets,
-} from '../../entities/Trade'
-import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
+import { cashAssets, tradeAssets } from '../../entities/Trade'
 import { TradeItemFrame } from './TradeItemFrame'
 import { Text } from '@lib/ui/text'
-import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
+import { ComponentWithValueProps } from '@lib/ui/props'
+import { TradeType } from '@lib/chain/types/TradeType'
 
-type NextTradeProps = {
-  lastTrade: Pick<Trade, 'price' | 'type'>
+type NextTradeProps = ComponentWithValueProps<TradeType> & {
+  isGoodPrice: boolean
+  price: number
 }
 
-export const NextTrade = ({ lastTrade }: NextTradeProps) => {
-  const priceQuery = useAssetPriceQuery({
-    id: primaryTradeAssetPriceProviderId,
-  })
-
+export const NextTrade = ({ value, isGoodPrice, price }: NextTradeProps) => {
   const [tradeAsset] = tradeAssets
   const [cashAsset] = cashAssets
 
@@ -27,32 +18,14 @@ export const NextTrade = ({ lastTrade }: NextTradeProps) => {
     <TradeItemFrame>
       <Text>{format(Date.now(), 'dd MMM yyyy')}</Text>
 
-      <MatchQuery
-        value={priceQuery}
-        error={() => <Text>Failed to load price</Text>}
-        pending={() => <Text>Loading price...</Text>}
-        success={(price) => {
-          const isGoodPrice = match(lastTrade.type, {
-            buy: () => price > lastTrade.price,
-            sell: () => price < lastTrade.price,
-          })
-
-          const nextTrade = lastTrade.type === 'buy' ? 'sell' : 'buy'
-
-          return (
-            <>
-              <Text>{`${isGoodPrice ? 'Good' : 'Bad'} price to ${nextTrade}`}</Text>
-              <Text>
-                1 {tradeAsset} ={' '}
-                <Text as="span" color={isGoodPrice ? 'success' : 'alert'}>
-                  {price.toFixed(2)}
-                </Text>{' '}
-                {cashAsset}
-              </Text>
-            </>
-          )
-        }}
-      />
+      <Text>{`${isGoodPrice ? 'Good' : 'Bad'} price to ${value}`}</Text>
+      <Text>
+        1 {tradeAsset} ={' '}
+        <Text as="span" color={isGoodPrice ? 'success' : 'alert'}>
+          {price.toFixed(2)}
+        </Text>{' '}
+        {cashAsset}
+      </Text>
     </TradeItemFrame>
   )
 }

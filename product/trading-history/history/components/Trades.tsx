@@ -6,17 +6,25 @@ import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
 import { Text } from '@lib/ui/text'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
 import { NextTrade } from './NextTrade'
-import { getLastItem } from '@lib/utils/array/getLastItem'
 import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
 import { TradesChart } from './chart/TradesChart'
+import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
+import { primaryTradeAssetPriceProviderId } from '../../entities/Trade'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { getOppositeTrade } from '@lib/chain/utils/getOppositeTrade'
+import { isGoodPrice } from '../utils/isGoodPrice'
 
 export const Trades = () => {
-  const query = useTradesQuery()
+  const tradesQuery = useTradesQuery()
+
+  const priceQuery = useAssetPriceQuery({
+    id: primaryTradeAssetPriceProviderId,
+  })
 
   return (
     <>
       <NonEmptyOnly
-        value={query.errors}
+        value={tradesQuery.errors}
         render={(errors) => (
           <ShyWarningBlock title="Failed to get some trades">
             {errors.map((error, index) => (
@@ -27,17 +35,33 @@ export const Trades = () => {
           </ShyWarningBlock>
         )}
       />
-      {query.isLoading && <Text color="supporting">Loading trades...</Text>}
+      {tradesQuery.isLoading && (
+        <Text color="supporting">Loading trades...</Text>
+      )}
       <NonEmptyOnly
-        value={query.data}
+        value={tradesQuery.data}
         render={(trades) => (
           <VStack gap={40}>
-            <NonEmptyOnly
-              value={trades}
-              render={(value) => <TradesChart value={value} />}
-            />
+            <TradesChart value={trades} />
             <SeparatedByLine gap={20}>
-              <NextTrade lastTrade={getLastItem(trades)} />
+              <MatchQuery
+                value={priceQuery}
+                success={(price) => {
+                  const nextTradeType = getOppositeTrade(trades[0].type)
+
+                  return (
+                    <NextTrade
+                      value={nextTradeType}
+                      isGoodPrice={isGoodPrice({
+                        trades,
+                        tradeType: nextTradeType,
+                        price,
+                      })}
+                      price={price}
+                    />
+                  )
+                }}
+              />
               <VStack gap={20}>
                 {trades.map((trade) => (
                   <TradeItem key={trade.hash} value={trade} />
