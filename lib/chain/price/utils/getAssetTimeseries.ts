@@ -25,10 +25,10 @@ export const getAssetTimeseries = async ({
     days: days.toString(),
   })
 
-  const result = await queryUrl<Response>(url)
+  const { prices } = await queryUrl<Response>(url)
 
-  return result.prices.map(([timestamp, price]) => ({
+  return prices.map(([timestamp, value]) => ({
     timestamp,
-    value: price,
+    value,
   }))
 }
