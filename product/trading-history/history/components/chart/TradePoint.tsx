@@ -8,10 +8,7 @@ import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { round } from '@lib/ui/css/round'
 import { Trade } from '../../../entities/Trade'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
-import { format } from 'date-fns'
-import { Text } from '@lib/ui/text'
-import { hStack, VStack } from '@lib/ui/css/stack'
-import { getColor } from '@lib/ui/theme/getters'
+import { TradeDetails } from './TradeDetails'
 
 type TradePointProps = UIComponentProps & {
   value: Trade
@@ -37,53 +34,12 @@ const IconContainer = styled.div<{ type: 'buy' | 'sell' }>`
   border: 1px solid;
 `
 
-const TooltipContent = styled(VStack).attrs({ gap: 4 })`
-  min-width: 200px;
-`
-
-const Field = styled.div`
-  ${hStack({
-    justifyContent: 'space-between',
-    fullWidth: true,
-    alignItems: 'center',
-  })};
-
-  > :first-child {
-    color: ${getColor('textSupporting')};
-  }
-`
-
 export function TradePoint({ value, style, className }: TradePointProps) {
-  const { type, price, timestamp, amount, asset, cashAsset } = value
-
-  const tooltipContent = (
-    <TooltipContent>
-      <Field>
-        <Text>Type</Text>
-        <Text>{type.toUpperCase()}</Text>
-      </Field>
-      <Field>
-        <Text>Amount</Text>
-        <Text>
-          {amount.toFixed(2)} {asset}
-        </Text>
-      </Field>
-      <Field>
-        <Text>Price</Text>
-        <Text>
-          {price.toFixed(2)} {cashAsset}
-        </Text>
-      </Field>
-      <Field>
-        <Text>Date</Text>
-        <Text>{format(timestamp, 'dd MMM yyyy')}</Text>
-      </Field>
-    </TooltipContent>
-  )
+  const { type } = value
 
   return (
     <Tooltip
-      content={tooltipContent}
+      content={<TradeDetails trade={value} />}
       renderOpener={(props) => (
         <IconContainer
           {...props}
