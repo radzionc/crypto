@@ -22,6 +22,8 @@ import { PositionAbsolutelyByCenter } from '@lib/ui/layout/PositionAbsolutelyByC
 import { TradePoint } from './TradePoint'
 import { toPercents } from '@lib/utils/toPercents'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { getOppositeTrade } from '@lib/chain/utils/getOppositeTrade'
+import { isGoodPrice } from '../../utils/isGoodPrice'
 
 export type TradesChartProps = ComponentWithValueProps<Trade[]>
 
@@ -69,6 +71,15 @@ export function TradesChart({ value: trades }: TradesChartProps) {
           yLabels,
         })
 
+        const nextTradeType = getOppositeTrade(trades[0].type)
+        const color = isGoodPrice({
+          trades,
+          tradeType: nextTradeType,
+          price: getLastItem(timeseries).value,
+        })
+          ? colors.success
+          : colors.alert
+
         return (
           <ElementSizeAware
             render={({ setElement, size }) => (
@@ -97,7 +108,7 @@ export function TradesChart({ value: trades }: TradesChartProps) {
                           size.width - tradesChartConfig.expectedLabelWidth
                         }
                         height={tradesChartConfig.chartHeight}
-                        color={colors.primary}
+                        color={color}
                       />
                     )}
                     <ChartHorizontalGridLines data={normalized.yLabels} />
