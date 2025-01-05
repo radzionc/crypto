@@ -7,11 +7,13 @@ import { ExitWallet } from '../../wallet/components/ExitWallet'
 import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { websiteConfig } from '@lib/ui/website/config'
+import { ChainIdProvider } from '../state/chainId'
+import { chains } from '../../chains/config'
+import { SwapForm } from './SwapForm'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({
-    contentMaxWidth: websiteConfig.contentMaxWidth,
+    contentMaxWidth: 480,
   })}
 
   ${verticalPadding(80)}
@@ -32,7 +34,11 @@ export const SwapPage = () => (
           renderOverlayItems={() => <ExitWallet />}
           logo={<ProductLogo />}
         >
-          <PageContainer>Coming soon</PageContainer>
+          <PageContainer>
+            <ChainIdProvider initialValue={chains[0].id}>
+              <SwapForm />
+            </ChainIdProvider>
+          </PageContainer>
         </WebsiteNavigation>
       </WalletGuard>
     </ClientOnly>

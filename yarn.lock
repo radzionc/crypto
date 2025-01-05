@@ -2165,7 +2165,7 @@ __metadata:
   resolution: "@lib/chain@workspace:lib/chain"
   dependencies:
     "@0x/swap-ts-sdk": "npm:^2.1.1"
-    viem: "npm:^2.21.57"
+    viem: "npm:^2.21.58"
   languageName: unknown
   linkType: soft
 
@@ -2221,7 +2221,7 @@ __metadata:
     "@react-spring/web": "npm:^9.7.5"
     "@svgr/core": "npm:^8.1.0"
     "@svgr/plugin-jsx": "npm:^8.1.0"
-    "@tanstack/react-query": "npm:^5.62.3"
+    "@tanstack/react-query": "npm:^5.62.11"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^19.0.1"
     "@types/react-dom": "npm:^19.0.2"
@@ -2777,10 +2777,12 @@ __metadata:
   dependencies:
     "@next/eslint-plugin-next": "npm:^15.0.4"
     "@rainbow-me/rainbowkit": "npm:^2.2.1"
-    "@tanstack/react-query": "npm:^5.62.3"
+    "@tanstack/react-query": "npm:^5.62.11"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^19.0.1"
     "@types/react-dom": "npm:^19.0.2"
+    "@web3icons/core": "npm:^3.14.0"
+    "@web3icons/react": "npm:^3.14.0"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^9.16.0"
     eslint-config-next: "npm:^15.0.4"
@@ -2803,7 +2805,7 @@ __metadata:
     "@sentry/serverless": "npm:7.114.0"
     "@types/node-telegram-bot-api": "npm:^0"
     node-telegram-bot-api: "npm:^0.66.0"
-    viem: "npm:^2.21.57"
+    viem: "npm:^2.21.58"
   languageName: unknown
   linkType: soft
 
@@ -2825,7 +2827,7 @@ __metadata:
     "@sentry/serverless": "npm:7.114.0"
     "@types/node-telegram-bot-api": "npm:^0"
     node-telegram-bot-api: "npm:^0.66.0"
-    viem: "npm:^2.21.57"
+    viem: "npm:^2.21.58"
   languageName: unknown
   linkType: soft
 
@@ -2834,7 +2836,7 @@ __metadata:
   resolution: "@product/trading-history@workspace:product/trading-history"
   dependencies:
     "@next/eslint-plugin-next": "npm:^15.0.4"
-    "@tanstack/react-query": "npm:^5.62.3"
+    "@tanstack/react-query": "npm:^5.62.11"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^19.0.1"
     "@types/react-dom": "npm:^19.0.2"
@@ -3998,7 +4000,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.62.11, @tanstack/react-query@npm:^5.62.3":
+"@tanstack/react-query@npm:^5.62.11":
   version: 5.62.11
   resolution: "@tanstack/react-query@npm:5.62.11"
   dependencies:
@@ -4949,6 +4951,36 @@ __metadata:
     "@walletconnect/window-getters": "npm:^1.0.1"
     tslib: "npm:1.14.1"
   checksum: 10/cf322e0860c4448cefcd81f34bc6d49d1a235a81e74a6146baefb74e47cf6c3c8050b65e534a3dc13f8d2aed3fc59732ccf48d5a01b5b23e08e1847fcffa950c
+  languageName: node
+  linkType: hard
+
+"@web3icons/common@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@web3icons/common@npm:0.8.0"
+  peerDependencies:
+    typescript: ^5.0.0
+  checksum: 10/6b80384b22661faf0c409b257e6ee234bfdb138c175e88b220e21be6c8a81fef495430481e708946d39d569e3a072c7b0ad3ebd7828266e98c18b851e8d38ed5
+  languageName: node
+  linkType: hard
+
+"@web3icons/core@npm:^3.14.0":
+  version: 3.14.0
+  resolution: "@web3icons/core@npm:3.14.0"
+  peerDependencies:
+    typescript: ^5.0.0
+  checksum: 10/1ef23149ae29efb4977ea075c651acc8db53d759dd2af0a6eb5e4a99475de6536ee6a5880f98b948dbf5b4c58ec254b53b9aaee54d8cc9560f8ce9a3c5b86450
+  languageName: node
+  linkType: hard
+
+"@web3icons/react@npm:^3.14.0":
+  version: 3.14.0
+  resolution: "@web3icons/react@npm:3.14.0"
+  dependencies:
+    "@web3icons/common": "npm:0.8.0"
+    react: "npm:^18.2.0"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 10/739990a8a162eca218c8d0fca76b8384dc9704abdbffc0709abf91926d6ec31e8a15859236b46f92e30ca59f56fd1b64f960f1f70865bca82e246d7b0ca03765
   languageName: node
   linkType: hard
 
@@ -9642,7 +9674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -10666,26 +10698,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ox@npm:0.1.2":
-  version: 0.1.2
-  resolution: "ox@npm:0.1.2"
-  dependencies:
-    "@adraffy/ens-normalize": "npm:^1.10.1"
-    "@noble/curves": "npm:^1.6.0"
-    "@noble/hashes": "npm:^1.5.0"
-    "@scure/bip32": "npm:^1.5.0"
-    "@scure/bip39": "npm:^1.4.0"
-    abitype: "npm:^1.0.6"
-    eventemitter3: "npm:5.0.1"
-  peerDependencies:
-    typescript: ">=5.4.0"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10/cba00f13289599ff03cee3dbc19167c1d0f01829379d119f962b4e951ee2bf0d14491c7a45974e6a2a745117b13b22e9e4131d285e1f5247ea4e1cbc43c5c3d8
-  languageName: node
-  linkType: hard
-
 "ox@npm:0.4.4":
   version: 0.4.4
   resolution: "ox@npm:0.4.4"
@@ -11525,6 +11537,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/62498094ff3877a37f351b29e6cad9e38b2eb1ac3c0cb27ebf80aee96554f80b35e17bdb552bcd7ac8b7cb9904fea93ea5668f2057c73d38f90b5d46bb9b27ab
+  languageName: node
+  linkType: hard
+
+"react@npm:^18.2.0":
+  version: 18.3.1
+  resolution: "react@npm:18.3.1"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 10/261137d3f3993eaa2368a83110466fc0e558bc2c7f7ae7ca52d94f03aac945f45146bd85e5f481044db1758a1dbb57879e2fcdd33924e2dde1bdc550ce73f7bf
   languageName: node
   linkType: hard
 
@@ -13550,28 +13571,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/374b37fdd4b1344e3a864434b20263f3f64536eef3142d4866fb971a7d204bfb1a12dc42c042b622b088fda6344e7f92f30be1e54bdcddb2d561bf1fad6c1c42
-  languageName: node
-  linkType: hard
-
-"viem@npm:^2.21.57":
-  version: 2.21.57
-  resolution: "viem@npm:2.21.57"
-  dependencies:
-    "@noble/curves": "npm:1.7.0"
-    "@noble/hashes": "npm:1.6.1"
-    "@scure/bip32": "npm:1.6.0"
-    "@scure/bip39": "npm:1.5.0"
-    abitype: "npm:1.0.7"
-    isows: "npm:1.0.6"
-    ox: "npm:0.1.2"
-    webauthn-p256: "npm:0.0.10"
-    ws: "npm:8.18.0"
-  peerDependencies:
-    typescript: ">=5.0.4"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10/07363310d4b1d13293b175531ff28cd63e93f9b0f29508914bd65db29a56aa850fa832ea17604724292af18d1bcbc7b386000cbd32bdd1aeff91c3e5cde455f6
   languageName: node
   linkType: hard
 
