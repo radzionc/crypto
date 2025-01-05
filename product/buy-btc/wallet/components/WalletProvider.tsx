@@ -5,7 +5,7 @@ import { WagmiProvider, http } from 'wagmi'
 import React from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { productName } from '../../product/config'
-import { chains } from '../../chains/config'
+import { chains } from '../../chain/config'
 import { recordFromKeys } from '@lib/utils/record/recordFromKeys'
 
 const config = getDefaultConfig({

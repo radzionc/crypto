@@ -4,5 +4,13 @@ import { mainnet, bsc, avalanche } from 'viem/chains'
 
 export const chains = [mainnet, bsc, avalanche] as const
 
+export type ChainId = (typeof chains)[number]['id']
+
 export const getChain = (chainId: number) =>
   shouldBePresent(findBy(chains, 'id', chainId))
+
+export const thorNetworkPrefix: Record<ChainId, string> = {
+  [mainnet.id]: 'AVAX',
+  [bsc.id]: 'BSC',
+  [avalanche.id]: 'ETH',
+}

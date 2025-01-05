@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { ChainIdProvider } from '../state/chainId'
-import { chains } from '../../chains/config'
+import { chains } from '../../chain/config'
 import { SwapForm } from './SwapForm'
 
 export const PageContainer = styled.div`

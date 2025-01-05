@@ -1,5 +1,5 @@
 import { SelectOptionInput } from '@lib/ui/inputs/dropdown/DropdownInput'
-import { chains, getChain } from '../../chains/config'
+import { chains, getChain } from '../../chain/config'
 import { useChainIdState } from '../state/chainId'
 import { DropdownOptionContent } from '@lib/ui/inputs/dropdown/DropdownOptionContent'
 import { NetworkIcon } from '@web3icons/react'
