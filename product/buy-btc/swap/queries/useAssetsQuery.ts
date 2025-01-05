@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Asset } from '../../chain/Asset'
-import { ChainId, thorNetworkPrefix } from '../../chain/config'
+import { thorChainIds, thorChainRecord } from '../../chain/config'
 import { queryUrl } from '@lib/utils/query/queryUrl'
 import { withoutUndefined } from '@lib/utils/array/withoutUndefined'
-import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
+import { isOneOf } from '@lib/utils/array/isOneOf'
 
 type ThorPoolStatus = 'Available' | 'Staged'
 
@@ -15,15 +15,17 @@ type ThorPool = {
 const thorPoolsUrl = 'https://thornode.ninerealms.com/thorchain/pools'
 
 const fromThorAsset = (thorAsset: string): Asset | undefined => {
-  const [network, assetPart] = thorAsset.split('.')
+  const [thorChainIdString, asset] = thorAsset.split('.')
 
-  const chainId = mirrorRecord(thorNetworkPrefix)[network]
-  if (!chainId) return
+  const thorChainId = isOneOf(thorChainIdString, thorChainIds)
+  if (!thorChainId) return
 
-  const [symbol, address] = assetPart.split('-')
+  const chainId = thorChainRecord[thorChainId]
+
+  const [symbol, address] = asset.split('-')
 
   return {
-    chainId: Number(chainId) as ChainId,
+    chainId,
     symbol,
     ...(address ? { address: address.toLowerCase() } : {}),
   }

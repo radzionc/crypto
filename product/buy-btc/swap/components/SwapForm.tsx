@@ -11,6 +11,7 @@ import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { AssetsProvider } from '../state/assets'
 import { AssetProvider } from '../state/asset'
 import { ManageAsset } from './ManageAsset'
+import { AssetBalance } from './AssetBalance'
 
 export const SwapForm = () => {
   const assetsQuery = useAssetsQuery()
@@ -46,7 +47,10 @@ export const SwapForm = () => {
           return (
             <AssetsProvider value={chainAssets}>
               <AssetProvider>
-                <ManageAsset />
+                <VStack gap={12}>
+                  <ManageAsset />
+                  <AssetBalance />
+                </VStack>
               </AssetProvider>
             </AssetsProvider>
           )

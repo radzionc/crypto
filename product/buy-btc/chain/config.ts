@@ -9,8 +9,12 @@ export type ChainId = (typeof chains)[number]['id']
 export const getChain = (chainId: number) =>
   shouldBePresent(findBy(chains, 'id', chainId))
 
-export const thorNetworkPrefix: Record<ChainId, string> = {
-  [mainnet.id]: 'AVAX',
-  [bsc.id]: 'BSC',
-  [avalanche.id]: 'ETH',
+export const thorChainIds = ['ETH', 'BSC', 'AVAX'] as const
+
+export type ThorChainId = (typeof thorChainIds)[number]
+
+export const thorChainRecord: Record<ThorChainId, ChainId> = {
+  ETH: mainnet.id,
+  BSC: bsc.id,
+  AVAX: avalanche.id,
 }
