@@ -20,10 +20,11 @@ const fromThorAsset = (thorAsset: string): Asset | undefined => {
   const chainId = mirrorRecord(thorNetworkPrefix)[network]
   if (!chainId) return
 
-  const [, address] = assetPart.split('-')
+  const [symbol, address] = assetPart.split('-')
 
   return {
     chainId: Number(chainId) as ChainId,
+    symbol,
     ...(address ? { address: address.toLowerCase() } : {}),
   }
 }

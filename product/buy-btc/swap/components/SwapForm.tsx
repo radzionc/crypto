@@ -10,6 +10,7 @@ import { isEmpty } from '@lib/utils/array/isEmpty'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { AssetsProvider } from '../state/assets'
 import { AssetProvider } from '../state/asset'
+import { ManageAsset } from './ManageAsset'
 
 export const SwapForm = () => {
   const assetsQuery = useAssetsQuery()
@@ -43,11 +44,9 @@ export const SwapForm = () => {
           }
 
           return (
-            <AssetsProvider initialValue={chainAssets}>
-              <AssetProvider initialValue={chainAssets[0]}>
-                <code>
-                  <pre>{JSON.stringify(chainAssets, null, 2)}</pre>
-                </code>
+            <AssetsProvider value={chainAssets}>
+              <AssetProvider>
+                <ManageAsset />
               </AssetProvider>
             </AssetsProvider>
           )

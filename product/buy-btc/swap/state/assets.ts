@@ -1,5 +1,5 @@
-import { getStateProviderSetup } from '@lib/ui/state/getStateProviderSetup'
 import { Asset } from '../../chain/Asset'
+import { getValueProviderSetup } from '@lib/ui/state/getValueProviderSetup'
 
-export const { provider: AssetsProvider, useState: useAssets } =
-  getStateProviderSetup<Asset[]>('assets')
+export const { provider: AssetsProvider, useValue: useAssets } =
+  getValueProviderSetup<Asset[]>('assets')
