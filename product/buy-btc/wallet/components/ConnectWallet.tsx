@@ -1,12 +1,22 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { ProductLogo } from '../../product/ProductLogo'
+import { Center } from '@lib/ui/layout/Center'
 import { VStack } from '@lib/ui/css/stack'
-import { Text } from '@lib/ui/text'
+import { Button } from '@lib/ui/buttons/Button'
 
 export const ConnectWallet = () => {
   return (
-    <VStack alignItems="center" gap={16}>
-      <Text>Connect your wallet to start trading</Text>
-      <ConnectButton />
-    </VStack>
+    <Center>
+      <VStack alignItems="center" gap={20}>
+        <ProductLogo />
+        <ConnectButton.Custom>
+          {({ openConnectModal }) => (
+            <Button onClick={openConnectModal} size="l" kind="primary">
+              Connect Wallet
+            </Button>
+          )}
+        </ConnectButton.Custom>
+      </VStack>
+    </Center>
   )
 }

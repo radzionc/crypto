@@ -5,10 +5,11 @@ import { WagmiProvider, http } from 'wagmi'
 import { mainnet } from 'wagmi/chains'
 import React from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { productName } from '../../product/config'
 
 const config = getDefaultConfig({
-  appName: 'Buy Bitcoin',
-  projectId: shouldBePresent(process.env.REOWN_PROJECT_ID),
+  appName: productName,
+  projectId: shouldBePresent(process.env.NEXT_PUBLIC_REOWN_PROJECT_ID),
   chains: [mainnet],
   transports: {
     [mainnet.id]: http(),
