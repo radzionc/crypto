@@ -8,15 +8,18 @@ import { createContextHook } from '@lib/ui/state/createContextHook'
 
 const AssetContext = createContext<ContextState<Asset> | undefined>(undefined)
 
+const getDefaultAsset = (assets: Asset[]) =>
+  assets.find(({ address }) => !address) ?? assets[0]
+
 export const AssetProvider = ({ children }: ComponentWithChildrenProps) => {
   const assets = useAssets()
 
   const [value, setValue] = useStateCorrector(
-    useState<Asset>(assets[0]),
+    useState<Asset>(() => getDefaultAsset(assets)),
     useCallback(
       (asset) => {
         if (!assets.find((a) => areAssetsEqual(a, asset))) {
-          return assets[0]
+          return getDefaultAsset(assets)
         }
 
         return asset
