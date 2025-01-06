@@ -13,6 +13,7 @@ import { AssetProvider } from '../state/asset'
 import { ManageAsset } from './ManageAsset'
 import { ManageAmount } from './ManageAmount'
 import { AmountProvider } from '../state/amount'
+import { ManageAddress } from './ManageAddress'
 
 export const SwapForm = () => {
   const assetsQuery = useAssetsQuery()
@@ -49,16 +50,15 @@ export const SwapForm = () => {
             <AssetsProvider value={chainAssets}>
               <AssetProvider>
                 <AmountProvider initialValue={null}>
-                  <VStack gap={12}>
-                    <ManageAsset />
-                    <ManageAmount />
-                  </VStack>
+                  <ManageAsset />
+                  <ManageAmount />
                 </AmountProvider>
               </AssetProvider>
             </AssetsProvider>
           )
         }}
       />
+      <ManageAddress />
     </VStack>
   )
 }

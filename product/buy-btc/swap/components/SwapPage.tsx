@@ -10,6 +10,7 @@ import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { ChainIdProvider } from '../state/chainId'
 import { chains } from '../../chain/config'
 import { SwapForm } from './SwapForm'
+import { AddressProvider } from '../state/address'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({
@@ -36,7 +37,9 @@ export const SwapPage = () => (
         >
           <PageContainer>
             <ChainIdProvider initialValue={chains[0].id}>
-              <SwapForm />
+              <AddressProvider initialValue="">
+                <SwapForm />
+              </AddressProvider>
             </ChainIdProvider>
           </PageContainer>
         </WebsiteNavigation>

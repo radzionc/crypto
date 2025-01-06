@@ -32,16 +32,18 @@ export function MaxAmount() {
       value={balanceQuery}
       pending={() => null}
       error={() => null}
-      success={({ value, decimals }) => (
-        <Container
-          onClick={() => {
-            const maxAmount = Number(formatUnits(value, decimals))
-            setAmount(maxAmount)
-          }}
-        >
-          Max: {formatUnits(value, decimals)} {asset.symbol}
-        </Container>
-      )}
+      success={({ value, decimals }) => {
+        const amount = Number(formatUnits(value, decimals))
+        return (
+          <Container
+            onClick={() => {
+              setAmount(amount)
+            }}
+          >
+            Max: {amount.toFixed(2)} {asset.symbol}
+          </Container>
+        )
+      }}
     />
   )
 }
