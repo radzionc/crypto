@@ -3,6 +3,8 @@ import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/Text'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
+import { Button } from '@lib/ui/buttons/Button'
+import { ChainGuard } from '../../wallet/components/ChainGuard'
 
 export const SwapConfirm = () => {
   const quoteQuery = useQuoteQuery()
@@ -16,7 +18,20 @@ export const SwapConfirm = () => {
           {getErrorMessage(err)}
         </ShyWarningBlock>
       )}
-      success={(quote) => <code>{JSON.stringify(quote, null, 2)}</code>}
+      success={(quote) => (
+        <>
+          <ChainGuard>
+            <Button
+              onClick={() => {
+                console.log('TO-DO')
+              }}
+            >
+              Buy Bitcoin
+            </Button>
+          </ChainGuard>
+          <code>{JSON.stringify(quote, null, 2)}</code>
+        </>
+      )}
     />
   )
 }
