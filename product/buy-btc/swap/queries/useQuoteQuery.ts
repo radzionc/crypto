@@ -11,8 +11,8 @@ export const useQuoteQuery = () => {
 
   return useStateDependentQuery({
     state: {
-      address: address ?? undefined,
-      amount: amount ?? undefined,
+      address: address || undefined,
+      amount: amount || undefined,
     },
     getQuery: ({ address, amount }) => {
       return {

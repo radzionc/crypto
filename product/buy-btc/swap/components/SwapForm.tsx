@@ -14,6 +14,7 @@ import { ManageAsset } from './ManageAsset'
 import { ManageAmount } from './ManageAmount'
 import { AmountProvider } from '../state/amount'
 import { ManageAddress } from './ManageAddress'
+import { SwapConfirm } from './SwapConfirm'
 
 export const SwapForm = () => {
   const assetsQuery = useAssetsQuery()
@@ -52,13 +53,14 @@ export const SwapForm = () => {
                 <AmountProvider initialValue={null}>
                   <ManageAsset />
                   <ManageAmount />
+                  <ManageAddress />
+                  <SwapConfirm />
                 </AmountProvider>
               </AssetProvider>
             </AssetsProvider>
           )
         }}
       />
-      <ManageAddress />
     </VStack>
   )
 }
