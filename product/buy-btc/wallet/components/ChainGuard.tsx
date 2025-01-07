@@ -9,9 +9,7 @@ export const ChainGuard = ({ children }: ComponentWithChildrenProps) => {
   const { switchChain } = useSwitchChain()
   const [asset] = useAsset()
 
-  const isWrongChain = chainId !== asset.chainId
-
-  if (isWrongChain) {
+  if (chainId !== asset.chainId) {
     return (
       <Button
         onClick={() => {

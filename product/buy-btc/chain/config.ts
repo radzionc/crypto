@@ -18,3 +18,9 @@ export const thorChainRecord: Record<ThorChainId, ChainId> = {
   BSC: bsc.id,
   AVAX: avalanche.id,
 }
+
+export const btc = {
+  decimals: 8,
+  symbol: 'BTC',
+  name: 'Bitcoin',
+}

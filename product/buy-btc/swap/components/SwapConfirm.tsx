@@ -5,6 +5,7 @@ import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
 import { Button } from '@lib/ui/buttons/Button'
 import { ChainGuard } from '../../wallet/components/ChainGuard'
+import { SwapInfo } from './SwapInfo'
 
 export const SwapConfirm = () => {
   const quoteQuery = useQuoteQuery()
@@ -20,6 +21,7 @@ export const SwapConfirm = () => {
       )}
       success={(quote) => (
         <>
+          <SwapInfo value={quote} />
           <ChainGuard>
             <Button
               onClick={() => {
