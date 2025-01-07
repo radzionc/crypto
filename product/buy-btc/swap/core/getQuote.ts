@@ -1,8 +1,7 @@
-import { Asset } from '../../chain/Asset'
 import { addQueryParams } from '@lib/utils/query/addQueryParams'
 import { toChainAmount } from '@lib/chain/utils/toChainAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
-import { thorChainRecord } from '../../chain/config'
+import { ChainId, getChain, thorChainRecord } from '../../chain/config'
 import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
 import { queryUrl } from '@lib/utils/query/queryUrl'
 import { formatAmount } from '@lib/utils/formatAmount'
@@ -10,7 +9,7 @@ import { formatAmount } from '@lib/utils/formatAmount'
 type GetQuoteInput = {
   address: string
   amount: number
-  asset: Asset
+  chainId: ChainId
 }
 
 export type QuoteResponse = {
@@ -51,13 +50,13 @@ const baseUrl = 'https://thornode.ninerealms.com/thorchain/quote/swap'
 
 const decimals = 8
 
-export const getQuote = async ({ address, amount, asset }: GetQuoteInput) => {
-  const chainPrefix = mirrorRecord(thorChainRecord)[asset.chainId]
+export const getQuote = async ({ address, amount, chainId }: GetQuoteInput) => {
+  const chainPrefix = mirrorRecord(thorChainRecord)[chainId]
 
   const chainAmount = toChainAmount(amount, decimals)
 
   const url = addQueryParams(baseUrl, {
-    from_asset: `${chainPrefix}.${asset.symbol}`,
+    from_asset: `${chainPrefix}.${chainPrefix}`,
     to_asset: 'BTC.BTC',
     amount: chainAmount.toString(),
     destination: address,
@@ -78,7 +77,9 @@ export const getQuote = async ({ address, amount, asset }: GetQuoteInput) => {
 
     const formattedMinAmount = formatAmount(minAmount)
 
-    const msg = `You need to swap at least ${formattedMinAmount} ${asset.symbol}`
+    const { nativeCurrency } = getChain(chainId)
+
+    const msg = `You need to swap at least ${formattedMinAmount} ${nativeCurrency.symbol}`
 
     throw new Error(msg)
   }

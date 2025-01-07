@@ -1,5 +1,4 @@
 import { useAmount } from '../state/amount'
-import { useAsset } from '../state/asset'
 import { useBalance } from 'wagmi'
 import { useAccount } from 'wagmi'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -9,7 +8,8 @@ import styled from 'styled-components'
 import { text } from '@lib/ui/text'
 import { interactive } from '@lib/ui/css/interactive'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
-
+import { useSourceChainId } from '../state/sourceChainId'
+import { getChain } from '../../chain/config'
 const Container = styled(UnstyledButton)`
   ${text({ color: 'primary' })}
   ${interactive}
@@ -18,14 +18,14 @@ const Container = styled(UnstyledButton)`
 export function MaxAmount() {
   const [, setAmount] = useAmount()
   const account = useAccount()
-  const [asset] = useAsset()
+  const [sourceChainId] = useSourceChainId()
 
   const address = shouldBePresent(account.address)
   const balanceQuery = useBalance({
     address,
-    token: asset.address as `0x${string}` | undefined,
-    chainId: asset.chainId,
+    chainId: sourceChainId,
   })
+  const { nativeCurrency } = getChain(sourceChainId)
 
   return (
     <MatchQuery
@@ -40,7 +40,7 @@ export function MaxAmount() {
               setAmount(amount)
             }}
           >
-            Max: {amount.toFixed(2)} {asset.symbol}
+            Max: {amount.toFixed(2)} {nativeCurrency.symbol}
           </Container>
         )
       }}

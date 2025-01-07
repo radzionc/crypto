@@ -1,13 +1,13 @@
 import { useAddress } from '../state/address'
 import { useAmount } from '../state/amount'
 import { useStateDependentQuery } from '@lib/ui/query/hooks/useStateDependentQuery'
-import { useAsset } from '../state/asset'
 import { getQuote } from '../core/getQuote'
+import { useSourceChainId } from '../state/sourceChainId'
 
 export const useQuoteQuery = () => {
   const [address] = useAddress()
   const [amount] = useAmount()
-  const [asset] = useAsset()
+  const [chainId] = useSourceChainId()
 
   return useStateDependentQuery({
     state: {
@@ -17,7 +17,7 @@ export const useQuoteQuery = () => {
     getQuery: ({ address, amount }) => {
       return {
         queryKey: ['quote', address, amount],
-        queryFn: () => getQuote({ address, amount, asset }),
+        queryFn: () => getQuote({ address, amount, chainId }),
       }
     },
   })

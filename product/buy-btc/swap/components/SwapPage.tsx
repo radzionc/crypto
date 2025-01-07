@@ -7,10 +7,15 @@ import { ExitWallet } from '../../wallet/components/ExitWallet'
 import styled from 'styled-components'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
-import { ChainIdProvider } from '../state/chainId'
 import { chains } from '../../chain/config'
-import { SwapForm } from './SwapForm'
 import { AddressProvider } from '../state/address'
+import { AmountProvider } from '../state/amount'
+import { VStack } from '@lib/ui/css/stack'
+import { ManageChain } from './ManageChain'
+import { ManageAmount } from './ManageAmount'
+import { SwapQuote } from './SwapQuote'
+import { ManageAddress } from './ManageAddress'
+import { SourceChainIdProvider } from '../state/sourceChainId'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({
@@ -36,11 +41,18 @@ export const SwapPage = () => (
           logo={<ProductLogo />}
         >
           <PageContainer>
-            <ChainIdProvider initialValue={chains[0].id}>
+            <SourceChainIdProvider initialValue={chains[0].id}>
               <AddressProvider initialValue="">
-                <SwapForm />
+                <AmountProvider initialValue={null}>
+                  <VStack gap={20}>
+                    <ManageChain />
+                    <ManageAmount />
+                    <ManageAddress />
+                    <SwapQuote />
+                  </VStack>
+                </AmountProvider>
               </AddressProvider>
-            </ChainIdProvider>
+            </SourceChainIdProvider>
           </PageContainer>
         </WebsiteNavigation>
       </WalletGuard>

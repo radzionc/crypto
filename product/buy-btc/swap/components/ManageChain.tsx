@@ -2,17 +2,17 @@ import { SelectOptionInput } from '@lib/ui/inputs/dropdown/DropdownInput'
 import { chains, getChain } from '../../chain/config'
 import { DropdownOptionContent } from '@lib/ui/inputs/dropdown/DropdownOptionContent'
 import { NetworkIcon } from '@web3icons/react'
-import { useChainId } from '../state/chainId'
+import { useSourceChainId } from '../state/sourceChainId'
 
 export function ManageChain() {
-  const [chainId, setChainId] = useChainId()
-  const chain = getChain(chainId)
+  const [sourceChainId, setSourceChainId] = useSourceChainId()
+  const chain = getChain(sourceChainId)
 
   return (
     <SelectOptionInput
-      label="Network"
-      value={chainId}
-      onChange={(id) => setChainId(id)}
+      label="Chain"
+      value={sourceChainId}
+      onChange={(id) => setSourceChainId(id)}
       options={chains.map((chain) => chain.id)}
       getOptionKey={(id) => getChain(id).name}
       renderOption={(id) => (
@@ -22,7 +22,11 @@ export function ManageChain() {
         />
       )}
       valueIdentifier={
-        <NetworkIcon key={chainId} chainId={chainId} variant="branded" />
+        <NetworkIcon
+          key={sourceChainId}
+          chainId={sourceChainId}
+          variant="branded"
+        />
       }
       valueName={chain.name}
     />

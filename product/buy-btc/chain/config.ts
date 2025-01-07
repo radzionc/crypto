@@ -19,7 +19,13 @@ export const thorChainRecord: Record<ThorChainId, ChainId> = {
   AVAX: avalanche.id,
 }
 
-export const btc = {
+type AssetInfo = {
+  decimals: number
+  symbol: string
+  name: string
+}
+
+export const btc: AssetInfo = {
   decimals: 8,
   symbol: 'BTC',
   name: 'Bitcoin',

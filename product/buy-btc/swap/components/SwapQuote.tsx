@@ -3,11 +3,12 @@ import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/Text'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
-import { Button } from '@lib/ui/buttons/Button'
 import { ChainGuard } from '../../wallet/components/ChainGuard'
 import { SwapInfo } from './SwapInfo'
+import { ExecuteSwap } from './ExecuteSwap'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 
-export const SwapConfirm = () => {
+export const SwapQuote = () => {
   const quoteQuery = useQuoteQuery()
 
   return (
@@ -23,15 +24,11 @@ export const SwapConfirm = () => {
         <>
           <SwapInfo value={quote} />
           <ChainGuard>
-            <Button
-              onClick={() => {
-                console.log('TO-DO')
-              }}
-            >
-              Buy Bitcoin
-            </Button>
+            <ExecuteSwap
+              memo={quote.memo}
+              receiver={shouldBePresent(quote.inbound_address) as `0x${string}`}
+            />
           </ChainGuard>
-          <code>{JSON.stringify(quote, null, 2)}</code>
         </>
       )}
     />
