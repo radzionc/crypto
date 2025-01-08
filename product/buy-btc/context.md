@@ -1,17 +1,10 @@
 You will assist me with tasks related to this project. Please read the details below and reply with "Yes" if you understand the project.
 
-This an application for tracking trading history. For simplicity sake, it supports only ETH and WETH trades on Ethereum and Polygon chains.
+This is an application for buying BTC with ETH, BNB or AVAX via THORChain.
 
-To get the trading history, we use Alchemy API.
+The user can select the chain they want to use, the amount of native cryptocurrency of that chain they want to pay, and Bitcoin address to receive the BTC.
 
-The app has two views:
-
-- **Set API Key**: To use the app, the user must set an API key. The API key is stored in local storage.
-- **Trading History**: The user can add multiple addresses to track their trading history. The app shows the combined trading history of all the addresses.
-
-Based on the last trade and the current price of ETH, the app tells the user if it's a good time to buy or sell.
-
-The app is available at https://history.radzion.com
+The app is available at https://btc.radzion.com
 
 ## Tech Stack
 

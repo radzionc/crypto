@@ -27,7 +27,10 @@ export const PageContainer = styled.div`
 
 export const SwapPage = () => (
   <>
-    <PageMetaTags title="" description="" />
+    <PageMetaTags
+      title="Buy Bitcoin with ETH, BNB, or AVAX | THORChain Swap"
+      description="Easily swap your ETH, BNB, or AVAX for Bitcoin using THORChain. Get real-time quotes and secure cross-chain swaps with minimal fees."
+    />
     <ClientOnly>
       <WalletGuard>
         <WebsiteNavigation
