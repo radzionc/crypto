@@ -1,7 +1,7 @@
 import { AmountTextInput } from '@lib/ui/inputs/AmountTextInput'
 import { useAmount } from '../state/amount'
 import { MaxAmount } from './MaxAmount'
-import { getChain } from '../../chain/config'
+import { getChain } from '../core/chains'
 import { TokenIcon } from '@web3icons/react'
 import { useSourceChainId } from '../state/sourceChainId'
 

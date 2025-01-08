@@ -9,7 +9,8 @@ import { text } from '@lib/ui/text'
 import { interactive } from '@lib/ui/css/interactive'
 import { UnstyledButton } from '@lib/ui/buttons/UnstyledButton'
 import { useSourceChainId } from '../state/sourceChainId'
-import { getChain } from '../../chain/config'
+import { getChain } from '../core/chains'
+
 const Container = styled(UnstyledButton)`
   ${text({ color: 'primary' })}
   ${interactive}

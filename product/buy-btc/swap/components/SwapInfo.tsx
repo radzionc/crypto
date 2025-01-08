@@ -1,7 +1,7 @@
 import { ComponentWithValueProps } from '@lib/ui/props'
 import { QuoteResponse } from '../core/getQuote'
 import { Text } from '@lib/ui/text'
-import { btc } from '../../chain/config'
+import { btc } from '../core/btc'
 import { formatAmount } from '@lib/utils/formatAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 
