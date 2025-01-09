@@ -31,8 +31,6 @@ export function MaxAmount() {
   return (
     <MatchQuery
       value={balanceQuery}
-      pending={() => null}
-      error={() => null}
       success={({ value, decimals }) => {
         const amount = Number(formatUnits(value, decimals))
         return (
