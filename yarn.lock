@@ -2809,6 +2809,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@product/merkle-tree@workspace:product/merkle-tree":
+  version: 0.0.0-use.local
+  resolution: "@product/merkle-tree@workspace:product/merkle-tree"
+  languageName: unknown
+  linkType: soft
+
 "@product/price-watcher@workspace:product/price-watcher":
   version: 0.0.0-use.local
   resolution: "@product/price-watcher@workspace:product/price-watcher"
