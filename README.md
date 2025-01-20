@@ -16,3 +16,6 @@ Welcome! This monorepo contains multiple TypeScript projects that streamline cry
 
 - [**@product/trading-history**](./product/trading-history/README.md)  
   A Next.js single-page application tracking trading history for ETH and WETH on both Ethereum and Polygon.
+
+- [**@product/merkle-tree**](./product/merkle-tree/README.md)  
+  A TypeScript implementation of Merkle trees with a focus on Bitcoin block verification. This package provides utilities for creating Merkle trees, generating proofs, and verifying transaction inclusion in Bitcoin blocks.
