@@ -19,3 +19,6 @@ Welcome! This monorepo contains multiple TypeScript projects that streamline cry
 
 - [**@product/merkle-tree**](./product/merkle-tree/README.md)  
   A TypeScript implementation of Merkle trees with a focus on Bitcoin block verification. This package provides utilities for creating Merkle trees, generating proofs, and verifying transaction inclusion in Bitcoin blocks.
+
+- [**@product/proof-of-work**](./product/proof-of-work/README.md)  
+  A TypeScript implementation of Bitcoin's Proof of Work (PoW) consensus mechanism, providing utilities for block hash calculation, mining simulation, and difficulty verification compatible with the Bitcoin protocol.
