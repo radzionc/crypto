@@ -1,12 +1,9 @@
 import { getBlockHash } from './getBlockHash'
 import { checkDifficulty } from './checkDifficulty'
+import { BlockData } from './BlockData'
 
 type MineBlockInput = {
-  version: number
-  previousBlockHash: string
-  merkleRoot: string
-  timestamp: number
-  bits: number
+  blockData: Omit<BlockData, 'nonce'>
   startNonce: number
 }
 
@@ -16,26 +13,18 @@ type MineBlockResult = {
 }
 
 export const mineBlock = ({
-  version,
-  previousBlockHash,
-  merkleRoot,
-  timestamp,
-  bits,
+  blockData,
   startNonce,
 }: MineBlockInput): MineBlockResult => {
   let nonce = startNonce
 
   while (true) {
     const hash = getBlockHash({
-      version,
-      previousBlockHash,
-      merkleRoot,
-      timestamp,
-      bits,
+      ...blockData,
       nonce,
     })
 
-    if (checkDifficulty(hash, bits)) {
+    if (checkDifficulty(hash, blockData.bits)) {
       return {
         nonce,
         hash,

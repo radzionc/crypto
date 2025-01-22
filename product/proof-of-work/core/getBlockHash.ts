@@ -1,13 +1,5 @@
 import { bitcoinHash } from '@lib/chain/bitcoin/bitcoinHash'
-
-type GetBlockHashInput = {
-  version: number
-  previousBlockHash: string
-  merkleRoot: string
-  timestamp: number
-  bits: number
-  nonce: number
-}
+import { BlockData } from './BlockData'
 
 export const getBlockHash = ({
   version,
@@ -16,7 +8,7 @@ export const getBlockHash = ({
   timestamp,
   bits,
   nonce,
-}: GetBlockHashInput): string => {
+}: BlockData): string => {
   const header = Buffer.alloc(80)
 
   header.writeInt32LE(version, 0)

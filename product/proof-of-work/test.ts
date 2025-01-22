@@ -1,11 +1,13 @@
 import { queryUrl } from '@lib/utils/query/queryUrl'
 import { getBlockHash } from './core/getBlockHash'
 import { mineBlock } from './core/mineBlock'
+import { BlockData } from './core/BlockData'
+import { omit } from '@lib/utils/record/omit'
 
 const blockHash =
   '0000000000000000000266819fe415c51f9c025e1059b4c1332c1033236166f0'
 
-interface BlockData {
+interface BlockDataResponse {
   id: string
   height: number
   version: number
@@ -22,18 +24,20 @@ interface BlockData {
 }
 
 const test = async () => {
-  const blockData = await queryUrl<BlockData>(
+  const blockDataResponse = await queryUrl<BlockDataResponse>(
     `https://blockstream.info/api/block/${blockHash}`,
   )
 
-  const computedHash = getBlockHash({
-    version: blockData.version,
-    previousBlockHash: blockData.previousblockhash,
-    merkleRoot: blockData.merkle_root,
-    timestamp: blockData.timestamp,
-    bits: blockData.bits,
-    nonce: blockData.nonce,
-  })
+  const blockData: BlockData = {
+    version: blockDataResponse.version,
+    previousBlockHash: blockDataResponse.previousblockhash,
+    merkleRoot: blockDataResponse.merkle_root,
+    timestamp: blockDataResponse.timestamp,
+    bits: blockDataResponse.bits,
+    nonce: blockDataResponse.nonce,
+  }
+
+  const computedHash = getBlockHash(blockData)
 
   console.log('\nVerifying actual block:')
   console.log('Computed block hash:', computedHash)
@@ -45,11 +49,7 @@ const test = async () => {
 
   console.log('\nDemonstrating mining process:')
   const miningResult = mineBlock({
-    version: blockData.version,
-    previousBlockHash: blockData.previousblockhash,
-    merkleRoot: blockData.merkle_root,
-    timestamp: blockData.timestamp,
-    bits: blockData.bits,
+    blockData: omit(blockData, 'nonce'),
     startNonce: blockData.nonce - 20, // Start from 20 nonces before the solution
   })
 
