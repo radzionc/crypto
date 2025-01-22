@@ -1,0 +1,9 @@
+{
+  "name": "@product/proof-of-work",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "npx tsx test.ts"
+  }
+}
