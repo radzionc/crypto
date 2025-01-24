@@ -2866,6 +2866,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@product/utxo@workspace:product/utxo":
+  version: 0.0.0-use.local
+  resolution: "@product/utxo@workspace:product/utxo"
+  languageName: unknown
+  linkType: soft
+
 "@rainbow-me/rainbowkit@npm:^2.2.1":
   version: 2.2.1
   resolution: "@rainbow-me/rainbowkit@npm:2.2.1"
