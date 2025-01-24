@@ -1,0 +1,9 @@
+{
+  "name": "@product/utxo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "npx tsx test.ts"
+  }
+}
