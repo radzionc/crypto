@@ -1,8 +1,6 @@
 import { sum } from '@lib/utils/array/sum'
-import { UTXO } from './utxo'
+import { ConfirmedUtxo } from './utxo'
 
-export const getBalance = (utxos: UTXO[]) => {
-  return sum(
-    utxos.filter((utxo) => utxo.status.confirmed).map((utxo) => utxo.value),
-  )
+export const getBalance = (utxos: ConfirmedUtxo[]) => {
+  return sum(utxos.map((utxo) => utxo.value))
 }
