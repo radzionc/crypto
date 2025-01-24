@@ -2,13 +2,15 @@ import { ConfirmedUtxo } from './utxo'
 
 export const selectUtxos = (
   utxos: ConfirmedUtxo[],
-  targetAmount: number,
+  targetAmount: bigint,
 ): ConfirmedUtxo[] => {
   // Sort UTXOs by value (ascending)
   const sortedUtxos = [...utxos].sort((a, b) => a.value - b.value)
 
   // Strategy 1: Look for exact match
-  const exactMatch = sortedUtxos.find((utxo) => utxo.value === targetAmount)
+  const exactMatch = sortedUtxos.find(
+    (utxo) => BigInt(utxo.value) === targetAmount,
+  )
   if (exactMatch) {
     return [exactMatch]
   }

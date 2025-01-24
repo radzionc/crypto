@@ -1,10 +1,11 @@
 import { btc } from '@lib/chain/bitcoin/btc'
-import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 import { queryUrl } from '@lib/utils/query/queryUrl'
 import { getConfirmedUtxos, Utxo } from './core/utxo'
 import { getBalance } from './core/getBalance'
-import { formatAmount } from '@lib/utils/formatAmount'
 import { selectUtxos } from './core/selectUtxos'
+import { toChainAmount } from '@lib/chain/utils/toChainAmount'
+import { sum } from '@lib/utils/array/sum'
+import { formatChainAmount } from '@lib/chain/utils/formatChainAmount'
 
 const test = async () => {
   const address =
@@ -22,69 +23,48 @@ const test = async () => {
     console.log(`\nUTXO #${index + 1}:`)
     console.log(`Transaction ID: ${utxo.txid}`)
     console.log(`Output Index: ${utxo.vout}`)
-    console.log(
-      `Amount: ${formatAmount(fromChainAmount(utxo.value, btc.decimals))} ${btc.symbol}`,
-    )
+    console.log(`Amount: ${formatChainAmount(utxo.value, btc)}`)
     console.log(`Block Height: ${utxo.status.block_height}`)
     console.log(`Block Time: ${utxo.status.block_time}`)
     console.log(`Block Hash: ${utxo.status.block_hash}`)
   })
 
   const balance = getBalance(confirmedUtxos)
+  console.log(`\nTotal Balance: ${formatChainAmount(balance, btc)}`)
+
+  const btcToSpend = toChainAmount(10, btc.decimals)
+  const estimatedFee = BigInt(1000)
+
+  const btcTargetAmount = btcToSpend + estimatedFee
+
   console.log(
-    `\nTotal Balance: ${formatAmount(fromChainAmount(balance, btc.decimals))} ${btc.symbol}`,
+    `\nAttempting to select UTXOs for spending ${formatChainAmount(
+      btcTargetAmount,
+      btc,
+    )}...`,
   )
+  const selectedUtxos = selectUtxos(confirmedUtxos, btcTargetAmount)
 
-  // Try to spend 10 BTC
-  const targetAmountBTC = 10
-  const targetAmountSats = targetAmountBTC * 100_000_000 // Convert BTC to satoshis
+  console.log('\nSelected UTXOs:')
+  const totalSelected = sum(selectedUtxos.map((utxo) => utxo.value))
 
-  // Estimate fee (assuming P2WPKH, 2 outputs - recipient and change)
-  // Conservative estimate: 200 vBytes * 5 sats/vByte = 1000 sats
-  const estimatedFee = 1000
+  selectedUtxos.forEach((utxo, index) => {
+    console.log(`\nInput #${index + 1}:`)
+    console.log(`Transaction ID: ${utxo.txid}`)
+    console.log(`Output Index: ${utxo.vout}`)
+    console.log(`Amount: ${formatChainAmount(utxo.value, btc)}`)
+  })
 
-  try {
-    console.log(
-      `\nAttempting to select UTXOs for spending ${targetAmountBTC} BTC...`,
-    )
-    const selectedUtxos = selectUtxos(
-      confirmedUtxos,
-      targetAmountSats + estimatedFee,
-    )
-
-    console.log('\nSelected UTXOs:')
-    const totalSelected = selectedUtxos.reduce(
-      (sum, utxo) => sum + utxo.value,
-      0,
-    )
-
-    selectedUtxos.forEach((utxo, index) => {
-      console.log(`\nInput #${index + 1}:`)
-      console.log(`Transaction ID: ${utxo.txid}`)
-      console.log(`Output Index: ${utxo.vout}`)
-      console.log(
-        `Amount: ${formatAmount(fromChainAmount(utxo.value, btc.decimals))} ${btc.symbol}`,
-      )
-    })
-
-    console.log('\nTransaction Summary:')
-    console.log(
-      `Total Input Amount: ${formatAmount(fromChainAmount(totalSelected, btc.decimals))} ${btc.symbol}`,
-    )
-    console.log(`Target Amount: ${formatAmount(targetAmountBTC)} ${btc.symbol}`)
-    console.log(
-      `Network Fee: ${formatAmount(fromChainAmount(estimatedFee, btc.decimals))} ${btc.symbol}`,
-    )
-    console.log(
-      `Change Amount: ${formatAmount(fromChainAmount(totalSelected - targetAmountSats - estimatedFee, btc.decimals))} ${btc.symbol}`,
-    )
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('\nError:', error.message)
-    } else {
-      console.error('\nUnknown error occurred')
-    }
-  }
+  console.log('\nTransaction Summary:')
+  console.log(`Total Input Amount: ${formatChainAmount(totalSelected, btc)}`)
+  console.log(`Target Amount: ${formatChainAmount(btcTargetAmount, btc)}`)
+  console.log(`Network Fee: ${formatChainAmount(estimatedFee, btc)}`)
+  console.log(
+    `Change Amount: ${formatChainAmount(
+      BigInt(totalSelected) - btcTargetAmount,
+      btc,
+    )}`,
+  )
 }
 
 test()
