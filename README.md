@@ -22,3 +22,6 @@ Welcome! This monorepo contains multiple TypeScript projects that streamline cry
 
 - [**@product/proof-of-work**](./product/proof-of-work/README.md)  
   A TypeScript implementation of Bitcoin's Proof of Work (PoW) consensus mechanism, providing utilities for block hash calculation, mining simulation, and difficulty verification compatible with the Bitcoin protocol.
+
+- [**@product/utxo**](./product/utxo/README.md)  
+  A TypeScript implementation of Bitcoin's UTXO (Unspent Transaction Output) model, providing utilities for managing Bitcoin UTXOs, including balance calculation, UTXO selection, and transaction input management.
