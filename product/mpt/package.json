@@ -5,8 +5,5 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "npx tsx test.ts"
-  },
-  "dependencies": {
-    "viem": "^2.22.14"
   }
 }

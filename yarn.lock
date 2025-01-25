@@ -1387,6 +1387,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ethereumjs/rlp@npm:^5.0.1, @ethereumjs/rlp@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@ethereumjs/rlp@npm:5.0.2"
+  bin:
+    rlp: bin/rlp.cjs
+  checksum: 10/2af80d98faf7f64dfb6d739c2df7da7350ff5ad52426c3219897e843ee441215db0ffa346873200a6be6d11142edb9536e66acd62436b5005fa935baaf7eb6bd
+  languageName: node
+  linkType: hard
+
+"@ethereumjs/trie@npm:^6.0.1":
+  version: 6.2.1
+  resolution: "@ethereumjs/trie@npm:6.2.1"
+  dependencies:
+    "@ethereumjs/rlp": "npm:^5.0.2"
+    "@ethereumjs/util": "npm:^9.1.0"
+    "@types/readable-stream": "npm:^2.3.13"
+    debug: "npm:^4.3.4"
+    ethereum-cryptography: "npm:^2.2.1"
+    lru-cache: "npm:10.1.0"
+    readable-stream: "npm:^3.6.0"
+  checksum: 10/da8c4caa4290a65b02536c5e6a61c1e92a41385e26c5222e293aea32232a57f1fb160d3edcfa198c9722266968e53a524cbb5ae37b4f5f00780848512b6dc1ac
+  languageName: node
+  linkType: hard
+
 "@ethereumjs/tx@npm:^4.1.2, @ethereumjs/tx@npm:^4.2.0":
   version: 4.2.0
   resolution: "@ethereumjs/tx@npm:4.2.0"
@@ -1407,6 +1431,16 @@ __metadata:
     ethereum-cryptography: "npm:^2.0.0"
     micro-ftch: "npm:^0.3.1"
   checksum: 10/cc35338932e49b15e54ca6e548b32a1f48eed7d7e1d34ee743e4d3600dd616668bd50f70139e86c5c35f55aac35fba3b6cc4e6f679cf650aeba66bf93016200c
+  languageName: node
+  linkType: hard
+
+"@ethereumjs/util@npm:^9.0.1, @ethereumjs/util@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "@ethereumjs/util@npm:9.1.0"
+  dependencies:
+    "@ethereumjs/rlp": "npm:^5.0.2"
+    ethereum-cryptography: "npm:^2.2.1"
+  checksum: 10/4e22c4081c63eebb808eccd54f7f91cd3407f4cac192da5f30a0d6983fe07d51f25e6a9d08624f1376e604bb7dce574aafcf0fbf0becf42f62687c11e710ac41
   languageName: node
   linkType: hard
 
@@ -2835,7 +2869,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@product/mpt@workspace:product/mpt"
   dependencies:
-    viem: "npm:^2.22.14"
+    "@ethereumjs/rlp": "npm:^5.0.1"
+    "@ethereumjs/trie": "npm:^6.0.1"
+    "@ethereumjs/util": "npm:^9.0.1"
   languageName: unknown
   linkType: soft
 
@@ -4308,6 +4344,16 @@ __metadata:
   dependencies:
     csstype: "npm:^3.0.2"
   checksum: 10/b355cfa22814e934b381c4f6de67c66652255377c3ddc6a757ea195ccbd0e7095aadfe1a28713d8ab1221222b8f2ec237903f4ec0e54eaf656ac832782d25dd2
+  languageName: node
+  linkType: hard
+
+"@types/readable-stream@npm:^2.3.13":
+  version: 2.3.15
+  resolution: "@types/readable-stream@npm:2.3.15"
+  dependencies:
+    "@types/node": "npm:*"
+    safe-buffer: "npm:~5.1.1"
+  checksum: 10/49b51e56f9cc401cb31c72973a7565ef4208d7e2465a789843104ec0fcbe609727b0b5bf4682fbec773c7f7bd14858e5dba739fd85e14d8a85e41185d65984d3
   languageName: node
   linkType: hard
 
@@ -7643,7 +7689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethereum-cryptography@npm:^2.0.0":
+"ethereum-cryptography@npm:^2.0.0, ethereum-cryptography@npm:^2.2.1":
   version: 2.2.1
   resolution: "ethereum-cryptography@npm:2.2.1"
   dependencies:
@@ -9761,6 +9807,13 @@ __metadata:
   dependencies:
     tslib: "npm:^2.0.3"
   checksum: 10/83a0a5f159ad7614bee8bf976b96275f3954335a84fad2696927f609ddae902802c4f3312d86668722e668bef41400254807e1d3a7f2e8c3eede79691aa1f010
+  languageName: node
+  linkType: hard
+
+"lru-cache@npm:10.1.0":
+  version: 10.1.0
+  resolution: "lru-cache@npm:10.1.0"
+  checksum: 10/207278d6fa711fb1f94a0835d4d4737441d2475302482a14785b10515e4c906a57ebf9f35bf060740c9560e91c7c1ad5a04fd7ed030972a9ba18bce2a228e95b
   languageName: node
   linkType: hard
 
