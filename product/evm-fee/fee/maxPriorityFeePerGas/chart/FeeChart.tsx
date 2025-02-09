@@ -7,12 +7,14 @@ import { useTheme } from 'styled-components'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { LineChart } from '@lib/ui/charts/LineChart'
 import { ComponentWithValueProps } from '@lib/ui/props'
+import { formatUnits } from 'viem'
 import { feePriorities, FeePriority } from '../core/FeePriority'
 import { feeChartConfig } from './config'
 import { ChartSlice } from './ChartSlice'
 import { ChartLabel } from './ChartLabel'
 import { getFeePriorityColor } from '../utils/getFeePriorityColor'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
+import { gwei } from '@lib/chain/evm/utils/gwei'
 
 type FeeChartProps = ComponentWithValueProps<Record<FeePriority, number[]>>
 
@@ -37,7 +39,9 @@ export const FeeChart = ({ value }: FeeChartProps) => {
             <ChartSlice>
               <ChartYAxis
                 renderLabel={(index) => (
-                  <ChartLabel key={index}>{yLabels[index]}</ChartLabel>
+                  <ChartLabel key={index}>
+                    {formatUnits(BigInt(yLabels[index]), gwei.decimals)}
+                  </ChartLabel>
                 )}
                 data={normalized.yLabels}
               />
