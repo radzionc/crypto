@@ -7,6 +7,10 @@ import { FeeChart } from './chart/FeeChart'
 import { VStack } from '@lib/ui/css/stack'
 import { PriorityOptions } from './options/PriorityOptions'
 import { FeeSection } from '../FeeSection'
+import { Text } from '@lib/ui/text'
+import { formatAmount } from '@lib/utils/formatAmount'
+import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
+import { gwei } from '@lib/chain/evm/utils/gwei'
 
 export const MaxPriorityFeePerGas = () => {
   const query = useFeeHistory({
@@ -15,35 +19,48 @@ export const MaxPriorityFeePerGas = () => {
   })
 
   return (
-    <FeeSection title="maxPriorityFeePerGas">
-      <MatchQuery
-        value={query}
-        success={({ reward }) => {
-          const timeseries = shouldBePresent(reward).reduce(
-            (acc, curr) => {
-              return acc.map((value, index) => [...value, Number(curr[index])])
-            },
-            feePriorities.map(() => [] as number[]),
-          )
+    <MatchQuery
+      value={query}
+      success={({ reward }) => {
+        const timeseries = shouldBePresent(reward).reduce(
+          (acc, curr) => {
+            return acc.map((value, index) => [...value, Number(curr[index])])
+          },
+          feePriorities.map(() => [] as number[]),
+        )
 
-          const averages = feePriorities.reduce(
-            (acc, priority, index) => {
-              const values = timeseries[index]
-              const average =
-                values.reduce((sum, val) => sum + val, 0) / values.length
-              return { ...acc, [priority]: average }
-            },
-            {} as Record<(typeof feePriorities)[number], number>,
-          )
+        const averages = feePriorities.reduce(
+          (acc, priority, index) => {
+            const values = timeseries[index]
+            const average =
+              values.reduce((sum, val) => sum + val, 0) / values.length
+            return { ...acc, [priority]: average }
+          },
+          {} as Record<(typeof feePriorities)[number], number>,
+        )
 
-          return (
+        return (
+          <FeeSection
+            title={
+              <>
+                maxPriorityFeePerGas
+                <Text as="span" color="supporting">
+                  {' = '}
+                  {formatAmount(
+                    fromChainAmount(averages.medium, gwei.decimals),
+                  )}{' '}
+                  {gwei.name}
+                </Text>
+              </>
+            }
+          >
             <VStack gap={40}>
               <PriorityOptions value={averages} />
               <FeeChart value={arraysToRecord(feePriorities, timeseries)} />
             </VStack>
-          )
-        }}
-      />
-    </FeeSection>
+          </FeeSection>
+        )
+      }}
+    />
   )
 }
