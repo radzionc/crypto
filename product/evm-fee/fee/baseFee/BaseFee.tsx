@@ -1,34 +1,26 @@
 import { FeeSection } from '../FeeSection'
-import { useBlock } from 'wagmi'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { gwei } from '@lib/chain/evm/utils/gwei'
 import { formatAmount } from '@lib/utils/formatAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { useBaseFeeQuery } from '../queries/useBaseFeeQuery'
 
 export const BaseFee = () => {
-  const query = useBlock({
-    watch: true,
-  })
+  const query = useBaseFeeQuery()
 
   return (
     <FeeSection
       title={
         <MatchQuery
           value={query}
-          success={({ baseFeePerGas }) => (
+          success={(value) => (
             <>
               baseFee
               <Text as="span" color="supporting">
                 {' = '}
-                {formatAmount(
-                  fromChainAmount(
-                    shouldBePresent(baseFeePerGas),
-                    gwei.decimals,
-                  ),
-                )}{' '}
+                {formatAmount(fromChainAmount(value, gwei.decimals))}{' '}
                 {gwei.name}
               </Text>
             </>

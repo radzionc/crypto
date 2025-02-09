@@ -8,6 +8,7 @@ import { VStack } from '@lib/ui/css/stack'
 import { MaxPriorityFeePerGas } from './maxPriorityFeePerGas/MaxPriorityFeePerGas'
 import { MaxFeePerGas } from './maxFeePerGas/MaxFeePerGas'
 import { BaseFee } from './baseFee/BaseFee'
+import { MaxFee } from './maxFee/MaxFee'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({
@@ -24,6 +25,7 @@ export const FeePage = () => (
     <WebsiteNavigation logo={<ProductLogo />}>
       <PageContainer>
         <VStack gap={60}>
+          <MaxFee />
           <MaxPriorityFeePerGas />
           <BaseFee />
           <MaxFeePerGas />

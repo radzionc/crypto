@@ -7,3 +7,5 @@ export const feePriorityPercentiles: Record<FeePriority, number> = {
   medium: 50,
   high: 90,
 }
+
+export const defaultFeePriority = 'medium' as const
