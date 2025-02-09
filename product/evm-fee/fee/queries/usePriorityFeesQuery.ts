@@ -3,11 +3,11 @@ import {
   PriorityFeeTimeseries,
   usePriorityFeeTimeseriesQuery,
 } from './usePriorityFeeTimeseriesQuery'
-import { getAverage } from '@lib/utils/math/getAverage'
 import { useTransformQueryData } from '@lib/ui/query/hooks/useTransformQueryData'
+import { bigintAverage } from '@lib/utils/math/bigint/bigintAverage'
 
 const transform = (timeseries: PriorityFeeTimeseries) =>
-  recordMap(timeseries, getAverage)
+  recordMap(timeseries, bigintAverage)
 
 export const usePriorityFeesQuery = () => {
   const query = usePriorityFeeTimeseriesQuery()

@@ -1,8 +1,5 @@
-import { VStack } from '@lib/ui/css/stack'
 import { Text } from '@lib/ui/text'
 import { formatAmount } from '@lib/utils/formatAmount'
-import { FeeSection } from '../FeeSection'
-import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { useEstimateGas } from 'wagmi'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
@@ -13,6 +10,7 @@ import { useTransformQueriesData } from '@lib/ui/query/hooks/useTransformQueries
 import { usePriorityFeeQuery } from '../queries/usePriorityFeeQuery'
 import { baseFeeMultiplier } from '../baseFee/config'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
+import { Spinner } from '@lib/ui/loaders/Spinner'
 
 export const MaxFee = () => {
   const baseFeeQuery = useBaseFeeQuery()
@@ -34,25 +32,26 @@ export const MaxFee = () => {
     },
     ({ baseFee, priorityFee, gas }) =>
       fromChainAmount(
-        Number(baseFee) * baseFeeMultiplier + Number(priorityFee) * Number(gas),
+        baseFee * BigInt(baseFeeMultiplier) + priorityFee * gas,
         mainnet.nativeCurrency.decimals,
       ),
   )
 
   return (
-    <VStack gap={60}>
+    <Text
+      color="contrast"
+      height="l"
+      as="h1"
+      size={28}
+      style={{ textTransform: 'uppercase' }}
+    >
+      Estimated max fee to send 1 ETH:{' '}
       <MatchQuery
         value={maxFeeQuery}
+        pending={() => <Spinner />}
         success={(maxFee) => {
           return (
-            <Text
-              color="contrast"
-              height="l"
-              as="h1"
-              size={28}
-              style={{ textTransform: 'uppercase' }}
-            >
-              Estimated maximum fee to send 1 ETH:{' '}
+            <>
               <Text as="span" color="primary">
                 {formatAmount(maxFee)} ETH{' '}
                 <MatchQuery
@@ -62,23 +61,10 @@ export const MaxFee = () => {
                   }}
                 />
               </Text>
-            </Text>
+            </>
           )
         }}
       />
-      <FeeSection title="maxFee = maxFeePerGas × gasLimit">
-        <ShyInfoBlock>
-          <Text color="supporting">
-            This is the maximum amount you might pay in transaction fees. The
-            actual cost is usually lower because you'll get refunded for: 1) any
-            unused gas from your gasLimit, and 2) the difference between your
-            maxFeePerGas and the actual base fee. The maxFeePerGas includes both
-            the base fee (with a {((1.125 - 1) * 100).toFixed(1)}% buffer for
-            potential increases) and a priority fee that incentivizes validators
-            to include your transaction.
-          </Text>
-        </ShyInfoBlock>
-      </FeeSection>
-    </VStack>
+    </Text>
   )
 }

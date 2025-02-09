@@ -9,7 +9,7 @@ import { arraysToRecord } from '@lib/utils/array/arraysToRecord'
 
 export type PriorityFeeTimeseries = Record<
   (typeof feePriorities)[number],
-  number[]
+  bigint[]
 >
 
 const transform = ({
@@ -19,9 +19,9 @@ const transform = ({
     feePriorities,
     shouldBePresent(reward).reduce(
       (acc, curr) => {
-        return acc.map((value, index) => [...value, Number(curr[index])])
+        return acc.map((value, index) => [...value, curr[index]])
       },
-      feePriorities.map(() => [] as number[]),
+      feePriorities.map(() => [] as bigint[]),
     ),
   )
 
