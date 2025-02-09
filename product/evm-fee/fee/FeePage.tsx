@@ -6,11 +6,12 @@ import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
 import { ProductLogo } from '../product/ProductLogo'
 import { VStack } from '@lib/ui/css/stack'
 import { MaxPriorityFeePerGas } from './maxPriorityFeePerGas/MaxPriorityFeePerGas'
-import { FeeSection } from './FeeSection'
+import { MaxFeePerGas } from './maxFeePerGas/MaxFeePerGas'
+import { BaseFee } from './baseFee/BaseFee'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({
-    contentMaxWidth: 480,
+    contentMaxWidth: 520,
   })}
 
   ${verticalPadding(80)}
@@ -23,9 +24,9 @@ export const FeePage = () => (
     <WebsiteNavigation logo={<ProductLogo />}>
       <PageContainer>
         <VStack gap={60}>
-          <FeeSection title="maxPriorityFeePerGas">
-            <MaxPriorityFeePerGas />
-          </FeeSection>
+          <MaxPriorityFeePerGas />
+          <BaseFee />
+          <MaxFeePerGas />
         </VStack>
       </PageContainer>
     </WebsiteNavigation>
