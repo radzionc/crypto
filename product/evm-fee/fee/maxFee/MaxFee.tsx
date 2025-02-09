@@ -32,7 +32,7 @@ export const MaxFee = () => {
     },
     ({ baseFee, priorityFee, gas }) =>
       fromChainAmount(
-        baseFee * BigInt(baseFeeMultiplier) + priorityFee * gas,
+        (BigInt(Number(baseFee) * baseFeeMultiplier) + priorityFee) * gas,
         mainnet.nativeCurrency.decimals,
       ),
   )
