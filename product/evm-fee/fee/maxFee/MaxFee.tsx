@@ -24,8 +24,6 @@ export const MaxFee = () => {
 
   const priceQuery = useAssetPriceQuery({ id: 'ethereum' })
 
-  console.log({})
-
   const maxFeeQuery = useTransformQueriesData(
     {
       baseFee: baseFeeQuery,
