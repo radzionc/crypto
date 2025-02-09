@@ -24,6 +24,8 @@ export const MaxFee = () => {
 
   const priceQuery = useAssetPriceQuery({ id: 'ethereum' })
 
+  console.log({})
+
   const maxFeeQuery = useTransformQueriesData(
     {
       baseFee: baseFeeQuery,
@@ -32,7 +34,9 @@ export const MaxFee = () => {
     },
     ({ baseFee, priorityFee, gas }) =>
       fromChainAmount(
-        (BigInt(Number(baseFee) * baseFeeMultiplier) + priorityFee) * gas,
+        (BigInt(Math.round(Number(baseFee) * baseFeeMultiplier)) +
+          priorityFee) *
+          gas,
         mainnet.nativeCurrency.decimals,
       ),
   )
