@@ -4,6 +4,8 @@ import { feePriorities, feePriorityPercentiles } from './core/FeePriority'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { arraysToRecord } from '@lib/utils/array/arraysToRecord'
 import { FeeChart } from './chart/FeeChart'
+import { VStack } from '@lib/ui/css/stack'
+import { PriorityOptions } from './options/PriorityOptions'
 
 export const MaxPriorityFeePerGas = () => {
   const query = useFeeHistory({
@@ -21,7 +23,23 @@ export const MaxPriorityFeePerGas = () => {
           },
           feePriorities.map(() => [] as number[]),
         )
-        return <FeeChart value={arraysToRecord(feePriorities, timeseries)} />
+
+        const averages = feePriorities.reduce(
+          (acc, priority, index) => {
+            const values = timeseries[index]
+            const average =
+              values.reduce((sum, val) => sum + val, 0) / values.length
+            return { ...acc, [priority]: average }
+          },
+          {} as Record<(typeof feePriorities)[number], number>,
+        )
+
+        return (
+          <VStack gap={40}>
+            <PriorityOptions value={averages} />
+            <FeeChart value={arraysToRecord(feePriorities, timeseries)} />
+          </VStack>
+        )
       }}
     />
   )

@@ -35,7 +35,7 @@ export const FeeChart = ({ value }: FeeChartProps) => {
           : undefined
 
         return (
-          <VStack gap={20} ref={setElement}>
+          <VStack flexGrow gap={20} ref={setElement}>
             <ChartSlice>
               <ChartYAxis
                 renderLabel={(index) => (

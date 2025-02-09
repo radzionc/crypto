@@ -1,0 +1,7 @@
+---
+description: General rules
+globs: *.ts, *.tsx
+---
+
+- Always try to follow the same style as the rest of the codebase.
+- Never use switch-case. Instead do pattern matching with a function like @match.ts or in React - @Match.tsx
