@@ -27,11 +27,11 @@ export const FeePage = () => (
 
     <WebsiteNavigation logo={<ProductLogo />}>
       <PageContainer>
-        <VStack gap={60}>
+        <VStack gap={40}>
           <MaxFee />
           <MaxPriorityFeePerGas />
-          <BaseFee />
           <MaxFeePerGas />
+          <BaseFee />
         </VStack>
       </PageContainer>
     </WebsiteNavigation>
