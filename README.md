@@ -2,6 +2,9 @@
 
 Welcome! This monorepo contains multiple TypeScript projects that streamline crypto trading, price monitoring, and trading history analysis:
 
+- [**@product/evm-fee**](./product/evm-fee/README.md)  
+  Real-time EVM gas fee calculator and monitoring tool that tracks base fees, priority fees, and max fees per gas to help optimize transaction costs on Ethereum and other EVM chains.
+
 - [**@product/buy-btc**](./product/buy-btc/README.md)  
   A decentralized application for buying Bitcoin (BTC) using ETH, BNB, or AVAX via THORChain, with real-time price quotes and secure wallet integration.
 
