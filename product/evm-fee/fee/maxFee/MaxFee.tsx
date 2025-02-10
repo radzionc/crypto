@@ -12,6 +12,8 @@ import { baseFeeMultiplier } from '../baseFee/config'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 
+const ethAmount = 1
+
 export const MaxFee = () => {
   const baseFeeQuery = useBaseFeeQuery()
   const priorityFeeQuery = usePriorityFeeQuery()
@@ -19,7 +21,7 @@ export const MaxFee = () => {
   const gasQuery = useEstimateGas({
     account: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
     to: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-    value: toChainAmount(1, mainnet.nativeCurrency.decimals),
+    value: toChainAmount(ethAmount, mainnet.nativeCurrency.decimals),
   })
 
   const priceQuery = useAssetPriceQuery({ id: 'ethereum' })
@@ -47,7 +49,7 @@ export const MaxFee = () => {
       size={28}
       style={{ textTransform: 'uppercase' }}
     >
-      Estimated max fee to send 1 ETH:{' '}
+      Estimated max fee to send {ethAmount} ETH:{' '}
       <MatchQuery
         value={maxFeeQuery}
         pending={() => <Spinner />}
