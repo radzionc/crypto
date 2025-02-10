@@ -20,7 +20,10 @@ export const PageContainer = styled.div`
 
 export const FeePage = () => (
   <>
-    <PageMetaTags title="" description="" />
+    <PageMetaTags
+      title="EVM Gas Fee Calculator | Real-time Gas Price Monitoring"
+      description="Monitor real-time Ethereum gas fees, including max priority fees, base fees, and max fees per gas. Get accurate estimates for your EVM transactions."
+    />
 
     <WebsiteNavigation logo={<ProductLogo />}>
       <PageContainer>
