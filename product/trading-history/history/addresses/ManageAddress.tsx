@@ -1,6 +1,6 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
 import { HStack } from '@lib/ui/css/stack'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
 import { useAddresses } from '../state/addresses'
@@ -9,7 +9,7 @@ import { useAreAddressesVisible } from './state/areAddressesVisible'
 import { range } from '@lib/utils/array/range'
 import { AsteriskIcon } from '@lib/ui/icons/AsteriskIcon'
 
-export const ManageAddress = ({ value }: ComponentWithValueProps<string>) => {
+export const ManageAddress = ({ value }: ValueProp<string>) => {
   const [, setItems] = useAddresses()
   const [isVisible] = useAreAddressesVisible()
 

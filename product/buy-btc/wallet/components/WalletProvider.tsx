@@ -1,6 +1,6 @@
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { WagmiProvider, http } from 'wagmi'
 import React from 'react'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
@@ -18,7 +18,7 @@ const config = getDefaultConfig({
   ),
 })
 
-export const WalletProvider = ({ children }: ComponentWithChildrenProps) => {
+export const WalletProvider = ({ children }: ChildrenProp) => {
   return (
     <WagmiProvider config={config}>
       <RainbowKitProvider>{children}</RainbowKitProvider>

@@ -1,4 +1,4 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { Text, TextColor } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { Trade } from '../../entities/Trade'
@@ -9,7 +9,7 @@ import { TradeType } from '@lib/chain/types/TradeType'
 
 export const TradeItem = ({
   value: { asset, amount, price, type, timestamp, cashAsset },
-}: ComponentWithValueProps<Trade>) => {
+}: ValueProp<Trade>) => {
   const color = match<TradeType, TextColor>(type, {
     buy: () => 'contrast',
     sell: () => 'primary',

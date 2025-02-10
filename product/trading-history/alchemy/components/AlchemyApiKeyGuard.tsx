@@ -1,10 +1,8 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { useAlchemyApiKey } from '../state/alchemyApiKey'
 import { SetAlchemyApiKey } from './SetAlchemyApiKey'
 
-export const AlchemyApiKeyGuard = ({
-  children,
-}: ComponentWithChildrenProps) => {
+export const AlchemyApiKeyGuard = ({ children }: ChildrenProp) => {
   const [value] = useAlchemyApiKey()
 
   if (!value) {

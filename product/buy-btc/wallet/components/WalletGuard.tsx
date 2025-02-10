@@ -1,8 +1,8 @@
-import { ComponentWithChildrenProps } from '@lib/ui/props'
+import { ChildrenProp } from '@lib/ui/props'
 import { ConnectWallet } from './ConnectWallet'
 import { useAccount } from 'wagmi'
 
-export const WalletGuard = ({ children }: ComponentWithChildrenProps) => {
+export const WalletGuard = ({ children }: ChildrenProp) => {
   const { isConnected } = useAccount()
 
   if (!isConnected) {

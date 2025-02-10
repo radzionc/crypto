@@ -2,73 +2,70 @@ import { ElementType, ReactNode } from 'react'
 import { HSLA } from '../colors/HSLA'
 import { Point } from '../entities/Point'
 
-export type ClosableComponentProps = {
+export type OnCloseProp = {
   onClose: () => void
 }
 
-export type ComponentWithIconProps = {
+export type IconProp = {
   icon: ReactNode
 }
 
-export type ComponentWithChildrenProps = {
+export type ChildrenProp = {
   children: ReactNode
 }
 
-export type ComponentWithBackActionProps = {
+export type OnBackProp = {
   onBack: () => void
 }
 
-export type ComponentWithForwardActionProps = {
+export type OnForwardProp = {
   onForward: () => void
 }
 
-export type ComponentWithClassNameProps = {
+export type ClassNameProp = {
   className?: string
 }
 
-export type ClickableComponentProps = {
+export type OnClickProp = {
   onClick: () => void
 }
 
-export type NoValueFinishProps = {
-  onFinish: () => void
-}
-
-export type OptionalValueFinishProps<T> = {
-  onFinish: (value?: T) => void
-}
-
-export type ValueFinishProps<T> = {
-  onFinish: (value: T) => void
-}
+export type OnFinishProp<
+  T = void,
+  Mode extends 'required' | 'optional' = 'required',
+> = [T] extends [void]
+  ? { onFinish: () => void }
+  : Mode extends 'optional'
+    ? { onFinish: (value?: T) => void }
+    : { onFinish: (value: T) => void }
 
 export type InputProps<T> = {
   value: T
   onChange: (value: T) => void
 }
 
-export type ComponentWithErrorProps = {
+export type ErrorProp = {
   error?: string
 }
 
-export type TitledComponentProps = {
+export type TitleProp = {
   title: ReactNode
 }
 
-export type StyledComponentWithColorProps = {
+export type StyledColorProp = {
   $color: HSLA
 }
 
-export type SelectableComponentProps<T> = {
+export type OnSelectProp<T> = {
   onSelect: (value: T) => void
 }
 
-export type UIComponentProps = {
+export type UiProps = {
   style?: React.CSSProperties
   className?: string
 }
 
-export type LabeledComponentProps = {
+export type LabelProp = {
   label: ReactNode
 }
 
@@ -77,15 +74,15 @@ export type PromptProps = {
   onCancel: () => void
 }
 
-export type ComponentWithValueProps<T> = {
+export type ValueProp<T> = {
   value: T
 }
 
-export type ComponentWithInitialValueProps<T> = {
+export type InitialValueProp<T> = {
   initialValue: T
 }
 
-export type ComponentWithOptionsProps<T> = {
+export type OptionsProp<T> = {
   options: readonly T[]
 }
 
@@ -94,75 +91,75 @@ export type ActionGuardProps<T = () => void | Promise<void>> = {
   render: (params: { action: T }) => ReactNode
 }
 
-export type ComponentWithWidthProps = {
+export type WidthProp = {
   width: number
 }
 
-export type ComponentWithActiveState = {
+export type IsActiveProp = {
   isActive?: boolean
 }
 
-export type ComponentWithSelectedState = {
+export type IsSelectedProp = {
   isSelected: boolean
 }
 
-export type ComponentWithDisabledState = {
+export type IsDisabledProp = {
   isDisabled?: boolean | string
 }
 
-export type ComponentWithIndexProps = {
+export type IndexProp = {
   index: number
 }
 
-export type RemovableComponentProps = {
+export type OnRemoveProp = {
   onRemove: () => void
 }
 
-export type AsElementComponent<T extends ElementType = ElementType> = {
+export type AsProp<T extends ElementType = ElementType> = {
   as?: T
 }
 
-export type DraggingAwareComponentProps = {
+export type IsDraggingProp = {
   isDragging?: boolean
 }
 
-export type ProgressComponentProps = {
+export type ProgressProps = {
   target: number
   current: number
 }
 
-export type PositionedComponentProps = {
+export type PositionProp = {
   position: Point
 }
 
-export type ColoredComponentProps = {
+export type ColorProp = {
   color: HSLA
 }
 
-export type ComponentWithActionProps = {
+export type ActionProp = {
   action: ReactNode
 }
 
-export type SubmittableComponentProps = {
+export type OnSubmitProp = {
   onSubmit: () => void
 }
 
-export type ComponentWithItemsProps<T> = {
+export type ItemsProp<T> = {
   items: T[]
 }
 
-export type SizedComponentProps<T = number> = {
+export type SizeProp<T = number> = {
   size: T
 }
 
-export type ComponentWithStatusProps<T> = {
+export type StatusProp<T> = {
   status: T
 }
 
-export type NamedComponentProps = {
+export type NameProp = {
   name: string
 }
 
-export type ComponentWithKindProps<T> = {
+export type KindProp<T> = {
   kind: T
 }

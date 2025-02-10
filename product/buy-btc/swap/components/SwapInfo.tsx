@@ -1,11 +1,11 @@
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { QuoteResponse } from '../core/getQuote'
 import { Text } from '@lib/ui/text'
 import { btc } from '../core/btc'
 import { formatAmount } from '@lib/utils/formatAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 
-export const SwapInfo = ({ value }: ComponentWithValueProps<QuoteResponse>) => {
+export const SwapInfo = ({ value }: ValueProp<QuoteResponse>) => {
   return (
     <Text>
       You should receive ~{' '}

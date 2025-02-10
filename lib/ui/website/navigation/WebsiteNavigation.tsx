@@ -1,6 +1,5 @@
 import { ComponentProps, ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { ClosableComponentProps } from '../../props'
 import { takeWholeSpace } from '../../css/takeWholeSpace'
 import { HStack, VStack } from '@lib/ui/css/stack'
 import { useIsScreenWidthLessThan } from '../../hooks/useIsScreenWidthLessThan'
@@ -12,6 +11,7 @@ import { CloseIcon } from '../../icons/CloseIcon'
 import { MenuIcon } from '../../icons/MenuIcon'
 import { toSizeUnit } from '../../css/toSizeUnit'
 import { verticalPadding } from '../../css/verticalPadding'
+import { OnCloseProp } from '../../props'
 
 const Wrapper = styled(VStack)`
   ${takeWholeSpace};
@@ -20,7 +20,7 @@ const Wrapper = styled(VStack)`
 type WebsiteNavigationProps = ComponentProps<typeof Wrapper> & {
   logo: ReactNode
   renderTopbarItems?: () => ReactNode
-  renderOverlayItems?: (props: ClosableComponentProps) => ReactNode
+  renderOverlayItems?: (props: OnCloseProp) => ReactNode
   footer?: ReactNode
 }
 

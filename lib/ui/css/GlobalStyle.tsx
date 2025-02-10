@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     }
   }
 
-  html, body, #root, #__next, [data-rk] {
+  html, body, #root, #__next {
     height: 100%;
   }
 

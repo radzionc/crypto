@@ -10,7 +10,6 @@ export const DropdownContainer = styled.div`
   overflow: hidden;
   max-height: 280px;
   overflow-y: auto;
-  outline: none;
 
   z-index: 1;
 `

@@ -6,7 +6,7 @@ import { ChartYAxis } from '@lib/ui/charts/ChartYAxis'
 import { useTheme } from 'styled-components'
 import { ChartHorizontalGridLines } from '@lib/ui/charts/ChartHorizontalGridLines'
 import { LineChart } from '@lib/ui/charts/LineChart'
-import { ComponentWithValueProps } from '@lib/ui/props'
+import { ValueProp } from '@lib/ui/props'
 import { formatUnits } from 'viem'
 import { feePriorities, FeePriority } from '../core/FeePriority'
 import { feeChartConfig } from './config'
@@ -16,7 +16,7 @@ import { getFeePriorityColor } from '../utils/getFeePriorityColor'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
 import { gwei } from '@lib/chain/evm/utils/gwei'
 
-type FeeChartProps = ComponentWithValueProps<Record<FeePriority, number[]>>
+type FeeChartProps = ValueProp<Record<FeePriority, number[]>>
 
 export const FeeChartContent = ({ value }: FeeChartProps) => {
   const theme = useTheme()

@@ -1,4 +1,3 @@
-import { UIComponentProps } from '@lib/ui/props'
 import { MinusIcon } from '@lib/ui/icons/MinusIcon'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
 import styled from 'styled-components'
@@ -9,8 +8,9 @@ import { round } from '@lib/ui/css/round'
 import { Trade } from '../../../entities/Trade'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
 import { TradeDetails } from './TradeDetails'
+import { UiProps } from '@lib/ui/props'
 
-type TradePointProps = UIComponentProps & {
+type TradePointProps = UiProps & {
   value: Trade
 }
 
