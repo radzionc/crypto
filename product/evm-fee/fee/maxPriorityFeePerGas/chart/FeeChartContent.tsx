@@ -10,7 +10,7 @@ import { ComponentWithValueProps } from '@lib/ui/props'
 import { formatUnits } from 'viem'
 import { feePriorities, FeePriority } from '../core/FeePriority'
 import { feeChartConfig } from './config'
-import { ChartSlice } from './ChartSlice'
+import { ChartSlice } from '@lib/ui/charts/ChartSlice'
 import { ChartLabel } from '@lib/ui/charts/ChartLabel'
 import { getFeePriorityColor } from '../utils/getFeePriorityColor'
 import { TakeWholeSpaceAbsolutely } from '@lib/ui/css/takeWholeSpaceAbsolutely'
@@ -36,7 +36,7 @@ export const FeeChartContent = ({ value }: FeeChartProps) => {
 
         return (
           <VStack flexGrow gap={20} ref={setElement}>
-            <ChartSlice>
+            <ChartSlice yLabelsWidth={feeChartConfig.yLabelsWidth}>
               <ChartYAxis
                 renderLabel={(index) => (
                   <ChartLabel key={index}>
