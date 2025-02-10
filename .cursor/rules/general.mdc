@@ -3,9 +3,9 @@ description: General rules
 globs: *.ts, *.tsx
 ---
 
-- Always try to follow the same style as the rest of the codebase.
+- Follow the established codebase style.
 
 ## Pattern matching
 
-- Never use switch-case. Instead do pattern matching with a function like @match.ts or in React - @Match.tsx
-- To match react query state, use components such as [MatchQuery.tsx](mdc:lib/ui/query/components/MatchQuery.tsx) or [MatchEagerQuery.tsx](mdc:lib/ui/query/components/MatchEagerQuery.tsx)
+- Use pattern matching functions ([match.ts](mdc:lib/utils/match.ts)) or components ([Match.tsx](mdc:lib/ui/base/Match.tsx)) instead of switch-case statements.
+- For React Query state handling, use [MatchQuery.tsx](mdc:lib/ui/query/components/MatchQuery.tsx) or [MatchEagerQuery.tsx](mdc:lib/ui/query/components/MatchEagerQuery.tsx).
