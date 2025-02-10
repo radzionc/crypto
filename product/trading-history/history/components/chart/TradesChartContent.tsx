@@ -17,7 +17,7 @@ import { isGoodPrice } from '../../utils/isGoodPrice'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { format } from 'date-fns'
-import { ChartLabel } from './ChartLabel'
+import { ChartLabel } from '@lib/ui/charts/ChartLabel'
 import { ChartSlice } from './ChartSlice'
 
 interface TradesChartContentProps {
