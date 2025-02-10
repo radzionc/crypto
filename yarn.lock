@@ -2797,6 +2797,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@product/evm-fee@workspace:product/evm-fee":
+  version: 0.0.0-use.local
+  resolution: "@product/evm-fee@workspace:product/evm-fee"
+  dependencies:
+    "@next/eslint-plugin-next": "npm:^15.0.4"
+    "@rainbow-me/rainbowkit": "npm:^2.2.1"
+    "@tanstack/react-query": "npm:^5.62.11"
+    "@types/node": "npm:^22.10.1"
+    "@types/react": "npm:^19.0.1"
+    "@types/react-dom": "npm:^19.0.2"
+    "@web3icons/core": "npm:^3.14.0"
+    "@web3icons/react": "npm:^3.14.0"
+    date-fns: "npm:^4.1.0"
+    eslint: "npm:^9.16.0"
+    eslint-config-next: "npm:^15.0.4"
+    next: "npm:^15.0.4"
+    next-sitemap: "npm:^4.2.3"
+    pwa-asset-generator: "npm:^6.4.0"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
+    styled-components: "npm:^6.1.13"
+    viem: "npm:^2.21.58"
+    wagmi: "npm:^2.14.6"
+  languageName: unknown
+  linkType: soft
+
 "@product/limit-orders@workspace:product/limit-orders":
   version: 0.0.0-use.local
   resolution: "@product/limit-orders@workspace:product/limit-orders"

@@ -17,8 +17,8 @@ import { isGoodPrice } from '../../utils/isGoodPrice'
 import { getIntervalDuration } from '@lib/utils/interval/getIntervalDuration'
 import { ChartXAxis } from '@lib/ui/charts/ChartXAxis'
 import { format } from 'date-fns'
-import { ChartLabel } from './ChartLabel'
-import { ChartSlice } from './ChartSlice'
+import { ChartLabel } from '@lib/ui/charts/ChartLabel'
+import { ChartSlice } from '@lib/ui/charts/ChartSlice'
 
 interface TradesChartContentProps {
   trades: Trade[]
@@ -61,7 +61,7 @@ export function TradesChartContent({
 
         return (
           <VStack gap={20} ref={setElement}>
-            <ChartSlice>
+            <ChartSlice yLabelsWidth={tradesChartConfig.yLabelsWidth}>
               <ChartYAxis
                 renderLabel={(index) => (
                   <ChartLabel key={index}>{yLabels[index]}</ChartLabel>
@@ -100,7 +100,7 @@ export function TradesChartContent({
                 ))}
               </VStack>
             </ChartSlice>
-            <ChartSlice>
+            <ChartSlice yLabelsWidth={tradesChartConfig.yLabelsWidth}>
               <div />
               {contentWidth && (
                 <ChartXAxis

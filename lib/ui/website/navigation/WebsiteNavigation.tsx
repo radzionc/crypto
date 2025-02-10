@@ -19,8 +19,8 @@ const Wrapper = styled(VStack)`
 
 type WebsiteNavigationProps = ComponentProps<typeof Wrapper> & {
   logo: ReactNode
-  renderTopbarItems: () => ReactNode
-  renderOverlayItems: (props: ClosableComponentProps) => ReactNode
+  renderTopbarItems?: () => ReactNode
+  renderOverlayItems?: (props: ClosableComponentProps) => ReactNode
   footer?: ReactNode
 }
 
@@ -85,17 +85,19 @@ export function WebsiteNavigation({
               {isSmallScreen ? (
                 <>
                   <div />
-                  <IconButton
-                    size="l"
-                    onClick={() => setIsOverlayOpen(!isOverlayOpen)}
-                    title={
-                      isOverlayOpen ? 'Close navigation' : 'Open navigation'
-                    }
-                    icon={isOverlayOpen ? <CloseIcon /> : <MenuIcon />}
-                  />
+                  {renderOverlayItems && (
+                    <IconButton
+                      size="l"
+                      onClick={() => setIsOverlayOpen(!isOverlayOpen)}
+                      title={
+                        isOverlayOpen ? 'Close navigation' : 'Open navigation'
+                      }
+                      icon={isOverlayOpen ? <CloseIcon /> : <MenuIcon />}
+                    />
+                  )}
                 </>
               ) : (
-                <TobbarContent>{renderTopbarItems()}</TobbarContent>
+                <TobbarContent>{renderTopbarItems?.()}</TobbarContent>
               )}
             </TobbarContent>
           </HStack>
@@ -105,7 +107,7 @@ export function WebsiteNavigation({
           {footer}
         </Container>
       </Wrapper>
-      {isOverlayOpen && (
+      {isOverlayOpen && renderOverlayItems && (
         <Overlay>
           {renderOverlayItems({
             onClose: () => setIsOverlayOpen(false),
