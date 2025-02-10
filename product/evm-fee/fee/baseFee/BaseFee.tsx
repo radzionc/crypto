@@ -6,6 +6,7 @@ import { gwei } from '@lib/chain/evm/utils/gwei'
 import { formatAmount } from '@lib/utils/formatAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 import { useBaseFeeQuery } from '../queries/useBaseFeeQuery'
+import { Spinner } from '@lib/ui/loaders/Spinner'
 
 export const BaseFee = () => {
   const query = useBaseFeeQuery()
@@ -13,19 +14,20 @@ export const BaseFee = () => {
   return (
     <FeeSection
       title={
-        <MatchQuery
-          value={query}
-          success={(value) => (
-            <>
-              baseFee
-              <Text as="span" color="supporting">
+        <>
+          baseFee
+          <MatchQuery
+            value={query}
+            pending={() => <Spinner />}
+            success={(value) => (
+              <Text as="span" color="contrast">
                 {' = '}
                 {formatAmount(fromChainAmount(value, gwei.decimals))}{' '}
                 {gwei.name}
               </Text>
-            </>
-          )}
-        />
+            )}
+          />
+        </>
       }
     >
       <ShyInfoBlock>
