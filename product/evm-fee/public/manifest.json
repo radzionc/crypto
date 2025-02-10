@@ -1,11 +1,11 @@
 {
-  "short_name": "Buy Bitcoin",
-  "name": "Buy Bitcoin",
+  "short_name": "Gas Fees",
+  "name": "EVM Gas Fee Calculator",
+  "description": "Monitor real-time Ethereum gas fees and get accurate transaction cost estimates",
   "start_url": ".",
   "display": "fullscreen",
   "theme_color": "#1a1a1a",
   "background_color": "#1a1a1a",
-  "description": "Buy Bitcoin",
   "icons": [
     {
       "src": "images/icon/manifest-icon-192.maskable.png",
