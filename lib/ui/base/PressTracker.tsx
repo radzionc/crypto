@@ -1,8 +1,11 @@
 import { ReactNode, useCallback, useState } from 'react'
+
 import { Point } from '../entities/Point'
 import { useBoundingBox } from '../hooks/useBoundingBox'
-import { useRelativePosition } from '../hooks/useRelativePosition'
 import { useIsomorphicLayoutEffect } from '../hooks/useIsomorphicLayoutEffect'
+import { useRelativePosition } from '../hooks/useRelativePosition'
+import { useValueRef } from '../hooks/useValueRef'
+
 import { WindowPointerMoveListener } from './WindowPointerMoveListener'
 
 type PointerHandler = (event: Pick<PointerEvent, 'clientX' | 'clientY'>) => void
@@ -38,11 +41,13 @@ export const PressTracker = ({ render, onChange }: PressTrackerProps) => {
     setClientPosition({ x: event.clientX, y: event.clientY })
   }, [])
 
+  const onChangeRef = useValueRef(onChange)
+
   useIsomorphicLayoutEffect(() => {
-    if (onChange) {
-      onChange({ position, clientPosition })
+    if (onChangeRef.current) {
+      onChangeRef.current({ position, clientPosition })
     }
-  }, [onChange, position, clientPosition])
+  }, [position, clientPosition])
 
   const clearPosition = useCallback(() => {
     setClientPosition(null)

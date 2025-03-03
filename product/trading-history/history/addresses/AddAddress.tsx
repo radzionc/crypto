@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
 import { TextInput } from '@lib/ui/inputs/TextInput'
-import { useAddresses } from '../state/addresses'
+import { useEffect, useState } from 'react'
 import { isAddress } from 'viem'
+
+import { useAddresses } from '../state/addresses'
+
 import { useAreAddressesVisible } from './state/areAddressesVisible'
 
 export const AddAddress = () => {

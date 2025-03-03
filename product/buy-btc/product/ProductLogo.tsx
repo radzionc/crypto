@@ -1,5 +1,6 @@
-import { Text } from '@lib/ui/text'
 import { BitcoinIcon } from '@lib/ui/icons/BitcoinIcon'
+import { Text } from '@lib/ui/text'
+
 import { productName } from './config'
 
 export const ProductLogo = () => (

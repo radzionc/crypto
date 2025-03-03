@@ -1,11 +1,12 @@
-import { getEnvVar } from './getEnvVar'
 import {
   SecretsManagerClient,
   GetSecretValueCommand,
 } from '@aws-sdk/client-secrets-manager'
-import { memoizeAsync } from '@lib/utils/memoizeAsync'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { memoizeAsync } from '@lib/utils/memoizeAsync'
 import { assertField } from '@lib/utils/record/assertField'
+
+import { getEnvVar } from './getEnvVar'
 
 type SecretName = 'accountPrivateKey' | 'zeroXApiKey' | 'telegramBotToken'
 

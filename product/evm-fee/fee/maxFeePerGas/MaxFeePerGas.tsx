@@ -1,8 +1,9 @@
 import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
 import { Text } from '@lib/ui/text'
-import { FeeSection } from '../FeeSection'
 import { toPercents } from '@lib/utils/toPercents'
+
 import { baseFeeMultiplier } from '../baseFee/config'
+import { FeeSection } from '../FeeSection'
 
 export const MaxFeePerGas = () => (
   <FeeSection

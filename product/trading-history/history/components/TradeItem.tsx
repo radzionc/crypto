@@ -1,11 +1,13 @@
+import { TradeType } from '@lib/chain/types/TradeType'
 import { ValueProp } from '@lib/ui/props'
 import { Text, TextColor } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
-import { Trade } from '../../entities/Trade'
-import { format } from 'date-fns'
 import { match } from '@lib/utils/match'
+import { format } from 'date-fns'
+
+import { Trade } from '../../entities/Trade'
+
 import { TradeItemFrame } from './TradeItemFrame'
-import { TradeType } from '@lib/chain/types/TradeType'
 
 export const TradeItem = ({
   value: { asset, amount, price, type, timestamp, cashAsset },

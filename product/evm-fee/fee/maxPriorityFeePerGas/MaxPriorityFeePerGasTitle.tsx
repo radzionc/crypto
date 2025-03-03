@@ -2,9 +2,10 @@ import { gwei } from '@lib/chain/evm/utils/gwei'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
 import { Spinner } from '@lib/ui/loaders/Spinner'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
-import { formatAmount } from '@lib/utils/formatAmount'
-import { usePriorityFeeQuery } from '../queries/usePriorityFeeQuery'
 import { Text } from '@lib/ui/text'
+import { formatAmount } from '@lib/utils/formatAmount'
+
+import { usePriorityFeeQuery } from '../queries/usePriorityFeeQuery'
 
 export const MaxPriorityFeePerGasTitle = () => {
   const query = usePriorityFeeQuery()

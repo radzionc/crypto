@@ -1,6 +1,7 @@
 import { ChildrenProp } from '@lib/ui/props'
-import { ConnectWallet } from './ConnectWallet'
 import { useAccount } from 'wagmi'
+
+import { ConnectWallet } from './ConnectWallet'
 
 export const WalletGuard = ({ children }: ChildrenProp) => {
   const { isConnected } = useAccount()

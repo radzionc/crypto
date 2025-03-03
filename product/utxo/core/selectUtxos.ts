@@ -1,4 +1,5 @@
 import { order } from '@lib/utils/array/order'
+
 import { ConfirmedUtxo } from './utxo'
 
 export const selectUtxos = (

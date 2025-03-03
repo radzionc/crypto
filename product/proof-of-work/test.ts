@@ -1,8 +1,9 @@
 import { queryUrl } from '@lib/utils/query/queryUrl'
+import { omit } from '@lib/utils/record/omit'
+
+import { BlockData } from './core/BlockData'
 import { getBlockHash } from './core/getBlockHash'
 import { mineBlock } from './core/mineBlock'
-import { BlockData } from './core/BlockData'
-import { omit } from '@lib/utils/record/omit'
 
 const blockHash =
   '0000000000000000000266819fe415c51f9c025e1059b4c1332c1033236166f0'

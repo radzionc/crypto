@@ -1,7 +1,8 @@
 import { ChildrenProp } from '@lib/ui/props'
-import { useAddresses } from '../state/addresses'
-import { isEmpty } from '@lib/utils/array/isEmpty'
 import { Text } from '@lib/ui/text'
+import { isEmpty } from '@lib/utils/array/isEmpty'
+
+import { useAddresses } from '../state/addresses'
 
 export const AddressesOnly = ({ children }: ChildrenProp) => {
   const [addresses] = useAddresses()

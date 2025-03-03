@@ -1,13 +1,13 @@
 import { privateKeyToAddress } from 'viem/accounts'
-import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
 
-import { getSecret } from '../getSercret'
+import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
 import { transferErc20Token } from '../../../lib/chain/evm/erc20/transferErc20Token'
 import {
   tradeAssetAddress,
   tradeAssets,
   tradeChain,
 } from '../entities/TradeAsset'
+import { getSecret } from '../getSercret'
 
 const withdraw = (address: `0x${string}`) =>
   Promise.all(

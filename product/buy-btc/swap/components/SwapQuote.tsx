@@ -1,12 +1,14 @@
-import { useQuoteQuery } from '../queries/useQuoteQuery'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
-import { Text } from '@lib/ui/Text'
 import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
-import { getErrorMessage } from '@lib/utils/getErrorMessage'
-import { ChainGuard } from '../../wallet/components/ChainGuard'
-import { SwapInfo } from './SwapInfo'
-import { ExecuteSwap } from './ExecuteSwap'
+import { Text } from '@lib/ui/Text'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { getErrorMessage } from '@lib/utils/getErrorMessage'
+
+import { ChainGuard } from '../../wallet/components/ChainGuard'
+import { useQuoteQuery } from '../queries/useQuoteQuery'
+
+import { ExecuteSwap } from './ExecuteSwap'
+import { SwapInfo } from './SwapInfo'
 
 export const SwapQuote = () => {
   const quoteQuery = useQuoteQuery()

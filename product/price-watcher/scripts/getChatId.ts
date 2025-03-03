@@ -1,4 +1,5 @@
 import TelegramBot from 'node-telegram-bot-api'
+
 import { getEnvVar } from '../getEnvVar'
 
 const bot = new TelegramBot(getEnvVar('TELEGRAM_BOT_TOKEN'), { polling: true })

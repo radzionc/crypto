@@ -1,8 +1,10 @@
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
-import { getAllTraders, updateTrader } from '../db/traders'
+
 import { getAssetPrices } from '../../../lib/chain/price/utils/getAssetPrices'
-import { traderConfig } from './config'
+import { getAllTraders, updateTrader } from '../db/traders'
 import { tradeAssetPriceProividerId } from '../entities/TradeAsset'
+
+import { traderConfig } from './config'
 
 export const updatePrices = async () => {
   const traders = await getAllTraders()

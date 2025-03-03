@@ -1,6 +1,8 @@
 import { match } from '@lib/utils/match'
+
 import { getAssetPrices } from '../../../lib/chain/price/utils/getAssetPrices'
 import { getAllPriceAlerts, updatePriceAlert } from '../db/priceAlerts'
+
 import { sendPriceChangeAlert } from './sendPriceChangeAlert'
 
 export const runPriceWatcher = async () => {

@@ -1,7 +1,8 @@
+import { useStateDependentQuery } from '@lib/ui/query/hooks/useStateDependentQuery'
+
+import { getQuote } from '../core/getQuote'
 import { useAddress } from '../state/address'
 import { useAmount } from '../state/amount'
-import { useStateDependentQuery } from '@lib/ui/query/hooks/useStateDependentQuery'
-import { getQuote } from '../core/getQuote'
 import { useSourceChainId } from '../state/sourceChainId'
 
 export const useQuoteQuery = () => {

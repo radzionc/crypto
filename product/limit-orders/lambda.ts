@@ -1,6 +1,7 @@
 import { AWSLambda } from '@sentry/serverless'
-import { getEnvVar } from './getEnvVar'
+
 import { runLimitOrders } from './core/runLimitOrders'
+import { getEnvVar } from './getEnvVar'
 
 AWSLambda.init({
   dsn: getEnvVar('SENTRY_KEY'),

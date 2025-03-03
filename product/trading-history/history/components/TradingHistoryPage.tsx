@@ -1,17 +1,19 @@
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
-import { AlchemyApiKeyGuard } from '../../alchemy/components/AlchemyApiKeyGuard'
-import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
-import { ProductLogo } from '../../product/ProductLogo'
-import { ExitAlchemy } from '../../alchemy/components/ExitAlchemy'
-import { Trades } from './Trades'
-import styled from 'styled-components'
+import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
+import { HStack, vStack } from '@lib/ui/css/stack'
 import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { websiteConfig } from '@lib/ui/website/config'
-import { HStack, vStack } from '@lib/ui/css/stack'
-import { ManageAddresses } from '../addresses/ManageAddresses'
+import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
+import styled from 'styled-components'
+
+import { AlchemyApiKeyGuard } from '../../alchemy/components/AlchemyApiKeyGuard'
+import { ExitAlchemy } from '../../alchemy/components/ExitAlchemy'
+import { ProductLogo } from '../../product/ProductLogo'
 import { AddressesOnly } from '../addresses/AddressesOnly'
+import { ManageAddresses } from '../addresses/ManageAddresses'
+
+import { Trades } from './Trades'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({

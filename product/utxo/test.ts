@@ -1,11 +1,12 @@
 import { btc } from '@lib/chain/bitcoin/btc'
-import { queryUrl } from '@lib/utils/query/queryUrl'
-import { getConfirmedUtxos, Utxo } from './core/utxo'
-import { getBalance } from './core/getBalance'
-import { selectUtxos } from './core/selectUtxos'
+import { formatChainAmount } from '@lib/chain/utils/formatChainAmount'
 import { toChainAmount } from '@lib/chain/utils/toChainAmount'
 import { sum } from '@lib/utils/array/sum'
-import { formatChainAmount } from '@lib/chain/utils/formatChainAmount'
+import { queryUrl } from '@lib/utils/query/queryUrl'
+
+import { getBalance } from './core/getBalance'
+import { selectUtxos } from './core/selectUtxos'
+import { getConfirmedUtxos, Utxo } from './core/utxo'
 
 const test = async () => {
   const address =

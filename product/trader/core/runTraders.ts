@@ -1,4 +1,5 @@
 import { getAllTraders } from '../db/traders'
+
 import { traderConfig } from './config'
 import { runTrader } from './runTrader'
 import { updatePrices } from './updatePrices'

@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
-import { Center } from '@lib/ui/layout/Center'
 import { vStack } from '@lib/ui/css/stack'
-import { Text } from '@lib/ui/text'
 import { InputDebounce } from '@lib/ui/inputs/InputDebounce'
 import { TextInput } from '@lib/ui/inputs/TextInput'
-import { useMutation } from '@tanstack/react-query'
+import { Center } from '@lib/ui/layout/Center'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { Text } from '@lib/ui/text'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
+import { useMutation } from '@tanstack/react-query'
+import { Alchemy, Network } from 'alchemy-sdk'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import { ProductLogo } from '../../product/ProductLogo'
 import { useAlchemyApiKey } from '../state/alchemyApiKey'
 import { isWrongAlchemyApiKey } from '../utils/isWrongAlchemyApiKey'
-import { ProductLogo } from '../../product/ProductLogo'
-import { Alchemy, Network } from 'alchemy-sdk'
 
 const Content = styled.div`
   ${vStack({

@@ -1,9 +1,10 @@
-import { format } from 'date-fns'
-import styled from 'styled-components'
-import { Text } from '@lib/ui/text'
 import { VStack } from '@lib/ui/css/stack'
 import { hStack } from '@lib/ui/css/stack'
+import { Text } from '@lib/ui/text'
 import { getColor } from '@lib/ui/theme/getters'
+import { format } from 'date-fns'
+import styled from 'styled-components'
+
 import { Trade } from '../../../entities/Trade'
 
 const Field = styled.div`

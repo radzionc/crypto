@@ -10,10 +10,10 @@
     "withdraw": "npx tsx scripts/withdraw.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-secrets-manager": "^3.716.0",
-    "@sentry/serverless": "7.114.0",
-    "@types/node-telegram-bot-api": "^0",
+    "@aws-sdk/client-secrets-manager": "^3.758.0",
+    "@sentry/serverless": "^7.120.3",
+    "@types/node-telegram-bot-api": "^0.64.7",
     "node-telegram-bot-api": "^0.66.0",
-    "viem": "^2.21.58"
+    "viem": "^2.23.5"
   }
 }

@@ -1,11 +1,13 @@
-import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { useAssetTimeseriesQuery } from '@lib/chain-ui/queries/useAssetTimeseriesQuery'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { convertDuration } from '@lib/utils/time/convertDuration'
+import { useMemo } from 'react'
+
 import {
   Trade,
   primaryTradeAssetPriceProviderId,
 } from '../../../entities/Trade'
-import { useMemo } from 'react'
-import { convertDuration } from '@lib/utils/time/convertDuration'
+
 import { TradesChartContent } from './TradesChartContent'
 
 export type TradesChartProps = {

@@ -1,5 +1,6 @@
-import { getEnvVar } from '../getEnvVar'
 import TelegramBot from 'node-telegram-bot-api'
+
+import { getEnvVar } from '../getEnvVar'
 
 type Input = {
   price: number

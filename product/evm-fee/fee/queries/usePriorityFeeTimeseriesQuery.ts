@@ -1,11 +1,11 @@
-import { feePriorityPercentiles } from '../maxPriorityFeePerGas/core/FeePriority'
-
-import { useFeeHistory } from 'wagmi'
-import { feePriorities } from '../maxPriorityFeePerGas/core/FeePriority'
 import { useTransformQueryData } from '@lib/ui/query/hooks/useTransformQueryData'
-import { GetFeeHistoryReturnType } from 'viem'
-import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { arraysToRecord } from '@lib/utils/array/arraysToRecord'
+import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { GetFeeHistoryReturnType } from 'viem'
+import { useFeeHistory } from 'wagmi'
+
+import { feePriorityPercentiles } from '../maxPriorityFeePerGas/core/FeePriority'
+import { feePriorities } from '../maxPriorityFeePerGas/core/FeePriority'
 
 export type PriorityFeeTimeseries = Record<
   (typeof feePriorities)[number],

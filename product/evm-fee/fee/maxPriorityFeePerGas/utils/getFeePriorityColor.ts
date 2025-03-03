@@ -1,6 +1,7 @@
-import { DefaultTheme } from 'styled-components'
-import { FeePriority } from '../core/FeePriority'
 import { match } from '@lib/utils/match'
+import { DefaultTheme } from 'styled-components'
+
+import { FeePriority } from '../core/FeePriority'
 
 export const getFeePriorityColor = (
   { colors }: DefaultTheme,

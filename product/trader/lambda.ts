@@ -1,6 +1,7 @@
 import { AWSLambda } from '@sentry/serverless'
-import { getEnvVar } from './getEnvVar'
+
 import { runTraders } from './core/runTraders'
+import { getEnvVar } from './getEnvVar'
 
 AWSLambda.init({
   dsn: getEnvVar('SENTRY_KEY'),

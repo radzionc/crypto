@@ -1,4 +1,5 @@
 import { bitcoinHash } from '@lib/chain/bitcoin/bitcoinHash'
+
 import { BlockData } from './BlockData'
 
 export const getBlockHash = ({

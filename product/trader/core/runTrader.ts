@@ -1,21 +1,23 @@
+import { TradeType } from '@lib/chain/types/TradeType'
+import { getLastItem } from '@lib/utils/array/getLastItem'
 import { getAverage } from '@lib/utils/math/getAverage'
-import { Trader } from '../entities/Trader'
-import { traderConfig } from './config'
-import { getSecret } from '../getSercret'
+import { recordMap } from '@lib/utils/record/recordMap'
+import { privateKeyToAddress } from 'viem/accounts'
+
+import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
+import { swapErc20Token } from '../../../lib/chain/evm/erc20/swapErc20Token'
+import { limitOrderAssetAddress } from '../../limit-orders/entities/LimitOrderAsset'
+import { updateTrader } from '../db/traders'
 import {
   cashAsset,
   tradeAssetAddress,
   tradeChain,
 } from '../entities/TradeAsset'
-import { getErc20Balance } from '../../../lib/chain/evm/erc20/getErc20Balance'
-import { limitOrderAssetAddress } from '../../limit-orders/entities/LimitOrderAsset'
-import { privateKeyToAddress } from 'viem/accounts'
-import { swapErc20Token } from '../../../lib/chain/evm/erc20/swapErc20Token'
-import { recordMap } from '@lib/utils/record/recordMap'
-import { updateTrader } from '../db/traders'
-import { getLastItem } from '@lib/utils/array/getLastItem'
+import { Trader } from '../entities/Trader'
+import { getSecret } from '../getSercret'
+
+import { traderConfig } from './config'
 import { sendTradeNotification } from './sendTradeNotification'
-import { TradeType } from '@lib/chain/types/TradeType'
 
 export const runTrader = async ({ prices, asset, lastTrade, id }: Trader) => {
   const shortTermAverage = getAverage(

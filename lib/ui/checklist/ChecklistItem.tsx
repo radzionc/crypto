@@ -1,23 +1,22 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
-import { ChecklistItemFrame } from './ChecklistItemFrame'
-import { matchColor } from '../theme/getters'
-import { Confetti } from '../animations/Confetti'
-import { transition } from '../css/transition'
-import { Text } from '../text'
 import { Hoverable } from '../base/Hoverable'
+import { transition } from '../css/transition'
 import {
   InvisibleHTMLCheckbox,
   InvisibleHTMLCheckboxProps,
 } from '../inputs/InvisibleHTMLCheckbox'
+import { Text } from '../text'
+import { matchColor } from '../theme/getters'
+
+import { ChecklistItemFrame } from './ChecklistItemFrame'
 import { CheckStatus } from './CheckStatus'
 
 interface ChecklistItemProps extends InvisibleHTMLCheckboxProps {
   name: ReactNode
   style?: React.CSSProperties
   shouldCrossOut?: boolean
-  hasCongratulation?: boolean
 }
 
 const Content = styled(Text)<{ isChecked: boolean }>`
@@ -44,15 +43,11 @@ export const ChecklistItem = ({
   name,
   style,
   shouldCrossOut,
-  hasCongratulation,
 }: ChecklistItemProps) => {
-  const [showConfetti, setShowConfetti] = useState(false)
-
   return (
     <Hoverable verticalOffset={0} style={style} as="label">
       <ChecklistItemFrame>
         <CheckStatus value={value} />
-        {showConfetti && <Confetti x={20} y={-20} />}
         <Content as="div" isChecked={value} cropped>
           {name}
           {shouldCrossOut && <Line isChecked={value} />}
@@ -62,9 +57,6 @@ export const ChecklistItem = ({
           onChange={() => {
             const newValue = !value
             onChange(newValue)
-            if (hasCongratulation) {
-              setShowConfetti(newValue)
-            }
           }}
         />
       </ChecklistItemFrame>

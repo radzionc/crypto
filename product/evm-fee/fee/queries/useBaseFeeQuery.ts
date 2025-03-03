@@ -1,7 +1,7 @@
-import { useBlock } from 'wagmi'
 import { useTransformQueryData } from '@lib/ui/query/hooks/useTransformQueryData'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Block } from 'viem'
+import { useBlock } from 'wagmi'
 
 const transform = (data: Block): bigint => {
   return shouldBePresent(data.baseFeePerGas)

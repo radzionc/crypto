@@ -1,8 +1,9 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { ProductLogo } from '../../product/ProductLogo'
-import { Center } from '@lib/ui/layout/Center'
-import { VStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
+import { VStack } from '@lib/ui/css/stack'
+import { Center } from '@lib/ui/layout/Center'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+
+import { ProductLogo } from '../../product/ProductLogo'
 
 export const ConnectWallet = () => {
   return (

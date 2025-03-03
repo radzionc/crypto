@@ -1,16 +1,17 @@
+import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
+import { toChainAmount } from '@lib/chain/utils/toChainAmount'
+import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
+import { Spinner } from '@lib/ui/loaders/Spinner'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { useTransformQueriesData } from '@lib/ui/query/hooks/useTransformQueriesData'
 import { Text } from '@lib/ui/text'
 import { formatAmount } from '@lib/utils/formatAmount'
-import { useEstimateGas } from 'wagmi'
-import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
-import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
-import { toChainAmount } from '@lib/chain/utils/toChainAmount'
 import { mainnet } from 'viem/chains'
-import { useBaseFeeQuery } from '../queries/useBaseFeeQuery'
-import { useTransformQueriesData } from '@lib/ui/query/hooks/useTransformQueriesData'
-import { usePriorityFeeQuery } from '../queries/usePriorityFeeQuery'
+import { useEstimateGas } from 'wagmi'
+
 import { baseFeeMultiplier } from '../baseFee/config'
-import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
-import { Spinner } from '@lib/ui/loaders/Spinner'
+import { useBaseFeeQuery } from '../queries/useBaseFeeQuery'
+import { usePriorityFeeQuery } from '../queries/usePriorityFeeQuery'
 
 const ethAmount = 1
 

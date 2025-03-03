@@ -1,10 +1,12 @@
-import { addQueryParams } from '@lib/utils/query/addQueryParams'
-import { toChainAmount } from '@lib/chain/utils/toChainAmount'
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
-import { ChainId, getChain } from '../core/chains'
-import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
-import { queryUrl } from '@lib/utils/query/queryUrl'
+import { toChainAmount } from '@lib/chain/utils/toChainAmount'
 import { formatAmount } from '@lib/utils/formatAmount'
+import { addQueryParams } from '@lib/utils/query/addQueryParams'
+import { queryUrl } from '@lib/utils/query/queryUrl'
+import { mirrorRecord } from '@lib/utils/record/mirrorRecord'
+
+import { ChainId, getChain } from '../core/chains'
+
 import { thorChainRecord } from './thor'
 
 type GetQuoteInput = {

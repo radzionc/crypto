@@ -1,9 +1,11 @@
-import { cashAssets, tradeAssets } from '../../entities/Trade'
-import { TradeItemFrame } from './TradeItemFrame'
+import { TradeType } from '@lib/chain/types/TradeType'
+import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { format } from 'date-fns'
-import { ValueProp } from '@lib/ui/props'
-import { TradeType } from '@lib/chain/types/TradeType'
+
+import { cashAssets, tradeAssets } from '../../entities/Trade'
+
+import { TradeItemFrame } from './TradeItemFrame'
 
 type NextTradeProps = ValueProp<TradeType> & {
   isGoodPrice: boolean

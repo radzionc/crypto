@@ -1,12 +1,13 @@
-import { FeeSection } from '../FeeSection'
+import { gwei } from '@lib/chain/evm/utils/gwei'
+import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
+import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
+import { Spinner } from '@lib/ui/loaders/Spinner'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
-import { ShyInfoBlock } from '@lib/ui/info/ShyInfoBlock'
-import { gwei } from '@lib/chain/evm/utils/gwei'
 import { formatAmount } from '@lib/utils/formatAmount'
-import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
+
+import { FeeSection } from '../FeeSection'
 import { useBaseFeeQuery } from '../queries/useBaseFeeQuery'
-import { Spinner } from '@lib/ui/loaders/Spinner'
 
 export const BaseFee = () => {
   const query = useBaseFeeQuery()

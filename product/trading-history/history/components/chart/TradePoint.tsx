@@ -1,14 +1,16 @@
+import { centerContent } from '@lib/ui/css/centerContent'
+import { round } from '@lib/ui/css/round'
+import { sameDimensions } from '@lib/ui/css/sameDimensions'
 import { MinusIcon } from '@lib/ui/icons/MinusIcon'
 import { PlusIcon } from '@lib/ui/icons/PlusIcon'
-import styled from 'styled-components'
-import { matchColor } from '@lib/ui/theme/getters'
-import { centerContent } from '@lib/ui/css/centerContent'
-import { sameDimensions } from '@lib/ui/css/sameDimensions'
-import { round } from '@lib/ui/css/round'
-import { Trade } from '../../../entities/Trade'
-import { Tooltip } from '@lib/ui/tooltips/Tooltip'
-import { TradeDetails } from './TradeDetails'
 import { UiProps } from '@lib/ui/props'
+import { matchColor } from '@lib/ui/theme/getters'
+import { Tooltip } from '@lib/ui/tooltips/Tooltip'
+import styled from 'styled-components'
+
+import { Trade } from '../../../entities/Trade'
+
+import { TradeDetails } from './TradeDetails'
 
 type TradePointProps = UiProps & {
   value: Trade

@@ -1,7 +1,8 @@
 import { IconButton } from '@lib/ui/buttons/IconButton'
-import { EyeOffIcon } from '@lib/ui/icons/EyeOffIcon'
 import { EyeIcon } from '@lib/ui/icons/EyeIcon'
+import { EyeOffIcon } from '@lib/ui/icons/EyeOffIcon'
 import { Tooltip } from '@lib/ui/tooltips/Tooltip'
+
 import { useAreAddressesVisible } from './state/areAddressesVisible'
 
 export const ManageAddressesVisibility = () => {

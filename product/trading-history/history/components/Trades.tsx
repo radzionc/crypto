@@ -1,18 +1,20 @@
-import { VStack } from '@lib/ui/css/stack'
-import { useTradesQuery } from '../queries/useTradesQuery'
-import { TradeItem } from './TradeItem'
-import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
+import { getOppositeTrade } from '@lib/chain/utils/getOppositeTrade'
+import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
 import { NonEmptyOnly } from '@lib/ui/base/NonEmptyOnly'
+import { VStack } from '@lib/ui/css/stack'
+import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
+import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { Text } from '@lib/ui/text'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
-import { NextTrade } from './NextTrade'
-import { SeparatedByLine } from '@lib/ui/layout/SeparatedByLine'
-import { TradesChart } from './chart/TradesChart'
-import { useAssetPriceQuery } from '@lib/chain-ui/queries/useAssetPriceQuery'
+
 import { primaryTradeAssetPriceProviderId } from '../../entities/Trade'
-import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
-import { getOppositeTrade } from '@lib/chain/utils/getOppositeTrade'
+import { useTradesQuery } from '../queries/useTradesQuery'
 import { isGoodPrice } from '../utils/isGoodPrice'
+
+import { TradesChart } from './chart/TradesChart'
+import { NextTrade } from './NextTrade'
+import { TradeItem } from './TradeItem'
 
 export const Trades = () => {
   const tradesQuery = useTradesQuery()

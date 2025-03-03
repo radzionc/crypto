@@ -1,21 +1,23 @@
-import { ClientOnly } from '@lib/ui/base/ClientOnly'
 import { PageMetaTags } from '@lib/next-ui/metadata/PageMetaTags'
-import { WalletGuard } from '../../wallet/components/WalletGuard'
+import { ClientOnly } from '@lib/ui/base/ClientOnly'
+import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
+import { VStack } from '@lib/ui/css/stack'
+import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
+import styled from 'styled-components'
+
 import { ProductLogo } from '../../product/ProductLogo'
 import { ExitWallet } from '../../wallet/components/ExitWallet'
-import styled from 'styled-components'
-import { centeredContentColumn } from '@lib/ui/css/centeredContentColumn'
-import { verticalPadding } from '@lib/ui/css/verticalPadding'
+import { WalletGuard } from '../../wallet/components/WalletGuard'
 import { chains } from '../core/chains'
 import { AddressProvider } from '../state/address'
 import { AmountProvider } from '../state/amount'
-import { VStack } from '@lib/ui/css/stack'
-import { ManageChain } from './ManageChain'
-import { ManageAmount } from './ManageAmount'
-import { SwapQuote } from './SwapQuote'
-import { ManageAddress } from './ManageAddress'
 import { SourceChainIdProvider } from '../state/sourceChainId'
+
+import { ManageAddress } from './ManageAddress'
+import { ManageAmount } from './ManageAmount'
+import { ManageChain } from './ManageChain'
+import { SwapQuote } from './SwapQuote'
 
 export const PageContainer = styled.div`
   ${centeredContentColumn({

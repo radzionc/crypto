@@ -1,6 +1,6 @@
-import { getBlockHash } from './getBlockHash'
-import { checkDifficulty } from './checkDifficulty'
 import { BlockData } from './BlockData'
+import { checkDifficulty } from './checkDifficulty'
+import { getBlockHash } from './getBlockHash'
 
 type MineBlockInput = {
   blockData: Omit<BlockData, 'nonce'>

@@ -1,15 +1,16 @@
-import { useQueries } from '@tanstack/react-query'
-import { useAddresses } from '../state/addresses'
 import { useQueriesToEagerQuery } from '@lib/ui/query/hooks/useQueriesToEagerQuery'
-import { tradingHistoryConfig } from '../config'
-import { useAlchemyApiKey } from '../../alchemy/state/alchemyApiKey'
+import { noRefetchQueryOptions } from '@lib/ui/query/utils/options'
 import { usePresentState } from '@lib/ui/state/usePresentState'
 import { order } from '@lib/utils/array/order'
 import { withoutDuplicates } from '@lib/utils/array/withoutDuplicates'
+import { useQueries } from '@tanstack/react-query'
+
+import { useAlchemyApiKey } from '../../alchemy/state/alchemyApiKey'
 import { getAlchemyClient } from '../../alchemy/utils/getAlchemyClient'
-import { noRefetchQueryOptions } from '@lib/ui/query/utils/options'
 import { getTrades } from '../../alchemy/utils/getTrades'
 import { Trade } from '../../entities/Trade'
+import { tradingHistoryConfig } from '../config'
+import { useAddresses } from '../state/addresses'
 
 const joinData = (items: Trade[][]) =>
   withoutDuplicates(

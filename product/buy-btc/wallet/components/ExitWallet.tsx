@@ -1,5 +1,5 @@
-import { HStack } from '@lib/ui/css/stack'
 import { Button } from '@lib/ui/buttons/Button'
+import { HStack } from '@lib/ui/css/stack'
 import { LogOutIcon } from '@lib/ui/icons/LogOutIcon'
 import { useDisconnect } from 'wagmi'
 

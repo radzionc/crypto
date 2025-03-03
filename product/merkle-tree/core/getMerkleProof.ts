@@ -1,5 +1,5 @@
-import { toPairs } from '@lib/utils/array/toPairs'
 import { getLastItem } from '@lib/utils/array/getLastItem'
+import { toPairs } from '@lib/utils/array/toPairs'
 
 type GetMerkleProofInput = {
   nodes: string[]

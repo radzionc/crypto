@@ -1,11 +1,13 @@
-import { HStack, VStack, vStack } from '@lib/ui/css/stack'
-import styled from 'styled-components'
-import { useAddresses } from '../state/addresses'
-import { Text } from '@lib/ui/text'
-import { ManageAddressesVisibility } from './ManageAddressesVisibility'
-import { ManageAddress } from './ManageAddress'
-import { AddAddress } from './AddAddress'
 import { panel } from '@lib/ui/css/panel'
+import { HStack, VStack, vStack } from '@lib/ui/css/stack'
+import { Text } from '@lib/ui/text'
+import styled from 'styled-components'
+
+import { useAddresses } from '../state/addresses'
+
+import { AddAddress } from './AddAddress'
+import { ManageAddress } from './ManageAddress'
+import { ManageAddressesVisibility } from './ManageAddressesVisibility'
 
 const Container = styled.div`
   ${panel()};

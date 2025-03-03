@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { getColor } from '@lib/ui/theme/getters'
+import styled from 'styled-components'
 
 export const TradeItemFrame = styled.div`
   display: grid;

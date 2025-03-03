@@ -1,11 +1,12 @@
-import { getPickParams } from '@lib/dynamodb/getPickParams'
-import { totalScan } from '@lib/dynamodb/totalScan'
-import { Trader } from '../entities/Trader'
-import { getEnvVar } from '../getEnvVar'
 import { DeleteCommand, PutCommand } from '@aws-sdk/lib-dynamodb'
 import { dbDocClient } from '@lib/dynamodb/client'
+import { getPickParams } from '@lib/dynamodb/getPickParams'
 import { makeGetItem } from '@lib/dynamodb/makeGetItem'
+import { totalScan } from '@lib/dynamodb/totalScan'
 import { updateItem } from '@lib/dynamodb/updateItem'
+
+import { Trader } from '../entities/Trader'
+import { getEnvVar } from '../getEnvVar'
 
 const tableName = getEnvVar('TRADERS_TABLE_NAME')
 

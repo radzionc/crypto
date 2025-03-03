@@ -1,8 +1,9 @@
-import { getMerkleRoot } from './core/getMerkleRoot'
-import { getMerkleProof } from './core/getMerkleProof'
-import { verifyMerkleProof } from './core/verifyMerkleProof'
 import { queryUrl } from '../../lib/utils/query/queryUrl'
+
+import { getMerkleProof } from './core/getMerkleProof'
+import { getMerkleRoot } from './core/getMerkleRoot'
 import { toBitcoinMerkleNode } from './core/toBitcoinMerkleNode'
+import { verifyMerkleProof } from './core/verifyMerkleProof'
 
 interface BlockData {
   merkle_root: string

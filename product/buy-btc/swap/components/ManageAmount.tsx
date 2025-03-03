@@ -1,8 +1,10 @@
 import { AmountTextInput } from '@lib/ui/inputs/AmountTextInput'
-import { useAmount } from '../state/amount'
-import { MaxAmount } from './MaxAmount'
+
 import { getChain } from '../core/chains'
+import { useAmount } from '../state/amount'
 import { useSourceChainId } from '../state/sourceChainId'
+
+import { MaxAmount } from './MaxAmount'
 
 export function ManageAmount() {
   const [amount, setAmount] = useAmount()

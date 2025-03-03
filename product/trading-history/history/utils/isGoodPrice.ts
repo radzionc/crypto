@@ -1,6 +1,7 @@
 import { TradeType } from '@lib/chain/types/TradeType'
-import { Trade } from '../../entities/Trade'
 import { match } from '@lib/utils/match'
+
+import { Trade } from '../../entities/Trade'
 
 type Input = {
   trades: Trade[]

@@ -1,9 +1,11 @@
 import { useTransformQueryData } from '@lib/ui/query/hooks/useTransformQueryData'
+import { useCallback } from 'react'
+
 import {
   defaultFeePriority,
   FeePriority,
 } from '../maxPriorityFeePerGas/core/FeePriority'
-import { useCallback } from 'react'
+
 import { usePriorityFeesQuery } from './usePriorityFeesQuery'
 
 export const usePriorityFeeQuery = (

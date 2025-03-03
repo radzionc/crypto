@@ -1,10 +1,11 @@
-import { getPickParams } from '@lib/dynamodb/getPickParams'
-import { totalScan } from '@lib/dynamodb/totalScan'
-import { PriceAlert } from '../entities/PriceAlert'
-import { getEnvVar } from '../getEnvVar'
 import { DeleteCommand, PutCommand } from '@aws-sdk/lib-dynamodb'
 import { dbDocClient } from '@lib/dynamodb/client'
+import { getPickParams } from '@lib/dynamodb/getPickParams'
+import { totalScan } from '@lib/dynamodb/totalScan'
 import { updateItem } from '@lib/dynamodb/updateItem'
+
+import { PriceAlert } from '../entities/PriceAlert'
+import { getEnvVar } from '../getEnvVar'
 
 const tableName = getEnvVar('PRICE_ALERTS_TABLE_NAME')
 
