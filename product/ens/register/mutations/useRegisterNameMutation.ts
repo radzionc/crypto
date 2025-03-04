@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
 
-import { ChainId } from '../../chain'
+import { ChainId, getChain } from '../../chain'
 import {
   ethRegistrarControllerAbi,
   ethRegistrarControllerAddresses,
@@ -79,6 +79,8 @@ export const useRegisterNameMutation = ({
             DEFAULT_OWNER_CONTROLLED_FUSES,
           ],
           value: totalPrice,
+          account: address,
+          chain: getChain(chainId),
         })
 
         await publicClient.waitForTransactionReceipt({ hash: registerHash })
@@ -122,6 +124,8 @@ export const useRegisterNameMutation = ({
         abi: ethRegistrarControllerAbi as Abi,
         functionName: 'commit',
         args: [commitmentHash],
+        chain: getChain(chainId),
+        account: address,
       })
 
       await publicClient.waitForTransactionReceipt({ hash })
@@ -173,6 +177,8 @@ export const useRegisterNameMutation = ({
           DEFAULT_OWNER_CONTROLLED_FUSES,
         ],
         value: totalPrice,
+        chain: getChain(chainId),
+        account: address,
       })
 
       await publicClient.waitForTransactionReceipt({ hash: registerHash })
