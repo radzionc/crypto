@@ -14,6 +14,6 @@
     "@sentry/serverless": "^7.120.3",
     "@types/node-telegram-bot-api": "^0.64.7",
     "node-telegram-bot-api": "^0.66.0",
-    "viem": "^2.23.5"
+    "viem": "^2.23.6"
   }
 }
