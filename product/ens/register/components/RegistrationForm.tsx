@@ -1,5 +1,5 @@
 import { Button } from '@lib/ui/buttons/Button'
-import { vStack } from '@lib/ui/css/stack'
+import { VStack, vStack } from '@lib/ui/css/stack'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { InputDebounce } from '@lib/ui/inputs/InputDebounce'
 import { TextInput } from '@lib/ui/inputs/TextInput'
@@ -9,7 +9,6 @@ import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { useWalletClient } from 'wagmi'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
@@ -41,89 +40,68 @@ export const RegistrationForm = ({ onFinish }: OnFinishProp<string>) => {
     onSuccess: onFinish,
   })
 
-  const isFormDisabled = !isNameAvailableQuery.data
+  const isNameAvailable = !!isNameAvailableQuery.data
   const isFormPending = registerNameMutation.isPending
-
-  const walletClientQuery = useWalletClient()
 
   return (
     <Center>
-      <MatchQuery
-        value={walletClientQuery}
-        pending={() => 'Loading wallet client...'}
-        success={(walletClient) => (
-          <WalletDependantForm
-            submitText="Register"
-            onSubmit={() =>
-              registerNameMutation.mutate({
-                name,
-                walletClient,
-              })
-            }
-            render={({ submitText, onSubmit }) => (
-              <Content
-                as="form"
-                {...getFormProps({
-                  isPending: registerNameMutation.isPending,
-                  isDisabled: isFormDisabled,
-                  onSubmit,
-                })}
-              >
-                <InputDebounce
-                  value={name}
-                  onChange={setName}
-                  render={({ value, onChange }) => (
-                    <TextInput
-                      value={value}
-                      onValueChange={(newValue) =>
-                        onChange(newValue.replace(/\./g, ''))
-                      }
-                      autoFocus
-                      label={`.${tld} name`}
-                      placeholder="Search for a name"
-                    />
-                  )}
+      <WalletDependantForm
+        submitText="Register"
+        onSubmit={({ walletClient }) =>
+          registerNameMutation.mutate({
+            name,
+            walletClient,
+          })
+        }
+        render={({ submitText, onSubmit }) => (
+          <Content
+            as="form"
+            {...getFormProps({
+              isPending: isFormPending,
+              isDisabled: !isNameAvailable,
+              onSubmit,
+            })}
+          >
+            <VStack gap={8}>
+              <InputDebounce<string>
+                value={name}
+                onChange={setName}
+                render={({ value, onChange }) => (
+                  <TextInput
+                    value={value}
+                    onValueChange={(newValue) =>
+                      onChange(newValue.replace(/\./g, ''))
+                    }
+                    autoFocus
+                    placeholder={`Search for a .${tld} name`}
+                  />
+                )}
+              />
+              {name && (
+                <MatchQuery
+                  value={isNameAvailableQuery}
+                  pending={() => 'Checking availability...'}
+                  success={(isAvailable) => {
+                    const fullName = `${name}.${tld}`
+
+                    return (
+                      <Text color={isAvailable ? 'success' : 'alert'}>
+                        {isAvailable
+                          ? `${fullName} is available!`
+                          : `${fullName} is already taken.`}
+                      </Text>
+                    )
+                  }}
+                  error={() => 'Error checking availability.'}
                 />
-                <Status>
-                  {name && (
-                    <MatchQuery
-                      value={isNameAvailableQuery}
-                      pending={() => 'Checking availability...'}
-                      success={(isAvailable) => {
-                        const fullName = `${name}.${tld}`
-
-                        return (
-                          <Text color={isAvailable ? 'success' : 'alert'}>
-                            {isAvailable
-                              ? `${fullName} is available!`
-                              : `${fullName} is already taken.`}
-                          </Text>
-                        )
-                      }}
-                      error={() => 'Error checking availability.'}
-                    />
-                  )}
-                </Status>
-                <Button
-                  isDisabled={isFormDisabled}
-                  isLoading={isFormPending}
-                  type="submit"
-                >
-                  {submitText}
-                </Button>
-
-                <Status>
-                  {name && (
-                    <MatchQuery
-                      value={registerNameMutation}
-                      pending={() => null}
-                      error={() => 'Error registering name.'}
-                    />
-                  )}
-                </Status>
-              </Content>
+              )}
+            </VStack>
+            {isNameAvailable && (
+              <Button isLoading={isFormPending} type="submit">
+                {submitText}
+              </Button>
             )}
-          />
+          </Content>
         )}
       />
     </Center>
