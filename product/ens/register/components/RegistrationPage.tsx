@@ -5,10 +5,7 @@ import { verticalPadding } from '@lib/ui/css/verticalPadding'
 import { WebsiteNavigation } from '@lib/ui/website/navigation/WebsiteNavigation'
 import styled from 'styled-components'
 
-import { ChainGuard } from '../../chain/components/ChainGuard'
 import { ProductLogo } from '../../product/ProductLogo'
-import { ExitWallet } from '../../wallet/components/ExitWallet'
-import { WalletGuard } from '../../wallet/components/WalletGuard'
 
 import { RegistrationFlow } from './RegistrationFlow'
 
@@ -27,24 +24,11 @@ export const RegistrationPage = () => (
       description="Register your unique .eth domain name with ENS. Get a human-readable address for your crypto wallet, websites, and more. Simple, secure, and decentralized."
     />
     <ClientOnly>
-      <WalletGuard>
-        <WebsiteNavigation
-          renderTopbarItems={() => (
-            <>
-              <div />
-              <ExitWallet />
-            </>
-          )}
-          renderOverlayItems={() => <ExitWallet />}
-          logo={<ProductLogo />}
-        >
-          <PageContainer>
-            <ChainGuard>
-              <RegistrationFlow />
-            </ChainGuard>
-          </PageContainer>
-        </WebsiteNavigation>
-      </WalletGuard>
+      <WebsiteNavigation logo={<ProductLogo />}>
+        <PageContainer>
+          <RegistrationFlow />
+        </PageContainer>
+      </WebsiteNavigation>
     </ClientOnly>
   </>
 )

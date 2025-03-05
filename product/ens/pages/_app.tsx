@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Inter } from 'next/font/google'
 import { ReactNode, useState } from 'react'
 
-import { WalletProvider } from '../wallet/components/WalletProvider'
+import { WalletProvider } from '../chain/wallet/components/WalletProvider'
 
 import type { AppProps } from 'next/app'
 

@@ -6,8 +6,8 @@ import '@rainbow-me/rainbowkit/styles.css'
 import React from 'react'
 import { WagmiProvider, http } from 'wagmi'
 
-import { chains } from '../../chain'
-import { productName } from '../../product/config'
+import { chains } from '../..'
+import { productName } from '../../../product/config'
 
 const config = getDefaultConfig({
   appName: productName,
