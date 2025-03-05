@@ -4,6 +4,7 @@ import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
 
 import { ChainId, getChain } from '../../chain'
+import { useChainId } from '../../chain/hooks/useChainId'
 import {
   ethRegistrarControllerAbi,
   ethRegistrarControllerAddresses,
@@ -30,7 +31,8 @@ export const useRegisterNameMutation = ({
 }: {
   onSuccess: (name: string) => void
 }) => {
-  const { address, chainId } = useAccount()
+  const chainId = useChainId()
+  const { address } = useAccount()
   const publicClient = shouldBePresent(usePublicClient())
 
   const {
