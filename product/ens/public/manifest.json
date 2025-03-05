@@ -1,11 +1,11 @@
 {
-  "short_name": "Buy Bitcoin",
-  "name": "Buy Bitcoin",
+  "short_name": "ENS Domain",
+  "name": "ENS Domain",
+  "description": "ENS Domain",
   "start_url": ".",
   "display": "fullscreen",
   "theme_color": "#1a1a1a",
   "background_color": "#1a1a1a",
-  "description": "Buy Bitcoin",
   "icons": [
     {
       "src": "images/icon/manifest-icon-192.maskable.png",
