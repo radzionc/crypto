@@ -15,6 +15,7 @@ import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 
 import { RegistrationStepContainer } from './RegistrationStepContainer'
+import { RegistrationStepTitle } from './RegistrationStepTitle'
 
 export const RegistrationFlowNameStep = ({
   onFinish,
@@ -44,6 +45,7 @@ export const RegistrationFlowNameStep = ({
               onSubmit,
             })}
           >
+            <RegistrationStepTitle>Your web3 username</RegistrationStepTitle>
             <VStack gap={8}>
               <InputDebounce<string>
                 value={name}

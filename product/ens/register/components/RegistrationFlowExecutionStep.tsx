@@ -1,48 +1,25 @@
+import { VStack } from '@lib/ui/css/stack'
 import { ProgressList } from '@lib/ui/progress/list/ProgressList'
 import { OnBackProp, OnFinishProp } from '@lib/ui/props'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
+import { Text } from '@lib/ui/text'
 import { useEffect } from 'react'
-import styled from 'styled-components'
 
 import {
   RegisterNameMutationInput,
   useRegisterNameMutation,
   nameRegistrationSteps,
   nameRegistrationStepText,
-  NameRegistrationStep,
 } from '../mutations/useRegisterNameMutation'
 
 import { RegistrationFlowFailureState } from './RegistrationFlowFailureState'
 import { RegistrationFlowSuccessState } from './RegistrationFlowSuccessState'
 import { RegistrationStepContainer } from './RegistrationStepContainer'
+import { RegistrationStepTitle } from './RegistrationStepTitle'
 
 type RegistrationFlowExecutionStepProps = OnBackProp &
   OnFinishProp &
   RegisterNameMutationInput
-
-const PendingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 24px;
-`
-
-const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-`
-
-const Description = styled.p`
-  font-size: 16px;
-  color: #666;
-  text-align: center;
-  margin: 0;
-`
 
 export const RegistrationFlowExecutionStep = ({
   onBack,
@@ -55,10 +32,6 @@ export const RegistrationFlowExecutionStep = ({
     register(registerNameInput)
   }, [registerNameInput, register])
 
-  // Function to get the text for a step
-  const getStepText = (stepId: NameRegistrationStep) =>
-    nameRegistrationStepText[stepId]
-
   return (
     <MatchQuery
       value={mutationState}
@@ -70,16 +43,20 @@ export const RegistrationFlowExecutionStep = ({
       )}
       pending={() => (
         <RegistrationStepContainer>
-          <Title>Registering {registerNameInput.name}.eth</Title>
-          <Description>
-            Please wait while we process your registration. This may take a few
-            minutes.
-          </Description>
+          <VStack alignItems="center" gap={8}>
+            <RegistrationStepTitle>
+              Registering {registerNameInput.name}.eth
+            </RegistrationStepTitle>
+            <Text color="supporting">
+              Please wait while we process your registration. This may take a
+              few minutes.
+            </Text>
+          </VStack>
           {step && (
             <ProgressList
               items={nameRegistrationSteps}
               value={step}
-              renderItem={getStepText}
+              renderItem={(item) => nameRegistrationStepText[item]}
             />
           )}
         </RegistrationStepContainer>
