@@ -1,6 +1,7 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { Years } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
+import { addYears, differenceInSeconds } from 'date-fns'
 import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
 
@@ -11,8 +12,6 @@ import {
   ethRegistrarControllerAddresses,
 } from '../contracts/ethRegistrarConroller'
 import { generateSecureRandomHex } from '../utils/generateSecureRandomHex'
-
-const REGISTRATION_DURATION = 31536000
 
 const DEFAULT_RESOLVER = '0x0000000000000000000000000000000000000000'
 const DEFAULT_DATA: `0x${string}`[] = []
@@ -52,6 +51,12 @@ export const useRegisterNameMutation = () => {
         throw new Error(`Name ${name} is not available`)
       }
 
+      const now = new Date()
+      const registrationDuration = differenceInSeconds(
+        addYears(now, duration),
+        now,
+      )
+
       const secret = generateSecureRandomHex(32) as `0x${string}`
 
       const commitmentHash = (await publicClient.readContract({
@@ -61,7 +66,7 @@ export const useRegisterNameMutation = () => {
         args: [
           name,
           address,
-          REGISTRATION_DURATION,
+          registrationDuration,
           secret,
           DEFAULT_RESOLVER,
           DEFAULT_DATA,
@@ -98,7 +103,7 @@ export const useRegisterNameMutation = () => {
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
         functionName: 'rentPrice',
-        args: [name, REGISTRATION_DURATION],
+        args: [name, registrationDuration],
       })) as { base: bigint; premium: bigint }
 
       const totalPrice =
@@ -112,7 +117,7 @@ export const useRegisterNameMutation = () => {
         args: [
           name,
           address,
-          REGISTRATION_DURATION,
+          registrationDuration,
           secret,
           DEFAULT_RESOLVER,
           DEFAULT_DATA,
