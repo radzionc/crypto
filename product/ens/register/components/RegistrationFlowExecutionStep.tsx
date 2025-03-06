@@ -34,6 +34,7 @@ export const RegistrationFlowExecutionStep = ({
           onFinish={onFinish}
         />
       )}
+      pending={() => <p>Todo</p>}
       error={() => <RegistrationFlowFailureState onFinish={onBack} />}
     />
   )

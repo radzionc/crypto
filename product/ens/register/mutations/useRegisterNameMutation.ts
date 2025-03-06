@@ -1,4 +1,7 @@
+import { placeholderEvmAddress } from '@lib/chain/evm/utils/address'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { sleep } from '@lib/utils/sleep'
+import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Years } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
 import { addYears, differenceInSeconds } from 'date-fns'
@@ -13,12 +16,9 @@ import {
 } from '../contracts/ethRegistrarConroller'
 import { generateSecureRandomHex } from '../utils/generateSecureRandomHex'
 
-const DEFAULT_RESOLVER = '0x0000000000000000000000000000000000000000'
-const DEFAULT_DATA: `0x${string}`[] = []
-const DEFAULT_REVERSE_RECORD = false
-const DEFAULT_OWNER_CONTROLLED_FUSES = 0
-
-const MIN_COMMITMENT_AGE = 60
+const data: `0x${string}`[] = []
+const reverseRecord = false
+const ownerControlledFuses = 0
 
 export type RegisterNameMutationInput = {
   name: string
@@ -40,17 +40,6 @@ export const useRegisterNameMutation = () => {
       const contractAddress =
         ethRegistrarControllerAddresses[chainId as ChainId]
 
-      const isAvailable = await publicClient.readContract({
-        address: contractAddress,
-        abi: ethRegistrarControllerAbi as Abi,
-        functionName: 'available',
-        args: [name],
-      })
-
-      if (!isAvailable) {
-        throw new Error(`Name ${name} is not available`)
-      }
-
       const now = new Date()
       const registrationDuration = differenceInSeconds(
         addYears(now, duration),
@@ -68,10 +57,10 @@ export const useRegisterNameMutation = () => {
           address,
           registrationDuration,
           secret,
-          DEFAULT_RESOLVER,
-          DEFAULT_DATA,
-          DEFAULT_REVERSE_RECORD,
-          DEFAULT_OWNER_CONTROLLED_FUSES,
+          placeholderEvmAddress,
+          data,
+          reverseRecord,
+          ownerControlledFuses,
         ],
       })) as `0x${string}`
 
@@ -86,19 +75,8 @@ export const useRegisterNameMutation = () => {
 
       await publicClient.waitForTransactionReceipt({ hash })
 
-      const startTime = Date.now()
-      const endTime = startTime + MIN_COMMITMENT_AGE * 1000
+      await sleep(convertDuration(1, 'min', 'ms'))
 
-      await new Promise((resolve) => {
-        const interval = setInterval(() => {
-          const now = Date.now()
-
-          if (now >= endTime) {
-            clearInterval(interval)
-            resolve(true)
-          }
-        }, 1000)
-      })
       const rentPriceResult = (await publicClient.readContract({
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
@@ -119,10 +97,10 @@ export const useRegisterNameMutation = () => {
           address,
           registrationDuration,
           secret,
-          DEFAULT_RESOLVER,
-          DEFAULT_DATA,
-          DEFAULT_REVERSE_RECORD,
-          DEFAULT_OWNER_CONTROLLED_FUSES,
+          placeholderEvmAddress,
+          data,
+          reverseRecord,
+          ownerControlledFuses,
         ],
         value: totalPrice,
         chain: getChain(chainId),
