@@ -1,4 +1,4 @@
-export const generateSecureRandomHex = (byteLength = 32): `0x${string}` => {
+export const getRandomHex = (byteLength = 32): `0x${string}` => {
   const randomBytes = new Uint8Array(byteLength)
   crypto.getRandomValues(randomBytes)
   const hexString = Array.from(randomBytes)

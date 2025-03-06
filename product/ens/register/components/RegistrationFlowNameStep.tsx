@@ -85,7 +85,7 @@ export const RegistrationFlowNameStep = ({
               )}
             </VStack>
             <ManageRegistrationDuration />
-            {isNameAvailableQuery.data && (
+            {!!isNameAvailableQuery.data && (
               <Button type="submit">{submitText}</Button>
             )}
           </RegistrationStepContainer>

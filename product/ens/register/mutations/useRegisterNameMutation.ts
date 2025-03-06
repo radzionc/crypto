@@ -1,3 +1,4 @@
+import { getRandomHex } from '@lib/chain/crypto/getRandomHex'
 import { placeholderEvmAddress } from '@lib/chain/evm/utils/address'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { sleep } from '@lib/utils/sleep'
@@ -14,7 +15,6 @@ import {
   ethRegistrarControllerAbi,
   ethRegistrarControllerAddresses,
 } from '../contracts/ethRegistrarConroller'
-import { generateSecureRandomHex } from '../utils/generateSecureRandomHex'
 
 const data: `0x${string}`[] = []
 const reverseRecord = false
@@ -60,7 +60,7 @@ export const useRegisterNameMutation = () => {
     }: RegisterNameMutationInput) => {
       const contractAddress = ethRegistrarControllerAddresses[chainId]
 
-      const secret = generateSecureRandomHex(32) as `0x${string}`
+      const secret = getRandomHex(32)
 
       const commitmentHash = (await publicClient.readContract({
         address: contractAddress,
