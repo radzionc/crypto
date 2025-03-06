@@ -1,7 +1,7 @@
 import { Flow } from '@lib/ui/base/Flow'
 import { useState } from 'react'
 
-import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
+import { NameRegistrationParams } from '../mutations/useRegisterNameMutation'
 
 import { RegistrationFlowExecutionStep } from './RegistrationFlowExecutionStep'
 import { RegistrationFlowNameStep } from './RegistrationFlowNameStep'
@@ -11,9 +11,10 @@ type RegistrationFlowStep =
       id: 'name'
       name: string
     }
-  | ({
+  | {
       id: 'execution'
-    } & RegisterNameMutationInput)
+      params: NameRegistrationParams
+    }
 
 export const RegistrationFlow = () => {
   const [step, setStep] = useState<RegistrationFlowStep>({
@@ -27,16 +28,14 @@ export const RegistrationFlow = () => {
       steps={{
         name: () => (
           <RegistrationFlowNameStep
-            onFinish={(registerNameInput) =>
-              setStep({ id: 'execution', ...registerNameInput })
-            }
+            onFinish={(params) => setStep({ id: 'execution', params })}
           />
         ),
-        execution: (registerNameInput) => (
+        execution: ({ params }) => (
           <RegistrationFlowExecutionStep
             onBack={() => setStep({ id: 'name', name: '' })}
             onFinish={() => setStep({ id: 'name', name: '' })}
-            {...registerNameInput}
+            params={params}
           />
         ),
       }}

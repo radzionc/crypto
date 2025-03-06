@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
-import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
+import { NameRegistrationParams } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 import { useRegistrationDuration } from '../state/registrationDuration'
 
@@ -22,7 +22,7 @@ import { RegistrationStepTitle } from './RegistrationStepTitle'
 
 export const RegistrationFlowNameStep = ({
   onFinish,
-}: OnFinishProp<RegisterNameMutationInput>) => {
+}: OnFinishProp<NameRegistrationParams>) => {
   const [name, setName] = useState('')
 
   const isNameAvailableQuery = useIsNameAvailableQuery(name)

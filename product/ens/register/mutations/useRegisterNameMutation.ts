@@ -39,7 +39,7 @@ export const nameRegistrationStepText: Record<NameRegistrationStep, string> = {
   confirming: 'Finalizing registration',
 }
 
-export type RegisterNameMutationInput = {
+export type NameRegistrationParams = {
   name: string
   walletClient: NonNullable<UseWalletClientReturnType['data']>
   duration: Seconds
@@ -57,7 +57,7 @@ export const useRegisterNameMutation = () => {
       name,
       walletClient,
       duration,
-    }: RegisterNameMutationInput) => {
+    }: NameRegistrationParams) => {
       const contractAddress = ethRegistrarControllerAddresses[chainId]
 
       const secret = getRandomHex(32)

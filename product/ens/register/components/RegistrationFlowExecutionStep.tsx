@@ -7,10 +7,10 @@ import { Text } from '@lib/ui/text'
 import { useEffect } from 'react'
 
 import {
-  RegisterNameMutationInput,
   useRegisterNameMutation,
   nameRegistrationSteps,
   nameRegistrationStepText,
+  NameRegistrationParams,
 } from '../mutations/useRegisterNameMutation'
 
 import { RegistrationFlowFailureState } from './RegistrationFlowFailureState'
@@ -19,34 +19,32 @@ import { RegistrationStepContainer } from './RegistrationStepContainer'
 import { RegistrationStepTitle } from './RegistrationStepTitle'
 
 type RegistrationFlowExecutionStepProps = OnBackProp &
-  OnFinishProp &
-  RegisterNameMutationInput
+  OnFinishProp & {
+    params: NameRegistrationParams
+  }
 
 export const RegistrationFlowExecutionStep = ({
   onBack,
   onFinish,
-  ...registerNameInput
+  params,
 }: RegistrationFlowExecutionStepProps) => {
   const { mutate: register, step, ...mutationState } = useRegisterNameMutation()
 
   useEffect(() => {
-    register(registerNameInput)
-  }, [registerNameInput, register])
+    register(params)
+  }, [params, register])
 
   return (
     <MatchQuery
       value={mutationState}
       success={() => (
-        <RegistrationFlowSuccessState
-          value={registerNameInput.name}
-          onFinish={onFinish}
-        />
+        <RegistrationFlowSuccessState value={params.name} onFinish={onFinish} />
       )}
       pending={() => (
         <RegistrationStepContainer alignItems="center">
           <VStack alignItems="center" gap={8}>
             <RegistrationStepTitle>
-              Registering {registerNameInput.name}.eth
+              Registering {params.name}.eth
             </RegistrationStepTitle>
             <Text>
               Please wait while we process your registration. This may take a
