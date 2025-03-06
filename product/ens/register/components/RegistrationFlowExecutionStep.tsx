@@ -1,5 +1,4 @@
 import { Button } from '@lib/ui/buttons/Button'
-import { VStack } from '@lib/ui/css/stack'
 import { ProgressList } from '@lib/ui/progress/list/ProgressList'
 import { OnBackProp, OnFinishProp } from '@lib/ui/props'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
@@ -42,15 +41,13 @@ export const RegistrationFlowExecutionStep = ({
       )}
       pending={() => (
         <RegistrationStepContainer alignItems="center">
-          <VStack alignItems="center" gap={8}>
-            <RegistrationStepTitle>
-              Registering {params.name}.eth
-            </RegistrationStepTitle>
-            <Text>
-              Please wait while we process your registration. This may take a
-              few minutes.
-            </Text>
-          </VStack>
+          <RegistrationStepTitle>
+            Registering {params.name}.eth
+          </RegistrationStepTitle>
+          <Text centerHorizontally>
+            Please wait while we process your registration. This may take a few
+            minutes.
+          </Text>
           {step && (
             <ProgressList
               items={nameRegistrationSteps}

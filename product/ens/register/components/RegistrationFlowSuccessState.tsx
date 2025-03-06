@@ -24,7 +24,7 @@ export const RegistrationFlowSuccessState = ({
       </Text>
 
       <RegistrationStepTitle>Congratulations!</RegistrationStepTitle>
-      <Text>
+      <Text centerHorizontally color="contrast">
         You have successfully registered{' '}
         <strong>
           {value}.{tld}
