@@ -5,6 +5,7 @@ import { convertDuration } from '@lib/utils/time/convertDuration'
 import { Years } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
 import { addYears, differenceInSeconds } from 'date-fns'
+import { useState } from 'react'
 import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
 
@@ -20,6 +21,25 @@ const data: `0x${string}`[] = []
 const reverseRecord = false
 const ownerControlledFuses = 0
 
+export const nameRegistrationSteps = [
+  'preparing',
+  'committing',
+  'waiting',
+  'calculating',
+  'registering',
+  'confirming',
+] as const
+export type NameRegistrationStep = (typeof nameRegistrationSteps)[number]
+
+export const nameRegistrationStepText: Record<NameRegistrationStep, string> = {
+  preparing: 'Preparing commitment',
+  committing: 'Committing registration',
+  waiting: 'Waiting for confirmation',
+  calculating: 'Calculating price',
+  registering: 'Registering name',
+  confirming: 'Finalizing registration',
+}
+
 export type RegisterNameMutationInput = {
   name: string
   walletClient: NonNullable<UseWalletClientReturnType['data']>
@@ -31,7 +51,9 @@ export const useRegisterNameMutation = () => {
   const { address } = useAccount()
   const publicClient = shouldBePresent(usePublicClient())
 
-  return useMutation({
+  const [step, setStep] = useState<NameRegistrationStep | null>(null)
+
+  const mutation = useMutation({
     mutationFn: async ({
       name,
       walletClient,
@@ -64,6 +86,7 @@ export const useRegisterNameMutation = () => {
         ],
       })) as `0x${string}`
 
+      setStep('committing')
       const hash = await walletClient.writeContract({
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
@@ -73,10 +96,12 @@ export const useRegisterNameMutation = () => {
         account: address,
       })
 
+      setStep('waiting')
       await publicClient.waitForTransactionReceipt({ hash })
 
       await sleep(convertDuration(1, 'min', 'ms'))
 
+      setStep('calculating')
       const rentPriceResult = (await publicClient.readContract({
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
@@ -88,6 +113,7 @@ export const useRegisterNameMutation = () => {
         ((rentPriceResult.base + rentPriceResult.premium) * BigInt(110)) /
         BigInt(100)
 
+      setStep('registering')
       const registerHash = await walletClient.writeContract({
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
@@ -107,9 +133,21 @@ export const useRegisterNameMutation = () => {
         account: address,
       })
 
+      setStep('confirming')
       await publicClient.waitForTransactionReceipt({ hash: registerHash })
 
       return name
     },
+    onMutate: () => {
+      setStep('preparing')
+    },
+    onSettled: () => {
+      setStep(null)
+    },
   })
+
+  return {
+    ...mutation,
+    step,
+  }
 }
