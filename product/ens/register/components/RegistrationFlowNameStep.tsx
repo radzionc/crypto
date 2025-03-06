@@ -7,6 +7,7 @@ import { Center } from '@lib/ui/layout/Center'
 import { OnFinishProp } from '@lib/ui/props'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
+import { addYears, differenceInSeconds } from 'date-fns'
 import { useState } from 'react'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
@@ -16,6 +17,8 @@ import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 
 import { RegistrationStepContainer } from './RegistrationStepContainer'
 import { RegistrationStepTitle } from './RegistrationStepTitle'
+
+const durationInYears = 1
 
 export const RegistrationFlowNameStep = ({
   onFinish,
@@ -30,13 +33,14 @@ export const RegistrationFlowNameStep = ({
     <Center>
       <WalletDependantForm
         submitText="Register"
-        onSubmit={({ walletClient }) =>
+        onSubmit={({ walletClient }) => {
+          const now = new Date()
           onFinish({
             name,
             walletClient,
-            duration: 1,
+            duration: differenceInSeconds(addYears(now, durationInYears), now),
           })
-        }
+        }}
         render={({ submitText, onSubmit }) => (
           <RegistrationStepContainer
             as="form"

@@ -2,14 +2,13 @@ import { placeholderEvmAddress } from '@lib/chain/evm/utils/address'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { sleep } from '@lib/utils/sleep'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { Years } from '@lib/utils/time/types'
+import { Seconds } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
-import { addYears, differenceInSeconds } from 'date-fns'
 import { useState } from 'react'
 import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
 
-import { ChainId, getChain } from '../../chain'
+import { getChain } from '../../chain'
 import { useChainId } from '../../chain/hooks/useChainId'
 import {
   ethRegistrarControllerAbi,
@@ -43,7 +42,7 @@ export const nameRegistrationStepText: Record<NameRegistrationStep, string> = {
 export type RegisterNameMutationInput = {
   name: string
   walletClient: NonNullable<UseWalletClientReturnType['data']>
-  duration: Years
+  duration: Seconds
 }
 
 export const useRegisterNameMutation = () => {
@@ -59,14 +58,7 @@ export const useRegisterNameMutation = () => {
       walletClient,
       duration,
     }: RegisterNameMutationInput) => {
-      const contractAddress =
-        ethRegistrarControllerAddresses[chainId as ChainId]
-
-      const now = new Date()
-      const registrationDuration = differenceInSeconds(
-        addYears(now, duration),
-        now,
-      )
+      const contractAddress = ethRegistrarControllerAddresses[chainId]
 
       const secret = generateSecureRandomHex(32) as `0x${string}`
 
@@ -77,7 +69,7 @@ export const useRegisterNameMutation = () => {
         args: [
           name,
           address,
-          registrationDuration,
+          duration,
           secret,
           placeholderEvmAddress,
           data,
@@ -106,7 +98,7 @@ export const useRegisterNameMutation = () => {
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
         functionName: 'rentPrice',
-        args: [name, registrationDuration],
+        args: [name, duration],
       })) as { base: bigint; premium: bigint }
 
       const totalPrice =
@@ -121,7 +113,7 @@ export const useRegisterNameMutation = () => {
         args: [
           name,
           address,
-          registrationDuration,
+          duration,
           secret,
           placeholderEvmAddress,
           data,
