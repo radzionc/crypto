@@ -1,4 +1,5 @@
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
+import { Years } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
 import { type Abi } from 'viem'
 import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
@@ -9,7 +10,6 @@ import {
   ethRegistrarControllerAbi,
   ethRegistrarControllerAddresses,
 } from '../contracts/ethRegistrarConroller'
-import { useRegistrationPersistence } from '../state/useRegistrationPersistence'
 import { generateSecureRandomHex } from '../utils/generateSecureRandomHex'
 
 const REGISTRATION_DURATION = 31536000
@@ -21,9 +21,10 @@ const DEFAULT_OWNER_CONTROLLED_FUSES = 0
 
 const MIN_COMMITMENT_AGE = 60
 
-type RegisterNameMutationInput = {
+export type RegisterNameMutationInput = {
   name: string
   walletClient: NonNullable<UseWalletClientReturnType['data']>
+  duration: Years
 }
 
 export const useRegisterNameMutation = () => {
@@ -31,60 +32,14 @@ export const useRegisterNameMutation = () => {
   const { address } = useAccount()
   const publicClient = shouldBePresent(usePublicClient())
 
-  const {
-    saveCommitment,
-    clearCommitment,
-    getStoredCommitment,
-    hasValidStoredCommitment,
-  } = useRegistrationPersistence()
-
   return useMutation({
-    mutationFn: async ({ name, walletClient }: RegisterNameMutationInput) => {
-      if (!address) {
-        throw new Error('No wallet connected')
-      }
-
+    mutationFn: async ({
+      name,
+      walletClient,
+      duration,
+    }: RegisterNameMutationInput) => {
       const contractAddress =
         ethRegistrarControllerAddresses[chainId as ChainId]
-
-      const existingCommitment = getStoredCommitment(name)
-      const hasValidCommitment = hasValidStoredCommitment(name)
-
-      if (hasValidCommitment && existingCommitment) {
-        const rentPriceResult = (await publicClient.readContract({
-          address: contractAddress,
-          abi: ethRegistrarControllerAbi as Abi,
-          functionName: 'rentPrice',
-          args: [name, REGISTRATION_DURATION],
-        })) as { base: bigint; premium: bigint }
-
-        const totalPrice =
-          ((rentPriceResult.base + rentPriceResult.premium) * BigInt(110)) /
-          BigInt(100)
-
-        const registerHash = await walletClient.writeContract({
-          address: contractAddress,
-          abi: ethRegistrarControllerAbi as Abi,
-          functionName: 'register',
-          args: [
-            name,
-            address,
-            REGISTRATION_DURATION,
-            existingCommitment.secret,
-            DEFAULT_RESOLVER,
-            DEFAULT_DATA,
-            DEFAULT_REVERSE_RECORD,
-            DEFAULT_OWNER_CONTROLLED_FUSES,
-          ],
-          value: totalPrice,
-          account: address,
-          chain: getChain(chainId),
-        })
-
-        await publicClient.waitForTransactionReceipt({ hash: registerHash })
-        clearCommitment(name)
-        return name
-      }
 
       const isAvailable = await publicClient.readContract({
         address: contractAddress,
@@ -97,7 +52,6 @@ export const useRegisterNameMutation = () => {
         throw new Error(`Name ${name} is not available`)
       }
 
-      // Step 2: Generate new commitment
       const secret = generateSecureRandomHex(32) as `0x${string}`
 
       const commitmentHash = (await publicClient.readContract({
@@ -116,7 +70,6 @@ export const useRegisterNameMutation = () => {
         ],
       })) as `0x${string}`
 
-      // Step 3: Submit commitment transaction
       const hash = await walletClient.writeContract({
         address: contractAddress,
         abi: ethRegistrarControllerAbi as Abi,
@@ -128,14 +81,6 @@ export const useRegisterNameMutation = () => {
 
       await publicClient.waitForTransactionReceipt({ hash })
 
-      // Save commitment data to persistence store
-      saveCommitment({
-        name,
-        secret,
-        commitmentHash,
-        timestamp: Date.now(),
-        address,
-      })
       const startTime = Date.now()
       const endTime = startTime + MIN_COMMITMENT_AGE * 1000
 
@@ -181,8 +126,6 @@ export const useRegisterNameMutation = () => {
 
       await publicClient.waitForTransactionReceipt({ hash: registerHash })
 
-      // Clear the commitment data
-      clearCommitment(name)
       return name
     },
   })

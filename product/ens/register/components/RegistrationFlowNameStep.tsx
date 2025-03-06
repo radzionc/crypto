@@ -9,10 +9,10 @@ import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { UseWalletClientReturnType } from 'wagmi/dist/types/hooks/useWalletClient'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
+import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 
 const Content = styled.div`
@@ -24,14 +24,9 @@ const Content = styled.div`
   max-width: 320px;
 `
 
-type RegistrationFlowNameStepProps = OnFinishProp<{
-  name: string
-  walletClient: NonNullable<UseWalletClientReturnType['data']>
-}>
-
 export const RegistrationFlowNameStep = ({
   onFinish,
-}: RegistrationFlowNameStepProps) => {
+}: OnFinishProp<RegisterNameMutationInput>) => {
   const [name, setName] = useState('')
 
   const isNameAvailableQuery = useIsNameAvailableQuery(name)
@@ -46,6 +41,7 @@ export const RegistrationFlowNameStep = ({
           onFinish({
             name,
             walletClient,
+            duration: 1,
           })
         }
         render={({ submitText, onSubmit }) => (
