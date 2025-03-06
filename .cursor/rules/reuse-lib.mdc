@@ -3,12 +3,6 @@ description: REUSE existing code WHEN implementing new features FROM @lib packag
 globs: *.{js,jsx,ts,tsx}
 alwaysApply: false
 ---
- ---
-description: REUSE existing code WHEN implementing new features FROM @lib packages TO maintain consistency and reduce duplication
-globs: src/**/*.{js,jsx,ts,tsx}
-alwaysApply: false
----
-
 # Reuse Lib Code Rules
 
 ## Context
