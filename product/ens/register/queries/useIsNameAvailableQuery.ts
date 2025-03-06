@@ -11,15 +11,13 @@ import {
 export const useIsNameAvailableQuery = (name: string) => {
   const chainId = useChainId()
 
-  const sanitizedName = name.replace(/\./g, '')
-
   return useReadContract({
     address: ethRegistrarControllerAddresses[chainId as ChainId],
     abi: ethRegistrarControllerAbi as Abi,
     functionName: 'available',
-    args: [sanitizedName],
+    args: [name],
     query: {
-      enabled: !!sanitizedName,
+      enabled: !!name,
     },
   })
 }

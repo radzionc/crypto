@@ -58,7 +58,7 @@ export const RegistrationFlowNameStep = ({
                   <TextInput
                     value={value}
                     onValueChange={(newValue) =>
-                      onChange(newValue.replace(/\./g, ''))
+                      onChange(newValue.replace(/[.\s]/g, ''))
                     }
                     autoFocus
                     placeholder={`Search for a .${tld} name`}
