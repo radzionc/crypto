@@ -1,17 +1,24 @@
 import { Button } from '@lib/ui/buttons/Button'
 import { VStack } from '@lib/ui/css/stack'
+import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CheckCircleIcon } from '@lib/ui/icons/CheckCircleIcon'
-import { OnBackProp, ValueProp } from '@lib/ui/props'
+import { OnFinishProp, ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 
 import { tld } from '../config'
 
-export const RegistrationSuccess = ({
+export const RegistrationFlowSuccessState = ({
   value,
-  onBack,
-}: ValueProp<string> & OnBackProp) => {
+  onFinish,
+}: ValueProp<string> & OnFinishProp) => {
   return (
-    <VStack alignItems="center" gap={20} fullWidth>
+    <VStack
+      as="form"
+      {...getFormProps({ onSubmit: onFinish })}
+      alignItems="center"
+      gap={20}
+      fullWidth
+    >
       <Text color="success" size={40}>
         <CheckCircleIcon />
       </Text>
@@ -24,7 +31,7 @@ export const RegistrationSuccess = ({
         </strong>
       </Text>
 
-      <Button kind="primary" size="l" onClick={onBack}>
+      <Button kind="primary" size="l" type="submit">
         Back to Home
       </Button>
     </VStack>

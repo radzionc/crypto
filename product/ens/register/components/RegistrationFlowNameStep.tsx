@@ -9,10 +9,10 @@ import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
 import { useState } from 'react'
 import styled from 'styled-components'
+import { UseWalletClientReturnType } from 'wagmi/dist/types/hooks/useWalletClient'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
-import { useRegisterNameMutation } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 
 const Content = styled.div`
@@ -24,31 +24,26 @@ const Content = styled.div`
   max-width: 320px;
 `
 
-const Status = styled.div`
-  min-height: 20px;
-  ${vStack({
-    alignItems: 'center',
-  })}
-`
+type RegistrationFlowNameStepProps = OnFinishProp<{
+  name: string
+  walletClient: NonNullable<UseWalletClientReturnType['data']>
+}>
 
-export const RegistrationForm = ({ onFinish }: OnFinishProp<string>) => {
+export const RegistrationFlowNameStep = ({
+  onFinish,
+}: RegistrationFlowNameStepProps) => {
   const [name, setName] = useState('')
 
   const isNameAvailableQuery = useIsNameAvailableQuery(name)
 
-  const registerNameMutation = useRegisterNameMutation({
-    onSuccess: onFinish,
-  })
-
   const isNameAvailable = !!isNameAvailableQuery.data
-  const isFormPending = registerNameMutation.isPending
 
   return (
     <Center>
       <WalletDependantForm
         submitText="Register"
         onSubmit={({ walletClient }) =>
-          registerNameMutation.mutate({
+          onFinish({
             name,
             walletClient,
           })
@@ -57,7 +52,6 @@ export const RegistrationForm = ({ onFinish }: OnFinishProp<string>) => {
           <Content
             as="form"
             {...getFormProps({
-              isPending: isFormPending,
               isDisabled: !isNameAvailable,
               onSubmit,
             })}
@@ -96,11 +90,7 @@ export const RegistrationForm = ({ onFinish }: OnFinishProp<string>) => {
                 />
               )}
             </VStack>
-            {isNameAvailable && (
-              <Button isLoading={isFormPending} type="submit">
-                {submitText}
-              </Button>
-            )}
+            {isNameAvailable && <Button type="submit">{submitText}</Button>}
           </Content>
         )}
       />

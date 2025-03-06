@@ -26,11 +26,7 @@ type RegisterNameMutationInput = {
   walletClient: NonNullable<UseWalletClientReturnType['data']>
 }
 
-export const useRegisterNameMutation = ({
-  onSuccess,
-}: {
-  onSuccess: (name: string) => void
-}) => {
+export const useRegisterNameMutation = () => {
   const chainId = useChainId()
   const { address } = useAccount()
   const publicClient = shouldBePresent(usePublicClient())
@@ -189,6 +185,5 @@ export const useRegisterNameMutation = ({
       clearCommitment(name)
       return name
     },
-    onSuccess,
   })
 }
