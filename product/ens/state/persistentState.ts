@@ -4,8 +4,7 @@ import { LocalStorage } from '@lib/ui/state/LocalStorage'
 import { TemporaryStorage } from '@lib/ui/state/TemporaryStorage'
 
 export enum PersistentStateKey {
-  _ = '_',
-  ENS_REGISTRATION_DATA = 'ENS_REGISTRATION_DATA',
+  RegistrationDuration = 'RegistrationDuration',
 }
 
 const persistentStorage =

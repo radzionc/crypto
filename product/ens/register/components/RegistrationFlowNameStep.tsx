@@ -14,11 +14,11 @@ import { WalletDependantForm } from '../../chain/wallet/components/WalletDependa
 import { tld } from '../config'
 import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
+import { useRegistrationDuration } from '../state/registrationDuration'
 
+import { ManageRegistrationDuration } from './ManageRegistrationDuration'
 import { RegistrationStepContainer } from './RegistrationStepContainer'
 import { RegistrationStepTitle } from './RegistrationStepTitle'
-
-const durationInYears = 1
 
 export const RegistrationFlowNameStep = ({
   onFinish,
@@ -27,7 +27,7 @@ export const RegistrationFlowNameStep = ({
 
   const isNameAvailableQuery = useIsNameAvailableQuery(name)
 
-  const isNameAvailable = !!isNameAvailableQuery.data
+  const [duration] = useRegistrationDuration()
 
   return (
     <Center>
@@ -38,14 +38,14 @@ export const RegistrationFlowNameStep = ({
           onFinish({
             name,
             walletClient,
-            duration: differenceInSeconds(addYears(now, durationInYears), now),
+            duration: differenceInSeconds(addYears(now, duration), now),
           })
         }}
         render={({ submitText, onSubmit }) => (
           <RegistrationStepContainer
             as="form"
             {...getFormProps({
-              isDisabled: !isNameAvailable,
+              isDisabled: !isNameAvailableQuery.data,
               onSubmit,
             })}
           >
@@ -84,7 +84,10 @@ export const RegistrationFlowNameStep = ({
                 />
               )}
             </VStack>
-            {isNameAvailable && <Button type="submit">{submitText}</Button>}
+            <ManageRegistrationDuration />
+            {isNameAvailableQuery.data && (
+              <Button type="submit">{submitText}</Button>
+            )}
           </RegistrationStepContainer>
         )}
       />
