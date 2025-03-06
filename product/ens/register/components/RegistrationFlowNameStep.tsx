@@ -1,5 +1,5 @@
 import { Button } from '@lib/ui/buttons/Button'
-import { VStack, vStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { InputDebounce } from '@lib/ui/inputs/InputDebounce'
 import { TextInput } from '@lib/ui/inputs/TextInput'
@@ -8,21 +8,13 @@ import { OnFinishProp } from '@lib/ui/props'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { Text } from '@lib/ui/text'
 import { useState } from 'react'
-import styled from 'styled-components'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
 import { RegisterNameMutationInput } from '../mutations/useRegisterNameMutation'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 
-const Content = styled.div`
-  ${vStack({
-    gap: 20,
-    fullWidth: true,
-  })}
-
-  max-width: 320px;
-`
+import { RegistrationStepContainer } from './RegistrationStepContainer'
 
 export const RegistrationFlowNameStep = ({
   onFinish,
@@ -45,7 +37,7 @@ export const RegistrationFlowNameStep = ({
           })
         }
         render={({ submitText, onSubmit }) => (
-          <Content
+          <RegistrationStepContainer
             as="form"
             {...getFormProps({
               isDisabled: !isNameAvailable,
@@ -87,7 +79,7 @@ export const RegistrationFlowNameStep = ({
               )}
             </VStack>
             {isNameAvailable && <Button type="submit">{submitText}</Button>}
-          </Content>
+          </RegistrationStepContainer>
         )}
       />
     </Center>

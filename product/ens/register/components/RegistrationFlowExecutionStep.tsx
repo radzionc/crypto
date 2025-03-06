@@ -1,4 +1,4 @@
-import { MultiStepProgressList } from '@lib/ui/progress/MultiStepProgressList'
+import { ProgressList } from '@lib/ui/progress/list/ProgressList'
 import { OnBackProp, OnFinishProp } from '@lib/ui/props'
 import { MatchQuery } from '@lib/ui/query/components/MatchQuery'
 import { useEffect } from 'react'
@@ -14,6 +14,7 @@ import {
 
 import { RegistrationFlowFailureState } from './RegistrationFlowFailureState'
 import { RegistrationFlowSuccessState } from './RegistrationFlowSuccessState'
+import { RegistrationStepContainer } from './RegistrationStepContainer'
 
 type RegistrationFlowExecutionStepProps = OnBackProp &
   OnFinishProp &
@@ -68,20 +69,20 @@ export const RegistrationFlowExecutionStep = ({
         />
       )}
       pending={() => (
-        <PendingContainer>
+        <RegistrationStepContainer>
           <Title>Registering {registerNameInput.name}.eth</Title>
           <Description>
             Please wait while we process your registration. This may take a few
             minutes.
           </Description>
           {step && (
-            <MultiStepProgressList
-              steps={nameRegistrationSteps}
-              currentStep={step}
-              getStepText={getStepText}
+            <ProgressList
+              items={nameRegistrationSteps}
+              value={step}
+              renderItem={getStepText}
             />
           )}
-        </PendingContainer>
+        </RegistrationStepContainer>
       )}
       error={() => <RegistrationFlowFailureState onFinish={onBack} />}
     />
