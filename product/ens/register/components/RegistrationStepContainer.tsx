@@ -1,11 +1,9 @@
-import { vStack } from '@lib/ui/css/stack'
+import { VStack } from '@lib/ui/css/stack'
 import styled from 'styled-components'
 
-export const RegistrationStepContainer = styled.div`
-  ${vStack({
-    gap: 20,
-    fullWidth: true,
-  })}
+export const RegistrationStepContainer = styled(VStack)`
+  width: 100%;
+  gap: 20px;
 
   max-width: 320px;
 `

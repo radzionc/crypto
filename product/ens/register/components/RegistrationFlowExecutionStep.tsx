@@ -1,3 +1,4 @@
+import { Button } from '@lib/ui/buttons/Button'
 import { VStack } from '@lib/ui/css/stack'
 import { ProgressList } from '@lib/ui/progress/list/ProgressList'
 import { OnBackProp, OnFinishProp } from '@lib/ui/props'
@@ -42,12 +43,12 @@ export const RegistrationFlowExecutionStep = ({
         />
       )}
       pending={() => (
-        <RegistrationStepContainer>
+        <RegistrationStepContainer alignItems="center">
           <VStack alignItems="center" gap={8}>
             <RegistrationStepTitle>
               Registering {registerNameInput.name}.eth
             </RegistrationStepTitle>
-            <Text color="supporting">
+            <Text>
               Please wait while we process your registration. This may take a
               few minutes.
             </Text>
@@ -59,6 +60,9 @@ export const RegistrationFlowExecutionStep = ({
               renderItem={(item) => nameRegistrationStepText[item]}
             />
           )}
+          <Button kind="secondary" onClick={onBack}>
+            Cancel
+          </Button>
         </RegistrationStepContainer>
       )}
       error={() => <RegistrationFlowFailureState onFinish={onBack} />}
