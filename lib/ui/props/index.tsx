@@ -1,4 +1,4 @@
-import { ElementType, ReactNode } from 'react'
+import { ElementType, ReactNode, SVGProps } from 'react'
 
 import { HSLA } from '../colors/HSLA'
 import { Point } from '../entities/Point'
@@ -146,7 +146,11 @@ export type OnSubmitProp = {
 }
 
 export type ItemsProp<T> = {
-  items: T[]
+  items: readonly T[]
+}
+
+export type RenderItemProp<T> = {
+  renderItem: (item: T) => ReactNode
 }
 
 export type SizeProp<T = number> = {
@@ -164,3 +168,5 @@ export type NameProp = {
 export type KindProp<T> = {
   kind: T
 }
+
+export type SvgProps = SVGProps<SVGSVGElement>

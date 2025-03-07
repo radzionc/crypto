@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     }
   }
 
-  html, body, #root, #__next {
+  html, body, #root, #__next, [data-rk] {
     height: 100%;
   }
 

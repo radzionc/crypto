@@ -8,6 +8,9 @@ Welcome! This monorepo contains multiple TypeScript projects that streamline cry
 - [**@product/buy-btc**](./product/buy-btc/README.md)  
   A decentralized application for buying Bitcoin (BTC) using ETH, BNB, or AVAX via THORChain, with real-time price quotes and secure wallet integration.
 
+- [**@product/ens**](./product/ens/README.md)  
+  A streamlined web application for registering Ethereum Name Service (ENS) domains with a simple two-step process, real-time availability checking, and secure wallet integration.
+
 - [**@product/limit-orders**](./product/limit-orders/README.md)  
   Automates limit orders on EVM chains (e.g., wETH <-> USDC on Polygon) using the 0x v2 API when conditions are met.
 

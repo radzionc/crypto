@@ -102,6 +102,7 @@ const nextJsApps = [
   'product/buy-btc',
   'product/evm-fee',
   'product/trading-history',
+  'product/ens',
 ]
 
 const nextJsConfigs = nextJsApps.map((appPath) => ({
