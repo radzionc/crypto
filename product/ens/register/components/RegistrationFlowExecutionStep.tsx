@@ -9,8 +9,8 @@ import {
   useRegisterNameMutation,
   nameRegistrationSteps,
   nameRegistrationStepText,
-  NameRegistrationParams,
 } from '../mutations/useRegisterNameMutation'
+import { NameRegistrationParams } from '../NameRegistrationParams'
 
 import { RegistrationFlowFailureState } from './RegistrationFlowFailureState'
 import { RegistrationFlowSuccessState } from './RegistrationFlowSuccessState'

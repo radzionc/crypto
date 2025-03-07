@@ -3,11 +3,10 @@ import { placeholderEvmAddress } from '@lib/chain/evm/utils/address'
 import { shouldBePresent } from '@lib/utils/assert/shouldBePresent'
 import { sleep } from '@lib/utils/sleep'
 import { convertDuration } from '@lib/utils/time/convertDuration'
-import { Seconds } from '@lib/utils/time/types'
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import { type Abi } from 'viem'
-import { useAccount, usePublicClient, UseWalletClientReturnType } from 'wagmi'
+import { useAccount, usePublicClient } from 'wagmi'
 
 import { getChain } from '../../chain'
 import { useChainId } from '../../chain/hooks/useChainId'
@@ -15,6 +14,7 @@ import {
   ethRegistrarControllerAbi,
   ethRegistrarControllerAddresses,
 } from '../contracts/ethRegistrarConroller'
+import { NameRegistrationParams } from '../NameRegistrationParams'
 
 const data: `0x${string}`[] = []
 const reverseRecord = false
@@ -37,12 +37,6 @@ export const nameRegistrationStepText: Record<NameRegistrationStep, string> = {
   calculating: 'Calculating price',
   registering: 'Registering name',
   confirming: 'Finalizing registration',
-}
-
-export type NameRegistrationParams = {
-  name: string
-  walletClient: NonNullable<UseWalletClientReturnType['data']>
-  duration: Seconds
 }
 
 export const useRegisterNameMutation = () => {

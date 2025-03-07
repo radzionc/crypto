@@ -1,7 +1,7 @@
 import { Flow } from '@lib/ui/base/Flow'
 import { useState } from 'react'
 
-import { NameRegistrationParams } from '../mutations/useRegisterNameMutation'
+import { NameRegistrationParams } from '../NameRegistrationParams'
 
 import { RegistrationFlowExecutionStep } from './RegistrationFlowExecutionStep'
 import { RegistrationFlowNameStep } from './RegistrationFlowNameStep'

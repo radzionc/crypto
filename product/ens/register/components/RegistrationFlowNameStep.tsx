@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 import { WalletDependantForm } from '../../chain/wallet/components/WalletDependantForm'
 import { tld } from '../config'
-import { NameRegistrationParams } from '../mutations/useRegisterNameMutation'
+import { NameRegistrationParams } from '../NameRegistrationParams'
 import { useIsNameAvailableQuery } from '../queries/useIsNameAvailableQuery'
 import { useRegistrationDuration } from '../state/registrationDuration'
 
