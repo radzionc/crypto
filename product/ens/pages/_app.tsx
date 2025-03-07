@@ -1,11 +1,13 @@
 import { Page } from '@lib/next-ui/Page'
 import { GlobalStyle } from '@lib/ui/css/GlobalStyle'
 import { DarkLightThemeProvider } from '@lib/ui/theme/DarkLightThemeProvider'
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Inter } from 'next/font/google'
 import { ReactNode, useState } from 'react'
+import { WagmiProvider } from 'wagmi'
 
-import { WalletProvider } from '../chain/wallet/components/WalletProvider'
+import { wagmiConfig } from '../chain/wagmiConfig'
 
 import type { AppProps } from 'next/app'
 
@@ -28,7 +30,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <QueryClientProvider client={queryClient}>
       <DarkLightThemeProvider value="dark">
         <GlobalStyle fontFamily={inter.style.fontFamily} />
-        <WalletProvider>{component}</WalletProvider>
+        <WagmiProvider config={wagmiConfig}>
+          <RainbowKitProvider>{component}</RainbowKitProvider>
+        </WagmiProvider>
       </DarkLightThemeProvider>
     </QueryClientProvider>
   )
