@@ -33,7 +33,7 @@ export const RegistrationFlow = () => {
         ),
         execution: ({ params }) => (
           <RegistrationFlowExecutionStep
-            onBack={() => setStep({ id: 'name', name: '' })}
+            onBack={() => setStep({ id: 'name', name: params.name })}
             onFinish={() => setStep({ id: 'name', name: '' })}
             params={params}
           />
