@@ -52,8 +52,10 @@ export const getQuote = async ({ address, amount, chainId }: GetQuoteInput) => {
 
   const chainAmount = toChainAmount(amount, decimals)
 
+  const { symbol } = getChain(chainId).nativeCurrency
+
   const url = addQueryParams(baseUrl, {
-    from_asset: `${chainPrefix}.${chainPrefix}`,
+    from_asset: `${chainPrefix}.${symbol}`,
     to_asset: 'BTC.BTC',
     amount: chainAmount.toString(),
     destination: address,
