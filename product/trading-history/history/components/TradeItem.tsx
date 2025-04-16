@@ -1,7 +1,7 @@
 import { TradeType } from '@lib/chain/types/TradeType'
-import { ValueProp } from '@lib/ui/props'
 import { Text, TextColor } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
+import { ValueProp } from '@lib/utils/entities/props'
 import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
 

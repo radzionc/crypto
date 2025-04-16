@@ -1,8 +1,9 @@
 import { Button } from '@lib/ui/buttons/Button'
 import { getFormProps } from '@lib/ui/form/utils/getFormProps'
 import { CheckCircleIcon } from '@lib/ui/icons/CheckCircleIcon'
-import { OnFinishProp, ValueProp } from '@lib/ui/props'
+import { OnFinishProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
+import { ValueProp } from '@lib/utils/entities/props'
 
 import { tld } from '../config'
 

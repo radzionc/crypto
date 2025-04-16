@@ -1,8 +1,8 @@
-import { EntityWithId } from '@lib/utils/entities/EntityWithId'
+import { IdProp } from '@lib/utils/entities/props'
 
 type PriceAlertCondition = 'more' | 'less'
 
-export type PriceAlert = EntityWithId & {
+export type PriceAlert = IdProp & {
   asset: string
   targetPrice: number
   condition: PriceAlertCondition

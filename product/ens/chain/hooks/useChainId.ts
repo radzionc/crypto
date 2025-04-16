@@ -6,5 +6,9 @@ import { ChainId, chainIds } from '..'
 export const useChainId = (): ChainId => {
   const { chainId } = useAccount()
 
-  return isOneOf(chainId, chainIds) ?? chainIds[0]
+  if (isOneOf(chainId, chainIds)) {
+    return chainId
+  }
+
+  return chainIds[0]
 }

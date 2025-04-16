@@ -2,10 +2,10 @@ import { IconButton } from '@lib/ui/buttons/IconButton'
 import { HStack } from '@lib/ui/css/stack'
 import { AsteriskIcon } from '@lib/ui/icons/AsteriskIcon'
 import { TrashBinIcon } from '@lib/ui/icons/TrashBinIcon'
-import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
 import { range } from '@lib/utils/array/range'
 import { without } from '@lib/utils/array/without'
+import { ValueProp } from '@lib/utils/entities/props'
 
 import { useAddresses } from '../state/addresses'
 

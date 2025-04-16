@@ -1,6 +1,6 @@
 import { fromChainAmount } from '@lib/chain/utils/fromChainAmount'
-import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
+import { ValueProp } from '@lib/utils/entities/props'
 import { formatAmount } from '@lib/utils/formatAmount'
 
 import { btc } from '../core/btc'

@@ -1,6 +1,6 @@
 ---
-description: USE pattern matching WHEN implementing conditional logic TO avoid switch/case statements and nested ternaries
-globs: src/**/*.{js,jsx,ts,tsx}
+description: USE pattern matching WHEN implementing conditional logic TO avoid switch/case statements
+globs: *.ts,*.tsx
 alwaysApply: false
 ---
 # Pattern Matching Rules

@@ -1,6 +1,6 @@
 import { TradeType } from '@lib/chain/types/TradeType'
-import { ValueProp } from '@lib/ui/props'
 import { Text } from '@lib/ui/text'
+import { ValueProp } from '@lib/utils/entities/props'
 import { format } from 'date-fns'
 
 import { cashAssets, tradeAssets } from '../../entities/Trade'

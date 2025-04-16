@@ -1,7 +1,7 @@
+import { Point } from '@lib/utils/entities/Point'
 import { ElementType, ReactNode, SVGProps } from 'react'
 
 import { HSLA } from '../colors/HSLA'
-import { Point } from '../entities/Point'
 
 export type OnCloseProp = {
   onClose: () => void
@@ -17,10 +17,6 @@ export type ChildrenProp = {
 
 export type OnBackProp = {
   onBack: () => void
-}
-
-export type OnForwardProp = {
-  onForward: () => void
 }
 
 export type ClassNameProp = {
@@ -75,10 +71,6 @@ export type PromptProps = {
   onCancel: () => void
 }
 
-export type ValueProp<T> = {
-  value: T
-}
-
 export type InitialValueProp<T> = {
   initialValue: T
 }
@@ -106,10 +98,6 @@ export type IsSelectedProp = {
 
 export type IsDisabledProp = {
   isDisabled?: boolean | string
-}
-
-export type IndexProp = {
-  index: number
 }
 
 export type OnRemoveProp = {
@@ -159,10 +147,6 @@ export type SizeProp<T = number> = {
 
 export type StatusProp<T> = {
   status: T
-}
-
-export type NameProp = {
-  name: string
 }
 
 export type KindProp<T> = {
