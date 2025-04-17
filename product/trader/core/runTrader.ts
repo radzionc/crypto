@@ -1,6 +1,4 @@
-import { TradeType } from '@lib/chain/types/TradeType'
 import { getLastItem } from '@lib/utils/array/getLastItem'
-import { getAverage } from '@lib/utils/math/getAverage'
 import { recordMap } from '@lib/utils/record/recordMap'
 import { privateKeyToAddress } from 'viem/accounts'
 
@@ -16,23 +14,13 @@ import {
 import { Trader } from '../entities/Trader'
 import { getSecret } from '../getSercret'
 
-import { traderConfig } from './config'
+import { getTradingSignal } from './getTradingSignal'
 import { sendTradeNotification } from './sendTradeNotification'
 
 export const runTrader = async ({ prices, asset, lastTrade, id }: Trader) => {
-  const shortTermAverage = getAverage(
-    prices.slice(-traderConfig.shortTermPeriod),
-  )
-  const longTermAverage = getAverage(prices.slice(-traderConfig.longTermPeriod))
+  const tradeType = getTradingSignal({ prices, lastTrade })
 
-  if (shortTermAverage === longTermAverage) {
-    return
-  }
-
-  const tradeType: TradeType =
-    shortTermAverage > longTermAverage ? 'buy' : 'sell'
-
-  if (tradeType === lastTrade) {
+  if (!tradeType) {
     return
   }
 
