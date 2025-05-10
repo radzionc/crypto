@@ -1,4 +1,4 @@
 export const traderConfig = {
-  shortTermPeriod: 20,
-  longTermPeriod: 50,
+  shortTermPeriod: 50,
+  longTermPeriod: 200,
 }
