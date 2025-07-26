@@ -65,7 +65,7 @@ export const SetAlchemyApiKey = () => {
           onChange={setInputValue}
           render={({ value, onChange }) => (
             <TextInput
-              value={value}
+              value={value as string}
               onValueChange={onChange}
               autoFocus
               placeholder="Enter your Alchemy API key to continue"
