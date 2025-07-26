@@ -33,6 +33,7 @@ export const useTradesQuery = () => {
           return getTrades({
             alchemy,
             address,
+            network,
           })
         },
         ...noRefetchQueryOptions,

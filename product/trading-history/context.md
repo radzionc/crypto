@@ -1,6 +1,6 @@
 You will assist me with tasks related to this project. Please read the details below and reply with "Yes" if you understand the project.
 
-This an application for tracking trading history. For simplicity sake, it supports only ETH and WETH trades on Ethereum and Polygon chains.
+This an application for tracking trading history. For simplicity sake, it supports only ETH and WETH trades on Ethereum, Polygon, and Base chains.
 
 To get the trading history, we use Alchemy API.
 

@@ -1,3 +1,4 @@
+const thousand = 1000
 const million = 1000000
 const billion = 1000000000
 
@@ -30,6 +31,9 @@ export const formatAmount = (amount: number): string => {
   }
   if (amount > million) {
     return `${formatAmount(amount / million)}M`
+  }
+  if (amount > thousand) {
+    return `${formatAmount(amount / thousand)}k`
   }
 
   const fractionDigits = getFractionDigits(amount)

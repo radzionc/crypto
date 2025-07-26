@@ -1,6 +1,6 @@
 # @product/trading-history
 
-This application tracks trading history for ETH and WETH on both Ethereum and Polygon networks. It utilizes the Alchemy API to fetch and display recent trades, helping users decide if it’s a good time to buy or sell.
+This application tracks trading history for ETH and WETH on Ethereum, Polygon, and Base networks. It utilizes the Alchemy API to fetch and display recent trades, helping users decide if it's a good time to buy or sell.
 
 **Deployed at**: [https://history.radzion.com](https://history.radzion.com)
 

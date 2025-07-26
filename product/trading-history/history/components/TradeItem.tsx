@@ -2,6 +2,7 @@ import { TradeType } from '@lib/chain/types/TradeType'
 import { Text, TextColor } from '@lib/ui/text'
 import { capitalizeFirstLetter } from '@lib/utils/capitalizeFirstLetter'
 import { ValueProp } from '@lib/utils/entities/props'
+import { formatAmount } from '@lib/utils/formatAmount'
 import { match } from '@lib/utils/match'
 import { format } from 'date-fns'
 
@@ -17,11 +18,14 @@ export const TradeItem = ({
     sell: () => 'primary',
   })
 
+  const cashValue = amount * price
+
   return (
     <TradeItemFrame>
       <Text>{format(timestamp, 'dd MMM yyyy')}</Text>
       <Text color={color}>
-        {capitalizeFirstLetter(type)} {amount.toFixed(2)} {asset}
+        {capitalizeFirstLetter(type)} {amount.toFixed(2)} {asset} ~ $
+        {formatAmount(cashValue)}
       </Text>
       <Text>
         1 {asset} ={' '}
