@@ -7,6 +7,7 @@ export enum PersistentStateKey {
   Addresses = 'addresses',
   AlchemyApiKey = 'alchemyApiKey',
   AreAddressesVisible = 'areAddressesVisible',
+  SelectedAssetType = 'selectedAssetType',
 }
 
 const persistentStorage =

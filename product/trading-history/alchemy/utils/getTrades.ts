@@ -18,6 +18,7 @@ import {
   Trade,
   TradeAsset,
   tradeAssets,
+  tradeAssetToAssetType,
 } from '../../entities/Trade'
 
 type Input = {
@@ -108,6 +109,13 @@ export const getTrades = async ({ address, alchemy, network }: Input) => {
           sell: () => toAmount / fromAmount,
         }),
         type: tradeType,
+        assetType:
+          tradeAssetToAssetType[
+            match(tradeType, {
+              buy: () => receiveTransfer.asset as TradeAsset,
+              sell: () => asset as TradeAsset,
+            })
+          ],
 
         timestamp,
         hash,

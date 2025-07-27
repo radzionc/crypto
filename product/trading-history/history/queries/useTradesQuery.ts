@@ -8,17 +8,25 @@ import { useQueries } from '@tanstack/react-query'
 import { useAlchemyApiKey } from '../../alchemy/state/alchemyApiKey'
 import { getAlchemyClient } from '../../alchemy/utils/getAlchemyClient'
 import { getTrades } from '../../alchemy/utils/getTrades'
-import { Trade } from '../../entities/Trade'
+import { AssetType, Trade } from '../../entities/Trade'
 import { tradingHistoryConfig } from '../config'
 import { useAddresses } from '../state/addresses'
 
-const joinData = (items: Trade[][]) =>
-  withoutDuplicates(
+const joinData = (items: Trade[][], assetType: AssetType) => {
+  const allTrades = withoutDuplicates(
     order(items.flat(), ({ timestamp }) => timestamp, 'desc'),
     (a, b) => a.hash === b.hash,
   )
 
-export const useTradesQuery = () => {
+  // Filter trades by asset type
+  return allTrades.filter((trade) => trade.assetType === assetType)
+}
+
+type UseTradesQueryInput = {
+  assetType: AssetType
+}
+
+export const useTradesQuery = ({ assetType }: UseTradesQueryInput) => {
   const [addresses] = useAddresses()
 
   const [apiKey] = usePresentState(useAlchemyApiKey())
@@ -28,7 +36,7 @@ export const useTradesQuery = () => {
       const alchemy = getAlchemyClient({ network, apiKey })
 
       return addresses.map((address) => ({
-        queryKey: ['txs', network, address],
+        queryKey: ['txs', network, address, assetType],
         queryFn: async () => {
           return getTrades({
             alchemy,
@@ -43,6 +51,6 @@ export const useTradesQuery = () => {
 
   return useQueriesToEagerQuery({
     queries,
-    joinData,
+    joinData: (items) => joinData(items, assetType),
   })
 }

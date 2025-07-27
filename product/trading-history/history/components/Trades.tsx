@@ -8,8 +8,9 @@ import { ShyWarningBlock } from '@lib/ui/status/ShyWarningBlock'
 import { Text } from '@lib/ui/text'
 import { getErrorMessage } from '@lib/utils/getErrorMessage'
 
-import { primaryTradeAssetPriceProviderId } from '../../entities/Trade'
+import { assetToPriceProviderId } from '../../entities/Trade'
 import { useTradesQuery } from '../queries/useTradesQuery'
+import { useSelectedAssetType } from '../state/selectedAssetType'
 import { isGoodPrice } from '../utils/isGoodPrice'
 
 import { TradesChart } from './chart/TradesChart'
@@ -17,10 +18,11 @@ import { NextTrade } from './NextTrade'
 import { TradeItem } from './TradeItem'
 
 export const Trades = () => {
-  const tradesQuery = useTradesQuery()
+  const [selectedAssetType] = useSelectedAssetType()
+  const tradesQuery = useTradesQuery({ assetType: selectedAssetType })
 
   const priceQuery = useAssetPriceQuery({
-    id: primaryTradeAssetPriceProviderId,
+    id: assetToPriceProviderId[selectedAssetType],
   })
 
   return (
